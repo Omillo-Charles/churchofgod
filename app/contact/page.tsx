@@ -208,12 +208,12 @@ const ContactPage = () => {
               </div>
             </div>
 
-            <div className="p-8 bg-amber-500 rounded-[2.5rem] text-white shadow-xl shadow-amber-500/20">
+            <div className="p-8 bg-white dark:bg-zinc-900 rounded-[2.5rem] border border-zinc-100 dark:border-zinc-800 text-zinc-900 dark:text-white shadow-sm">
               <h4 className="font-bold text-lg mb-2">Prayer & Support Hotline</h4>
-              <p className="text-amber-100 text-[11px] mb-6 leading-relaxed">
+              <p className="text-zinc-500 dark:text-zinc-400 text-[11px] mb-6 leading-relaxed">
                 Need prayer? Our support team is available to stand with you in faith.
               </p>
-              <div className="flex items-center gap-3 text-xl font-black">
+              <div className="flex items-center gap-3 text-xl font-black text-amber-500">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                 +254 759 120 222
               </div>
@@ -345,12 +345,6 @@ const ContactPage = () => {
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-black/40" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="p-5 md:p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl text-center">
-                  <p className="text-[10px] font-bold text-amber-500 uppercase tracking-widest mb-1">Join Us Online</p>
-                  <p className="text-white text-sm font-bold">Live on Facebook Every Sunday</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -367,10 +361,6 @@ const ContactPage = () => {
           </div>
           <div className="pt-8 space-y-4">
             <h2 className="text-xl md:text-2xl font-black text-zinc-900 dark:text-white uppercase tracking-widest">To God be the Glory.</h2>
-            <div className="flex justify-center gap-6 pt-4 text-xs">
-              <Link href="https://facebook.com" className="text-zinc-400 hover:text-amber-500 transition-colors">Facebook</Link>
-              <Link href="/" className="text-zinc-400 hover:text-amber-500 transition-colors">Website</Link>
-            </div>
           </div>
         </div>
       </section>
