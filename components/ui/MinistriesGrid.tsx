@@ -20,10 +20,10 @@ const ministries = [
     color: "bg-amber-500/10 text-amber-500",
   },
   {
-    title: "Community Outreach",
-    desc: "Serving our local community through impactful programs and support.",
-    image: "/aboutImages/about2.png",
-    href: "/outreach",
+    title: "Discipleship College",
+    desc: "Equipping leaders and believers through theological and vocational training.",
+    image: "/heroImages/hero6.png",
+    href: "/college",
     color: "bg-emerald-500/10 text-emerald-500",
   },
 ];
