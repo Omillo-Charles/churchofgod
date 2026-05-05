@@ -97,6 +97,25 @@ const Hero = () => {
         </Link>
       </div>
 
+      {/* Enhanced Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20 md:hidden">
+        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500 animate-pulse">
+          Scroll
+        </span>
+        <div className="w-6 h-10 border-2 border-zinc-500/30 rounded-full flex justify-center p-1.5">
+          <div className="w-1 h-2 bg-amber-500 rounded-full animate-scroll-dot" />
+        </div>
+      </div>
+
+      <style jsx global>{`
+        @keyframes scroll-dot {
+          0% { transform: translateY(0); opacity: 1; }
+          100% { transform: translateY(12px); opacity: 0; }
+        }
+        .animate-scroll-dot {
+          animation: scroll-dot 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+        }
+      `}</style>
     </section>
   );
 };
