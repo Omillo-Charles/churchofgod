@@ -30,20 +30,8 @@ const Hero = () => {
         <div className="absolute bottom-1/4 -right-1/4 w-[500px] h-[500px] bg-zinc-700/10 rounded-full blur-[100px] animate-pulse delay-700" />
       </div>
 
-      {/* Kenya1 Image – mobile only, top right below navbar */}
-      <div className="md:hidden absolute top-16 right-0 z-10 w-[200px] pointer-events-none select-none">
-        <Image
-          src="/kenya1.png"
-          alt="Kenya"
-          width={200}
-          height={260}
-          className="w-full h-auto object-contain opacity-25 drop-shadow-[0_0_40px_rgba(245,158,11,0.1)]"
-          priority
-        />
-      </div>
-
-      {/* Kenya Map Image – desktop only, bottom right */}
-      <div className="hidden md:block absolute bottom-0 right-0 z-10 md:w-[480px] lg:w-[580px] xl:w-[660px] pointer-events-none select-none">
+      {/* Kenya Map Image – bottom right, all screen sizes */}
+      <div className="absolute bottom-0 right-0 z-10 w-[420px] md:w-[480px] lg:w-[580px] xl:w-[660px] pointer-events-none select-none">
         <Image
           src="/kenya.png"
           alt="Kenya"
