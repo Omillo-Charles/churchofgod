@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const MissionSection = () => {
   return (
-    <section className="py-24 bg-black overflow-hidden">
+    <section className="pt-8 pb-24 bg-black overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="relative aspect-square md:aspect-video lg:aspect-square rounded-3xl overflow-hidden group shadow-2xl">
