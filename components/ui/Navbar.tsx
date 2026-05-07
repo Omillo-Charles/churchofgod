@@ -106,8 +106,8 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/90 dark:bg-black/90 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800"
-          : "bg-white/50 dark:bg-black/50 backdrop-blur-sm border-b border-zinc-100 dark:border-zinc-900"
+          ? "bg-black/90 backdrop-blur-md border-b border-zinc-800"
+          : "bg-black/50 backdrop-blur-sm border-b border-zinc-900"
       }`}
     >
       {/* Top Row */}
@@ -116,7 +116,7 @@ const Navbar = () => {
           {/* Left Hamburger Menu */}
           <button
             onClick={() => setIsSidebarOpen(true)}
-            className="p-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+            className="p-2 text-zinc-400 hover:text-white transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -145,7 +145,7 @@ const Navbar = () => {
                 className="object-cover"
               />
             </div>
-            <span className="text-lg md:text-xl font-bold tracking-tight text-zinc-900 dark:text-white">
+            <span className="text-lg md:text-xl font-bold tracking-tight text-white">
               NTCOGK
             </span>
           </Link>
@@ -156,7 +156,7 @@ const Navbar = () => {
           <div className="relative w-full group">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg
-                className="h-4 w-4 text-zinc-400 group-focus-within:text-zinc-900 dark:group-focus-within:text-white transition-colors"
+                className="h-4 w-4 text-zinc-400 group-focus-within:text-white transition-colors"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -171,7 +171,7 @@ const Navbar = () => {
             </div>
             <input
               type="text"
-              className="block w-full pl-10 pr-3 py-2 border border-zinc-200 dark:border-zinc-800 rounded-full bg-zinc-50/50 dark:bg-zinc-900/50 text-sm placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/10 focus:border-zinc-900 dark:focus:border-white transition-all"
+              className="block w-full pl-10 pr-3 py-2 border border-zinc-800 rounded-full bg-zinc-900/50 text-sm placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-white/10 focus:border-white transition-all"
               placeholder="Search..."
             />
           </div>
@@ -182,7 +182,7 @@ const Navbar = () => {
           {/* Mobile Search Toggle */}
           <button
             onClick={() => setIsSearchOpen(!isSearchOpen)}
-            className="lg:hidden p-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all rounded-full"
+            className="lg:hidden p-2 text-zinc-400 hover:text-white transition-all rounded-full"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -211,7 +211,7 @@ const Navbar = () => {
                   className={`text-xs font-bold uppercase tracking-widest transition-all ${
                     isActive 
                       ? "text-amber-500" 
-                      : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                      : "text-zinc-400 hover:text-white"
                   }`}
                 >
                   {link.name}
@@ -223,7 +223,7 @@ const Navbar = () => {
           {/* Auth Icon */}
           <Link
             href="/auth"
-            className="p-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full"
+            className="p-2 text-zinc-400 hover:text-white transition-all hover:bg-zinc-800 rounded-full"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -250,7 +250,7 @@ const Navbar = () => {
             <input
               type="text"
               autoFocus
-              className="block w-full pl-4 pr-10 py-2.5 border border-zinc-200 dark:border-zinc-800 rounded-xl bg-zinc-100 dark:bg-zinc-900 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-white/10"
+              className="block w-full pl-4 pr-10 py-2.5 border border-zinc-800 rounded-xl bg-zinc-900 text-sm focus:outline-none focus:ring-2 focus:ring-white/10"
               placeholder="Search for resources..."
             />
             <button
@@ -276,7 +276,7 @@ const Navbar = () => {
       )}
 
       {/* Bottom Row: Mobile Links */}
-      <div className="md:hidden border-t border-zinc-100/50 dark:border-zinc-800/50 bg-inherit overflow-x-auto no-scrollbar">
+      <div className="md:hidden border-t border-zinc-800/50 bg-inherit overflow-x-auto no-scrollbar">
         <div className="flex items-center justify-center gap-8 px-6 h-14 min-w-max">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
@@ -285,10 +285,10 @@ const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   className={`flex flex-col items-center gap-1.5 transition-all group ${
-                    isActive ? "text-amber-500" : "text-zinc-500 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white"
+                    isActive ? "text-amber-500" : "text-zinc-500 hover:text-white"
                   }`}
                 >
-                  <div className={`${isActive ? "text-amber-500" : "text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white"} transition-colors`}>
+                  <div className={`${isActive ? "text-amber-500" : "text-zinc-400 group-hover:text-white"} transition-colors`}>
                     {link.icon}
                   </div>
                   <span className="text-[9px] font-black uppercase tracking-wide">

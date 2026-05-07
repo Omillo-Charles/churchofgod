@@ -30,16 +30,16 @@ const ministries = [
 
 const MinistriesGrid = () => {
   return (
-    <section className="py-24 bg-zinc-50 dark:bg-black overflow-hidden">
+    <section className="py-24 bg-black overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-12 md:mb-20 space-y-4">
           <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500">
             Get Involved
           </h2>
-          <h3 className="text-xl md:text-3xl font-black tracking-tight text-zinc-900 dark:text-white leading-tight">
+          <h3 className="text-xl md:text-3xl font-black tracking-tight text-white leading-tight">
             Our Thriving <span className="text-zinc-400">Ministries.</span>
           </h3>
-          <p className="text-[10px] md:text-xs text-zinc-600 dark:text-zinc-400 font-medium">
+          <p className="text-[10px] md:text-xs text-zinc-400 font-medium">
             Discover a place where you belong. We have diverse ministries tailored for every stage of life.
           </p>
         </div>
@@ -77,7 +77,7 @@ const MinistriesGrid = () => {
         <div className="mt-12 md:mt-16 text-center">
           <Link
             href="/ministries"
-            className="px-6 py-3 md:px-8 md:py-4 text-[10px] md:text-xs bg-zinc-900 dark:bg-white text-white dark:text-black font-bold rounded-2xl hover:scale-105 transition-all inline-block active:scale-95"
+            className="px-6 py-3 md:px-8 md:py-4 text-[10px] md:text-xs bg-white text-black font-bold rounded-2xl hover:scale-105 transition-all inline-block active:scale-95"
           >
             View All Ministries
           </Link>
