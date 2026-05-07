@@ -39,6 +39,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       links: [
         { name: "Events", desc: "Stay updated with our calendar", href: "/events" },
         { name: "Latest News", desc: "Stories from our community", href: "/news" },
+        { name: "Gallery", desc: "Moments from our church life", href: "/gallery" },
       ],
     },
   ];
