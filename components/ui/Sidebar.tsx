@@ -18,8 +18,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       links: [
         { name: "Youth Ministry", desc: "Empowering the next generation", href: "/ministries/youth" },
         { name: "Children's Ministry", desc: "Nurturing faith in our little ones", href: "/ministries/children" },
-        { name: "Men's Fellowship", desc: "Building strong men of God", href: "/ministries/men" },
-        { name: "Women's Guild", desc: "Supporting and inspiring women", href: "/ministries/women" },
       ],
     },
     {
