@@ -60,7 +60,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans">
         <Navbar />
-        <main className="flex-1">
+        <main className="flex-1 pt-32 md:pt-20">
           {children}
         </main>
         <Footer />
