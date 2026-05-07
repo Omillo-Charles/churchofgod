@@ -22,8 +22,6 @@ const Footer = () => {
       links: [
         { name: "Youth Ministry", href: "/ministries/youth" },
         { name: "Children's Ministry", href: "/ministries/children" },
-        { name: "Men's Fellowship", href: "/ministries/men" },
-        { name: "Women's Guild", href: "/ministries/women" },
       ],
     },
     {
