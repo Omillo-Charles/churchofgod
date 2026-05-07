@@ -104,7 +104,7 @@ const CollegePage = () => {
   ];
 
   return (
-    <div className="bg-white dark:bg-zinc-950 min-h-screen">
+    <div className="bg-black min-h-screen">
       {/* 1. Hero Section */}
       <section className="relative h-[60vh] min-h-[500px] w-full flex items-center justify-center overflow-hidden bg-black">
         <Image
@@ -136,48 +136,48 @@ const CollegePage = () => {
       </section>
 
       {/* 2. Courses Section */}
-      <section className="py-20 md:py-32 bg-zinc-50 dark:bg-zinc-950">
+      <section className="py-20 md:py-32 bg-black">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24 space-y-4">
             <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500">Academic Programs</h3>
-            <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white uppercase tracking-tight">Our Courses</h2>
-            <p className="text-xs md:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">
+            <h2 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight">Our Courses</h2>
+            <p className="text-xs md:text-sm text-zinc-400 leading-relaxed font-medium">
               Choose the program that fits your calling and schedule. We offer a range of theological and skill-based courses designed to empower your journey.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
             {courses.map((course, index) => (
-              <div key={index} className="group bg-white dark:bg-zinc-900/50 p-8 rounded-[2.5rem] border border-zinc-100 dark:border-zinc-800 hover:border-amber-500/20 transition-all duration-500 flex flex-col h-full shadow-sm hover:shadow-xl">
+              <div key={index} className="group bg-zinc-900/50 p-8 rounded-[2.5rem] border border-zinc-800 hover:border-amber-500/20 transition-all duration-500 flex flex-col h-full shadow-sm hover:shadow-xl">
                 <div className="mb-6 flex justify-between items-start">
-                  <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800 text-amber-500 group-hover:bg-amber-500 group-hover:text-white transition-colors duration-500">
+                  <div className="p-3 rounded-2xl bg-zinc-800 text-amber-500 group-hover:bg-amber-500 group-hover:text-white transition-colors duration-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m2 4 10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
                   </div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-zinc-400 border border-zinc-100 dark:border-zinc-800 px-3 py-1 rounded-full">
+                  <span className="text-[9px] font-black uppercase tracking-widest text-zinc-400 border border-zinc-800 px-3 py-1 rounded-full">
                     {course.duration}
                   </span>
                 </div>
                 
-                <h3 className="text-lg font-black text-zinc-900 dark:text-white uppercase mb-4 leading-tight">
+                <h3 className="text-lg font-black text-white uppercase mb-4 leading-tight">
                   {course.name}
                 </h3>
 
                 <div className="space-y-4 mb-8 flex-grow">
                   <div className="space-y-1">
                     <p className="text-[9px] font-bold text-amber-500 uppercase tracking-widest">Mode of Study</p>
-                    <p className="text-xs text-zinc-600 dark:text-zinc-400 font-medium">{course.mode}</p>
+                    <p className="text-xs text-zinc-400 font-medium">{course.mode}</p>
                   </div>
                   <div className="space-y-1">
                     <p className="text-[9px] font-bold text-amber-500 uppercase tracking-widest">Target Audience</p>
-                    <p className="text-xs text-zinc-600 dark:text-zinc-400 font-medium">{course.target}</p>
+                    <p className="text-xs text-zinc-400 font-medium">{course.target}</p>
                   </div>
                 </div>
 
-                <div className="pt-6 border-t border-zinc-100 dark:border-zinc-800">
-                  <p className="text-[9px] font-black text-zinc-900 dark:text-white uppercase tracking-widest mb-3">Key Modules</p>
+                <div className="pt-6 border-t border-zinc-800">
+                  <p className="text-[9px] font-black text-white uppercase tracking-widest mb-3">Key Modules</p>
                   <ul className="grid grid-cols-1 gap-2">
                     {course.modules.map((module, i) => (
-                      <li key={i} className="flex items-center gap-2 text-[10px] text-zinc-500 dark:text-zinc-400 font-medium leading-tight">
+                      <li key={i} className="flex items-center gap-2 text-[10px] text-zinc-400 font-medium leading-tight">
                         <div className="w-1 h-1 rounded-full bg-amber-500" />
                         {module}
                       </li>
@@ -197,7 +197,7 @@ const CollegePage = () => {
             <div className="space-y-12">
               <div className="space-y-4">
                 <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500">Admissions</h3>
-                <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white uppercase">Join the College</h2>
+                <h2 className="text-3xl md:text-4xl font-black text-white uppercase">Join the College</h2>
               </div>
 
               <div className="space-y-8">
@@ -207,7 +207,7 @@ const CollegePage = () => {
                     <div className="w-8 h-8 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
                     </div>
-                    <h4 className="text-sm font-black text-zinc-900 dark:text-white uppercase tracking-widest">Entry Requirements</h4>
+                    <h4 className="text-sm font-black text-white uppercase tracking-widest">Entry Requirements</h4>
                   </div>
                   <ul className="space-y-3 ml-11">
                     {[
@@ -216,7 +216,7 @@ const CollegePage = () => {
                       "Recommendation from local church pastor",
                       "For Diploma: KCSE certificate or verifiable ministry experience",
                     ].map((req, i) => (
-                      <li key={i} className="text-xs text-zinc-500 dark:text-zinc-400 flex items-start gap-2">
+                      <li key={i} className="text-xs text-zinc-400 flex items-start gap-2">
                         <span className="text-amber-500">•</span> {req}
                       </li>
                     ))}
@@ -229,24 +229,24 @@ const CollegePage = () => {
                     <div className="w-8 h-8 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
                     </div>
-                    <h4 className="text-sm font-black text-zinc-900 dark:text-white uppercase tracking-widest">Fees & Intakes</h4>
+                    <h4 className="text-sm font-black text-white uppercase tracking-widest">Fees & Intakes</h4>
                   </div>
                   <div className="ml-11 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Intake Periods</p>
-                      <p className="text-xs text-zinc-900 dark:text-white font-bold">January, April, September</p>
+                      <p className="text-xs text-white font-bold">January, April, September</p>
                     </div>
                     <div>
                       <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Scholarships</p>
-                      <p className="text-xs text-zinc-900 dark:text-white font-bold">Church-sponsored available</p>
+                      <p className="text-xs text-white font-bold">Church-sponsored available</p>
                     </div>
                     <div>
                       <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Payment Methods</p>
-                      <p className="text-xs text-zinc-900 dark:text-white font-bold">M-Pesa, Bank, Cash</p>
+                      <p className="text-xs text-white font-bold">M-Pesa, Bank, Cash</p>
                     </div>
                     <div>
                       <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Course Fees</p>
-                      <p className="text-xs text-zinc-900 dark:text-white font-bold italic">Vary per course</p>
+                      <p className="text-xs text-white font-bold italic">Vary per course</p>
                     </div>
                   </div>
                 </div>
@@ -297,27 +297,27 @@ const CollegePage = () => {
       </section>
 
       {/* 4. FAQ Section */}
-      <section className="py-20 md:py-32 bg-zinc-50 dark:bg-black">
+      <section className="py-20 md:py-32 bg-black">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16 md:mb-24 space-y-4">
             <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500">Common Questions</h3>
-            <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white uppercase">Frequently Asked</h2>
+            <h2 className="text-3xl md:text-4xl font-black text-white uppercase">Frequently Asked</h2>
           </div>
 
           <div className="max-w-3xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="bg-white dark:bg-zinc-900 rounded-[2rem] border border-zinc-100 dark:border-zinc-800 overflow-hidden transition-all duration-300"
+                className="bg-zinc-900 rounded-[2rem] border border-zinc-800 overflow-hidden transition-all duration-300"
               >
                 <button
                   onClick={() => setActiveAccordion(activeAccordion === index ? null : index)}
                   className="w-full px-8 py-6 flex items-center justify-between text-left group"
                 >
-                  <span className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-tight group-hover:text-amber-500 transition-colors">
+                  <span className="text-sm font-bold text-white uppercase tracking-tight group-hover:text-amber-500 transition-colors">
                     {faq.question}
                   </span>
-                  <div className={`p-2 rounded-full bg-zinc-50 dark:bg-zinc-800 transition-transform duration-300 ${activeAccordion === index ? "rotate-180 bg-amber-500 text-white" : ""}`}>
+                  <div className={`p-2 rounded-full bg-zinc-800 transition-transform duration-300 ${activeAccordion === index ? "rotate-180 bg-amber-500 text-white" : ""}`}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                   </div>
                 </button>
@@ -326,7 +326,7 @@ const CollegePage = () => {
                     activeAccordion === index ? "max-h-48 pb-8" : "max-h-0"
                   }`}
                 >
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">
+                  <p className="text-xs text-zinc-400 leading-relaxed font-medium">
                     {faq.answer}
                   </p>
                 </div>
@@ -343,30 +343,30 @@ const CollegePage = () => {
             <div className="lg:col-span-5 space-y-10">
               <div className="space-y-4">
                 <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500">Get in Touch</h3>
-                <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white uppercase leading-tight">Visit Eldoret <br />Campus</h2>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">
+                <h2 className="text-3xl md:text-4xl font-black text-white uppercase leading-tight">Visit Eldoret <br />Campus</h2>
+                <p className="text-xs text-zinc-400 leading-relaxed font-medium">
                   We are located in the heart of Eldoret, providing a conducive environment for theological study and spiritual growth.
                 </p>
               </div>
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-2xl bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center text-amber-500 shadow-sm">
+                  <div className="w-10 h-10 rounded-2xl bg-zinc-900 flex items-center justify-center text-amber-500 shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                   </div>
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-1">Location</p>
-                    <p className="text-xs font-bold text-zinc-900 dark:text-white">Pioneer Estate, Eldoret, Kenya</p>
+                    <p className="text-xs font-bold text-white">Pioneer Estate, Eldoret, Kenya</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-2xl bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center text-amber-500 shadow-sm">
+                  <div className="w-10 h-10 rounded-2xl bg-zinc-900 flex items-center justify-center text-amber-500 shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                   </div>
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-1">Social Media</p>
-                    <a href="#" className="text-xs font-bold text-zinc-900 dark:text-white hover:text-amber-500 transition-colors">Discipleship College Eldoret</a>
+                    <a href="#" className="text-xs font-bold text-white hover:text-amber-500 transition-colors">Discipleship College Eldoret</a>
                   </div>
                 </div>
               </div>
@@ -375,7 +375,7 @@ const CollegePage = () => {
                 <Link
                   href="https://goo.gl/maps/example"
                   target="_blank"
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-zinc-900 text-white dark:bg-white dark:text-black font-black uppercase tracking-widest text-[10px] rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-xl"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-black uppercase tracking-widest text-[10px] rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-xl"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
                   Get Directions
@@ -383,7 +383,7 @@ const CollegePage = () => {
               </div>
             </div>
 
-            <div className="lg:col-span-7 h-[400px] md:h-[500px] rounded-[3rem] overflow-hidden border border-zinc-100 dark:border-zinc-800 shadow-2xl relative grayscale hover:grayscale-0 transition-all duration-700 group">
+            <div className="lg:col-span-7 h-[400px] md:h-[500px] rounded-[3rem] overflow-hidden border border-zinc-800 shadow-2xl relative grayscale hover:grayscale-0 transition-all duration-700 group">
               {/* Using a placeholder-like style for map since we can't embed the actual dynamic map easily without API key, but we'll use an iframe if provided */}
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.758837330206!2d35.2690!3d0.5143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x178101ae3a7c6f93%3A0x63c0a5a2f5f6b8b0!2sPioneer%20Estate%2C%20Eldoret!5e0!3m2!1sen!2ske!4v1620000000000!5m2!1sen!2ske"
@@ -394,23 +394,23 @@ const CollegePage = () => {
                 loading="lazy"
                 className="opacity-80 group-hover:opacity-100 transition-opacity"
               ></iframe>
-              <div className="absolute inset-0 pointer-events-none border-[20px] border-white dark:border-zinc-950 rounded-[3rem]" />
+              <div className="absolute inset-0 pointer-events-none border-[20px] border-zinc-950 rounded-[3rem]" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer Call to Action */}
-      <section className="py-20 md:py-32 text-center bg-zinc-50 dark:bg-black border-t border-zinc-100 dark:border-zinc-900">
+      <section className="py-20 md:py-32 text-center bg-black border-t border-zinc-900">
         <div className="container mx-auto px-6 space-y-8">
-          <h2 className="text-3xl md:text-5xl font-black text-zinc-900 dark:text-white uppercase tracking-tighter">Ready to Start?</h2>
-          <p className="text-xs md:text-sm font-bold text-zinc-500 dark:text-zinc-400 max-w-xl mx-auto uppercase tracking-widest leading-relaxed">
+          <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter">Ready to Start?</h2>
+          <p className="text-xs md:text-sm font-bold text-zinc-400 max-w-xl mx-auto uppercase tracking-widest leading-relaxed">
             Take the first step towards your calling. Applications for the next intake are now open.
           </p>
           <div className="pt-4">
             <Link
               href="mailto:info@ntcogk.org"
-              className="px-10 py-5 bg-zinc-900 text-white dark:bg-white dark:text-black font-black uppercase tracking-widest text-[10px] rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-xl inline-block"
+              className="px-10 py-5 bg-white text-black font-black uppercase tracking-widest text-[10px] rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-xl inline-block"
             >
               Request Prospectus
             </Link>

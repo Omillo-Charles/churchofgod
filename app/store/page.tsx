@@ -30,7 +30,7 @@ const StorePage = () => {
   const cartTotal = cart.reduce((sum, item) => sum + item.price, 0);
 
   return (
-    <div className="bg-white dark:bg-zinc-950 min-h-screen">
+    <div className="bg-black min-h-screen">
       {/* 1. Hero Section */}
       <section className="relative h-[40vh] min-h-[400px] w-full flex items-center justify-center overflow-hidden bg-black">
         <Image
@@ -55,7 +55,7 @@ const StorePage = () => {
       </section>
 
       {/* 2. Category Navigation */}
-      <section className="sticky top-16 z-30 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-100 dark:border-zinc-900 overflow-x-auto no-scrollbar">
+      <section className="sticky top-16 z-30 bg-black/80 backdrop-blur-md border-b border-zinc-900 overflow-x-auto no-scrollbar">
         <div className="container mx-auto px-6">
           <div className="flex justify-center md:justify-center items-center gap-8 py-6 whitespace-nowrap">
             {categories.map((cat) => (
@@ -63,7 +63,7 @@ const StorePage = () => {
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={`text-[10px] font-black uppercase tracking-[0.2em] transition-all relative pb-2 ${
-                  activeCategory === cat ? "text-amber-500" : "text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                  activeCategory === cat ? "text-amber-500" : "text-zinc-400 hover:text-white"
                 }`}
               >
                 {cat}
@@ -84,10 +84,10 @@ const StorePage = () => {
               filteredProducts.map((product) => (
                 <div 
                   key={product.id} 
-                  className="group bg-white dark:bg-zinc-900/30 rounded-[2.5rem] border border-zinc-100 dark:border-zinc-800 overflow-hidden hover:border-amber-500/20 transition-all duration-500 flex flex-col"
+                  className="group bg-zinc-900/30 rounded-[2.5rem] border border-zinc-800 overflow-hidden hover:border-amber-500/20 transition-all duration-500 flex flex-col"
                 >
                   {/* Product Image */}
-                  <div className="relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+                  <div className="relative aspect-square overflow-hidden bg-zinc-800">
                     <Image
                       src={product.image}
                       alt={product.name}
@@ -105,18 +105,18 @@ const StorePage = () => {
                   <div className="p-8 space-y-4 flex-1 flex flex-col">
                     <div className="space-y-1">
                       <p className="text-[9px] font-bold text-amber-500 uppercase tracking-widest">{product.category}</p>
-                      <h3 className="text-lg font-black text-zinc-900 dark:text-white uppercase leading-tight group-hover:text-amber-500 transition-colors">
+                      <h3 className="text-lg font-black text-white uppercase leading-tight group-hover:text-amber-500 transition-colors">
                         {product.name}
                       </h3>
                     </div>
                     
-                    <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium flex-1">
+                    <p className="text-[11px] text-zinc-400 leading-relaxed font-medium flex-1">
                       {product.desc}
                     </p>
 
                     <button 
                       onClick={() => addToCart(product)}
-                      className="w-full py-4 bg-zinc-900 dark:bg-white text-white dark:text-black font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-amber-500 hover:text-white dark:hover:bg-amber-500 dark:hover:text-white transition-all shadow-lg active:scale-95"
+                      className="w-full py-4 bg-white text-black font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-amber-500 hover:text-white transition-all shadow-lg active:scale-95"
                     >
                       Add to Cart
                     </button>
@@ -124,13 +124,13 @@ const StorePage = () => {
                 </div>
               ))
             ) : (
-              <div className="col-span-full py-24 text-center space-y-6 bg-zinc-50 dark:bg-zinc-900/30 rounded-[3rem] border border-dashed border-zinc-200 dark:border-zinc-800">
-                <div className="w-16 h-16 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center mx-auto text-zinc-400">
+              <div className="col-span-full py-24 text-center space-y-6 bg-zinc-900/30 rounded-[3rem] border border-dashed border-zinc-800">
+                <div className="w-16 h-16 bg-zinc-800 rounded-full flex items-center justify-center mx-auto text-zinc-400">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12c-1.1 0-2-.9-2-2V7c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2v3c0 1.1-.9 2-2 2"/><path d="M12 12v10"/><path d="M16 16l-4-4-4 4"/></svg>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-widest">No Products Available</h4>
-                  <p className="text-[10px] text-zinc-500 dark:text-zinc-500 uppercase tracking-widest">We are currently updating our inventory. Please check back soon.</p>
+                  <h4 className="text-sm font-bold text-white uppercase tracking-widest">No Products Available</h4>
+                  <p className="text-[10px] text-zinc-500 uppercase tracking-widest">We are currently updating our inventory. Please check back soon.</p>
                 </div>
               </div>
             )}
@@ -143,13 +143,13 @@ const StorePage = () => {
         className={`fixed inset-0 z-[100] transition-opacity duration-500 ${isCartOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
       >
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsCartOpen(false)} />
-        <div className={`absolute right-0 top-0 bottom-0 w-full max-w-md bg-white dark:bg-zinc-950 shadow-2xl transition-transform duration-500 transform ${isCartOpen ? "translate-x-0" : "translate-x-full"}`}>
+        <div className={`absolute right-0 top-0 bottom-0 w-full max-w-md bg-black shadow-2xl transition-transform duration-500 transform ${isCartOpen ? "translate-x-0" : "translate-x-full"}`}>
           <div className="h-full flex flex-col p-8 md:p-12">
             <div className="flex items-center justify-between mb-12">
-              <h2 className="text-2xl font-black text-zinc-900 dark:text-white uppercase tracking-tight">Your Cart</h2>
+              <h2 className="text-2xl font-black text-white uppercase tracking-tight">Your Cart</h2>
               <button 
                 onClick={() => setIsCartOpen(false)}
-                className="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
               </button>
@@ -158,12 +158,12 @@ const StorePage = () => {
             <div className="flex-1 overflow-y-auto space-y-6 no-scrollbar">
               {cart.length > 0 ? (
                 cart.map((item, index) => (
-                  <div key={index} className="flex gap-4 p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-100 dark:border-zinc-800">
+                  <div key={index} className="flex gap-4 p-4 rounded-2xl bg-zinc-900/50 border border-zinc-800">
                     <div className="relative w-20 h-20 rounded-xl overflow-hidden shrink-0">
                       <Image src={item.image} alt={item.name} fill className="object-cover" />
                     </div>
                     <div className="flex-1 flex flex-col justify-center">
-                      <h4 className="text-xs font-bold text-zinc-900 dark:text-white uppercase">{item.name}</h4>
+                      <h4 className="text-xs font-bold text-white uppercase">{item.name}</h4>
                       <p className="text-[10px] text-amber-500 font-black">Ksh {item.price.toLocaleString()}</p>
                     </div>
                     <button 
@@ -176,7 +176,7 @@ const StorePage = () => {
                 ))
               ) : (
                 <div className="h-full flex flex-col items-center justify-center text-center space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center text-zinc-400">
+                  <div className="w-16 h-16 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
                   </div>
                   <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Your cart is empty</p>
@@ -184,10 +184,10 @@ const StorePage = () => {
               )}
             </div>
 
-            <div className="pt-8 border-t border-zinc-100 dark:border-zinc-900 space-y-6">
+            <div className="pt-8 border-t border-zinc-900 space-y-6">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Total</span>
-                <span className="text-xl font-black text-zinc-900 dark:text-white uppercase">Ksh {cartTotal.toLocaleString()}</span>
+                <span className="text-xl font-black text-white uppercase">Ksh {cartTotal.toLocaleString()}</span>
               </div>
               <button 
                 disabled={cart.length === 0}
