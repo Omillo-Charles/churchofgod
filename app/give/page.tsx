@@ -42,7 +42,7 @@ const categories = [
 
 const GivePage = () => {
   return (
-    <div className="bg-white dark:bg-zinc-950 min-h-screen">
+    <div className="bg-black min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[40vh] min-h-[400px] w-full flex items-center justify-center overflow-hidden bg-black">
         <Image
@@ -76,25 +76,25 @@ const GivePage = () => {
             <div className="lg:col-span-2 space-y-12">
               <div className="space-y-4">
                 <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-amber-500">Ways to Give</h2>
-                <h3 className="text-2xl font-black text-zinc-900 dark:text-white uppercase tracking-tight">Direct Contributions</h3>
+                <h3 className="text-2xl font-black text-white uppercase tracking-tight">Direct Contributions</h3>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {givingMethods.map((method) => (
-                  <div key={method.title} className="p-8 rounded-3xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 space-y-6 group hover:border-amber-500/30 transition-all">
+                  <div key={method.title} className="p-8 rounded-3xl bg-zinc-900 border border-zinc-800 space-y-6 group hover:border-amber-500/30 transition-all">
                     <div className="flex items-center justify-between">
                       {method.icon}
                       <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">{method.type}</span>
                     </div>
                     <div className="space-y-1">
-                      <h4 className="text-lg font-bold text-zinc-900 dark:text-white uppercase tracking-tight">{method.title}</h4>
+                      <h4 className="text-lg font-bold text-white uppercase tracking-tight">{method.title}</h4>
                       <p className="text-[10px] text-zinc-500 uppercase tracking-widest">Official Channel</p>
                     </div>
                     <div className="space-y-4 pt-2">
                       {method.details.map((detail) => (
                         <div key={detail.label} className="flex flex-col gap-1">
                           <span className="text-[9px] font-black text-zinc-400 uppercase tracking-[0.2em]">{detail.label}</span>
-                          <span className="text-xs font-bold text-zinc-800 dark:text-zinc-200">{detail.value}</span>
+                          <span className="text-xs font-bold text-zinc-200">{detail.value}</span>
                         </div>
                       ))}
                     </div>
@@ -107,8 +107,8 @@ const GivePage = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-xs font-bold text-zinc-900 dark:text-white uppercase tracking-tight">Secure Giving</p>
-                  <p className="text-[11px] text-zinc-500 dark:text-zinc-500">All transactions are encrypted and processed through official bank and mobile network channels.</p>
+                  <p className="text-xs font-bold text-white uppercase tracking-tight">Secure Giving</p>
+                  <p className="text-[11px] text-zinc-500">All transactions are encrypted and processed through official bank and mobile network channels.</p>
                 </div>
               </div>
             </div>
@@ -117,22 +117,22 @@ const GivePage = () => {
             <div className="space-y-8">
               <div className="space-y-4">
                 <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500">Categories</h2>
-                <h3 className="text-xl font-black text-zinc-900 dark:text-white uppercase tracking-tight">Purposeful Giving</h3>
+                <h3 className="text-xl font-black text-white uppercase tracking-tight">Purposeful Giving</h3>
               </div>
               
               <div className="grid gap-4">
                 {categories.map((cat) => (
-                  <div key={cat.name} className="p-6 rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-100 dark:border-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors">
-                    <h4 className="text-xs font-bold text-zinc-900 dark:text-white uppercase tracking-widest mb-2">{cat.name}</h4>
-                    <p className="text-[11px] text-zinc-500 dark:text-zinc-500 leading-relaxed">{cat.desc}</p>
+                  <div key={cat.name} className="p-6 rounded-2xl bg-zinc-950 border border-zinc-900 hover:bg-zinc-900 transition-colors">
+                    <h4 className="text-xs font-bold text-white uppercase tracking-widest mb-2">{cat.name}</h4>
+                    <p className="text-[11px] text-zinc-500 leading-relaxed">{cat.desc}</p>
                   </div>
                 ))}
               </div>
 
               <div className="pt-8 text-center md:text-left">
-                <p className="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest leading-loose">
+                <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest leading-loose">
                   "Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver." <br />
-                  <span className="text-zinc-900 dark:text-zinc-300">— 2 Corinthians 9:7</span>
+                  <span className="text-zinc-300">— 2 Corinthians 9:7</span>
                 </p>
               </div>
             </div>
