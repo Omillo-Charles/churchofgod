@@ -60,7 +60,7 @@ const EventsPage = () => {
   const selectedEvents = useMemo(() => getEventsForDay(selectedDate), [selectedDate, currentDate]);
 
   return (
-    <div className="bg-white dark:bg-zinc-950 min-h-screen">
+    <div className="bg-black min-h-screen">
       {/* 1. Hero Section */}
       <section className="relative h-[40vh] min-h-[400px] w-full flex items-center justify-center overflow-hidden bg-black">
         <Image
@@ -83,14 +83,14 @@ const EventsPage = () => {
       </section>
 
       {/* 2. Tab Navigation */}
-      <section className="sticky top-16 z-30 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-100 dark:border-zinc-900">
+      <section className="sticky top-16 z-30 bg-black/80 backdrop-blur-md border-b border-zinc-900">
         <div className="container mx-auto px-6">
           <div className="flex justify-center">
             <div className="flex gap-8">
               <button
                 onClick={() => setActiveTab("listing")}
                 className={`py-6 text-[10px] font-black uppercase tracking-[0.2em] transition-all relative ${
-                  activeTab === "listing" ? "text-amber-500" : "text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                  activeTab === "listing" ? "text-amber-500" : "text-zinc-400 hover:text-white"
                 }`}
               >
                 List View
@@ -101,7 +101,7 @@ const EventsPage = () => {
               <button
                 onClick={() => setActiveTab("calendar")}
                 className={`py-6 text-[10px] font-black uppercase tracking-[0.2em] transition-all relative ${
-                  activeTab === "calendar" ? "text-amber-500" : "text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                  activeTab === "calendar" ? "text-amber-500" : "text-zinc-400 hover:text-white"
                 }`}
               >
                 Calendar View
@@ -121,7 +121,7 @@ const EventsPage = () => {
             /* Listing View */
             <div className="max-w-5xl mx-auto space-y-12">
               <div className="flex items-center justify-between mb-12">
-                <h2 className="text-xl md:text-2xl font-black text-zinc-900 dark:text-white uppercase">Upcoming Events</h2>
+                <h2 className="text-xl md:text-2xl font-black text-white uppercase">Upcoming Events</h2>
                 <div className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
                   Showing {mockEvents.length} Events
                 </div>
@@ -130,9 +130,9 @@ const EventsPage = () => {
               <div className="grid grid-cols-1 gap-8 md:gap-12">
                 {mockEvents.length > 0 ? (
                   mockEvents.sort((a, b) => a.date.getTime() - b.date.getTime()).map((event) => (
-                    <div key={event.id} className="group flex flex-col md:flex-row gap-8 items-start bg-white dark:bg-zinc-900/30 p-6 md:p-8 rounded-[2.5rem] border border-zinc-100 dark:border-zinc-800 hover:border-amber-500/20 transition-all duration-500">
+                    <div key={event.id} className="group flex flex-col md:flex-row gap-8 items-start bg-zinc-900/30 p-6 md:p-8 rounded-[2.5rem] border border-zinc-800 hover:border-amber-500/20 transition-all duration-500">
                       {/* Date Badge */}
-                      <div className="flex flex-col items-center justify-center min-w-[80px] h-[80px] bg-zinc-900 dark:bg-zinc-800 rounded-3xl text-white">
+                      <div className="flex flex-col items-center justify-center min-w-[80px] h-[80px] bg-zinc-800 rounded-3xl text-white">
                         <span className="text-[10px] font-bold uppercase tracking-widest text-amber-500">
                           {event.date.toLocaleString("default", { month: "short" })}
                         </span>
@@ -155,18 +155,18 @@ const EventsPage = () => {
                           </div>
                         </div>
 
-                        <h3 className="text-lg md:text-xl font-black text-zinc-900 dark:text-white uppercase leading-tight group-hover:text-amber-500 transition-colors">
+                        <h3 className="text-lg md:text-xl font-black text-white uppercase leading-tight group-hover:text-amber-500 transition-colors">
                           {event.title}
                         </h3>
                         
-                        <p className="text-[11px] md:text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium max-w-2xl">
+                        <p className="text-[11px] md:text-xs text-zinc-400 leading-relaxed font-medium max-w-2xl">
                           {event.desc}
                         </p>
 
                         <div className="pt-2">
                           <Link
                             href={`/events/${event.id}`}
-                            className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-zinc-900 dark:text-white hover:text-amber-500 dark:hover:text-amber-500 transition-colors"
+                            className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white hover:text-amber-500 transition-colors"
                           >
                             Details & Registration
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -186,13 +186,13 @@ const EventsPage = () => {
                     </div>
                   ))
                 ) : (
-                  <div className="py-20 text-center space-y-6 bg-zinc-50 dark:bg-zinc-900/30 rounded-[3rem] border border-dashed border-zinc-200 dark:border-zinc-800">
-                    <div className="w-16 h-16 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center mx-auto text-zinc-400">
+                  <div className="py-20 text-center space-y-6 bg-zinc-900/30 rounded-[3rem] border border-dashed border-zinc-800">
+                    <div className="w-16 h-16 bg-zinc-800 rounded-full flex items-center justify-center mx-auto text-zinc-400">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
                     </div>
                     <div className="space-y-2">
-                      <h4 className="text-sm font-bold text-zinc-900 dark:text-white uppercase tracking-widest">No Upcoming Events</h4>
-                      <p className="text-[10px] text-zinc-500 dark:text-zinc-500 uppercase tracking-widest">Check back later or subscribe to our newsletter for updates</p>
+                      <h4 className="text-sm font-bold text-white uppercase tracking-widest">No Upcoming Events</h4>
+                      <p className="text-[10px] text-zinc-500 uppercase tracking-widest">Check back later or subscribe to our newsletter for updates</p>
                     </div>
                   </div>
                 )}
@@ -201,11 +201,11 @@ const EventsPage = () => {
           ) : (
             /* Calendar View */
             <div className="max-w-5xl mx-auto space-y-8">
-              <div className="bg-white dark:bg-zinc-900 rounded-[3rem] border border-zinc-100 dark:border-zinc-800 shadow-sm overflow-hidden">
+              <div className="bg-zinc-900 rounded-[3rem] border border-zinc-800 shadow-sm overflow-hidden">
                 {/* Calendar Header */}
-                <div className="p-8 md:p-12 border-b border-zinc-100 dark:border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="p-8 md:p-12 border-b border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6">
                   <div className="flex flex-col items-center md:items-start space-y-1">
-                    <h2 className="text-2xl md:text-3xl font-black text-zinc-900 dark:text-white uppercase tracking-tight">
+                    <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight">
                       {monthName} <span className="text-amber-500">{year}</span>
                     </h2>
                     <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em]">View our monthly schedule</p>
@@ -214,7 +214,7 @@ const EventsPage = () => {
                   <div className="flex items-center gap-4">
                     <button
                       onClick={handlePrevMonth}
-                      className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-amber-500 hover:text-white transition-all"
+                      className="p-3 rounded-2xl bg-zinc-800 text-zinc-400 hover:bg-amber-500 hover:text-white transition-all"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
                     </button>
@@ -223,13 +223,13 @@ const EventsPage = () => {
                         setCurrentDate(new Date());
                         setSelectedDate(new Date().getDate());
                       }}
-                      className="px-6 py-3 rounded-2xl bg-zinc-900 dark:bg-white text-white dark:text-black text-[10px] font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all"
+                      className="px-6 py-3 rounded-2xl bg-white text-black text-[10px] font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all"
                     >
                       Today
                     </button>
                     <button
                       onClick={handleNextMonth}
-                      className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-amber-500 hover:text-white transition-all"
+                      className="p-3 rounded-2xl bg-zinc-800 text-zinc-400 hover:bg-amber-500 hover:text-white transition-all"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                     </button>
@@ -267,15 +267,15 @@ const EventsPage = () => {
                               ? isSelected
                                 ? "bg-amber-500 text-white border-amber-500 shadow-lg shadow-amber-500/20 z-10 scale-105"
                                 : isToday
-                                  ? "bg-white dark:bg-zinc-900 border-amber-500 ring-2 ring-amber-500/20 shadow-sm"
-                                  : "bg-zinc-50/50 dark:bg-zinc-800/30 border-zinc-100 dark:border-zinc-800 hover:border-amber-500/20 group cursor-pointer"
+                                  ? "bg-zinc-900 border-amber-500 ring-2 ring-amber-500/20 shadow-sm"
+                                  : "bg-zinc-800/30 border-zinc-800 hover:border-amber-500/20 group cursor-pointer"
                               : "border-transparent"
                           }`}
                         >
                           {dateObj.day && (
                             <div className="h-full flex flex-col justify-between">
                               <div className="flex justify-between items-start">
-                                <span className={`text-xs md:text-sm font-black ${isSelected ? "text-white" : isToday ? "text-amber-500" : "text-zinc-500 dark:text-zinc-400 group-hover:text-amber-500 transition-colors"}`}>
+                                <span className={`text-xs md:text-sm font-black ${isSelected ? "text-white" : isToday ? "text-amber-500" : "text-zinc-400 group-hover:text-amber-500 transition-colors"}`}>
                                   {dateObj.day}
                                 </span>
                                 {isToday && !isSelected && (
@@ -287,14 +287,14 @@ const EventsPage = () => {
                                 {dayEvents.map((event) => (
                                   <div
                                     key={event.id}
-                                    className={`p-1.5 rounded-lg border md:block hidden overflow-hidden ${isSelected ? "bg-white/20 border-white/20" : "bg-zinc-900 dark:bg-zinc-800 border-zinc-700"}`}
+                                    className={`p-1.5 rounded-lg border md:block hidden overflow-hidden ${isSelected ? "bg-white/20 border-white/20" : "bg-zinc-800 border-zinc-700"}`}
                                   >
                                     <p className={`text-[8px] font-bold uppercase truncate ${isSelected ? "text-white" : "text-white"}`}>{event.title}</p>
                                     <p className={`text-[7px] font-medium truncate ${isSelected ? "text-white/80" : "text-zinc-400"}`}>{event.time}</p>
                                   </div>
                                 ))}
                                 {dayEvents.length > 0 && (
-                                  <div className={`md:hidden w-2 h-2 rounded-full mx-auto ${isSelected ? "bg-white" : "bg-zinc-400 dark:bg-zinc-500"} shadow-sm`} />
+                                  <div className={`md:hidden w-2 h-2 rounded-full mx-auto ${isSelected ? "bg-white" : "bg-zinc-500"} shadow-sm`} />
                                 )}
                               </div>
                             </div>
@@ -315,26 +315,26 @@ const EventsPage = () => {
                     </div>
                     <div>
                       <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Events for</p>
-                      <h4 className="text-sm font-bold text-zinc-900 dark:text-white uppercase">{monthName} {selectedDate}, {year}</h4>
+                      <h4 className="text-sm font-bold text-white uppercase">{monthName} {selectedDate}, {year}</h4>
                     </div>
                   </div>
 
                   {selectedEvents.length > 0 ? (
                     <div className="grid grid-cols-1 gap-3">
                       {selectedEvents.map((event) => (
-                        <div key={event.id} className="p-4 bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 flex items-center gap-4">
+                        <div key={event.id} className="p-4 bg-zinc-900 rounded-2xl border border-zinc-800 flex items-center gap-4">
                           <div className="flex-1">
-                            <h5 className="text-xs font-black text-zinc-900 dark:text-white uppercase">{event.title}</h5>
-                            <p className="text-[10px] text-zinc-500 dark:text-zinc-400 font-medium">{event.time} • {event.location}</p>
+                            <h5 className="text-xs font-black text-white uppercase">{event.title}</h5>
+                            <p className="text-[10px] text-zinc-400 font-medium">{event.time} • {event.location}</p>
                           </div>
-                          <Link href={`/events/${event.id}`} className="p-2 rounded-xl bg-zinc-50 dark:bg-zinc-800 text-zinc-400">
+                          <Link href={`/events/${event.id}`} className="p-2 rounded-xl bg-zinc-800 text-zinc-400">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                           </Link>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <div className="p-6 bg-zinc-50 dark:bg-zinc-900/50 rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-800 text-center">
+                    <div className="p-6 bg-zinc-900/50 rounded-2xl border border-dashed border-zinc-800 text-center">
                       <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">No events scheduled for this day</p>
                     </div>
                   )}
@@ -352,7 +352,7 @@ const EventsPage = () => {
                   Selected
                 </div>
                 <div className="flex items-center gap-2.5 text-[9px] font-black uppercase tracking-widest text-zinc-500">
-                  <div className="w-3 h-3 rounded-md bg-zinc-400 dark:bg-zinc-600" />
+                  <div className="w-3 h-3 rounded-md bg-zinc-600" />
                   Has Events
                 </div>
               </div>
