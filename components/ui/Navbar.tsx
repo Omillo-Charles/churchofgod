@@ -114,11 +114,15 @@ const Navbar = () => {
     [isDropdownOpen, results, focusedIndex, router]
   );
 
-  const SearchDropdown = ({ isMobile = false }: { isMobile?: boolean }) => (
-    <div
-      ref={isMobile ? undefined : dropdownRef}
-      className="absolute top-full left-0 right-0 mt-2 bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden z-50"
-    >
+  const navigateTo = useCallback((href: string) => {
+    setIsDropdownOpen(false);
+    setQuery("");
+    setIsSearchOpen(false);
+    router.push(href);
+  }, [router]);
+
+  const renderDropdownResults = () => (
+    <div className="absolute top-full left-0 right-0 mt-2 bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden z-50">
       {results.length === 0 ? (
         <div className="px-5 py-8 text-center">
           <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">No results for &ldquo;{query}&rdquo;</p>
@@ -126,18 +130,17 @@ const Navbar = () => {
       ) : (
         <div className="py-2">
           {results.map((result, idx) => (
-            <Link
-              key={result.href + result.title}
-              href={result.href}
-              onClick={() => { setIsDropdownOpen(false); setQuery(""); }}
-              className={`flex items-center gap-4 px-4 py-3 transition-colors group ${
+            <button
+              key={result.href + result.title + idx}
+              onMouseDown={(e) => { e.preventDefault(); navigateTo(result.href); }}
+              className={`w-full flex items-center gap-4 px-4 py-3 transition-colors group text-left ${
                 focusedIndex === idx ? "bg-zinc-800" : "hover:bg-zinc-900"
               }`}
             >
               <div className="w-8 h-8 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-amber-500 shrink-0 group-hover:bg-amber-500 group-hover:text-white group-hover:border-amber-500 transition-all">
                 {iconMap[result.icon]}
               </div>
-              <div className="flex-1 min-w-0">
+              <div className="flex-1 min-w-0 text-left">
                 <p className="text-xs font-bold text-white truncate">{result.title}</p>
                 <p className="text-[10px] text-zinc-500 truncate">{result.description}</p>
               </div>
@@ -147,7 +150,7 @@ const Navbar = () => {
                 )}
                 <span className="text-[9px] font-black uppercase tracking-widest text-zinc-600">{result.category}</span>
               </div>
-            </Link>
+            </button>
           ))}
           <div className="px-4 py-2 border-t border-zinc-800 flex items-center justify-between">
             <p className="text-[9px] text-zinc-600 uppercase tracking-widest font-bold">{results.length} result{results.length !== 1 ? "s" : ""}</p>
@@ -326,7 +329,7 @@ const Navbar = () => {
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
               </button>
             )}
-            {isDropdownOpen && <SearchDropdown />}
+            {isDropdownOpen && renderDropdownResults()}
           </div>
         </div>
 
@@ -426,11 +429,10 @@ const Navbar = () => {
                 ) : (
                   <div className="py-2">
                     {results.map((result, idx) => (
-                      <Link
-                        key={result.href + result.title}
-                        href={result.href}
-                        onClick={() => { setIsDropdownOpen(false); setQuery(""); setIsSearchOpen(false); }}
-                        className={`flex items-center gap-3 px-4 py-3 transition-colors ${
+                      <button
+                        key={result.href + result.title + idx}
+                        onMouseDown={(e) => { e.preventDefault(); navigateTo(result.href); }}
+                        className={`w-full flex items-center gap-3 px-4 py-3 transition-colors text-left ${
                           focusedIndex === idx ? "bg-zinc-800" : "hover:bg-zinc-900"
                         }`}
                       >
@@ -441,7 +443,7 @@ const Navbar = () => {
                           <p className="text-xs font-bold text-white truncate">{result.title}</p>
                           <p className="text-[10px] text-zinc-500 truncate">{result.description}</p>
                         </div>
-                      </Link>
+                      </button>
                     ))}
                   </div>
                 )}

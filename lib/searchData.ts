@@ -13,7 +13,7 @@ export const searchIndex: SearchResult[] = [
   {
     title: "Dr. David Gilbert Bwire",
     description: "National Administrative Bishop – 5th National Overseer since 1977, 30+ years of pastoral service",
-    href: "/about#leadership",
+    href: "/about",
     category: "Leadership",
     icon: "person",
     tag: "Bishop",
@@ -21,7 +21,7 @@ export const searchIndex: SearchResult[] = [
   {
     title: "National Administrative Bishop",
     description: "Dr. David Gilbert Bwire – Holds Honorary Doctor in Divinity, MBA, BSc in Christian Ministries",
-    href: "/about#leadership",
+    href: "/about",
     category: "Leadership",
     icon: "person",
     tag: "Role",
@@ -29,7 +29,7 @@ export const searchIndex: SearchResult[] = [
   {
     title: "Ordained Bishop",
     description: "Dr. David Gilbert Bwire is an Ordained Bishop with World Missions (WM-USA) and CEO of Damajo Consultancy",
-    href: "/about#leadership",
+    href: "/about",
     category: "Leadership",
     icon: "person",
     tag: "Bishop",
@@ -39,7 +39,7 @@ export const searchIndex: SearchResult[] = [
   {
     title: "Samuel Wainaina",
     description: "National Secretary – North Central Region Bishop",
-    href: "/about#council",
+    href: "/about",
     category: "Leadership",
     icon: "person",
     tag: "National Secretary",
@@ -47,7 +47,7 @@ export const searchIndex: SearchResult[] = [
   {
     title: "Dickson Tito Mwalili",
     description: "National Treasurer – Nairobi Region Bishop",
-    href: "/about#council",
+    href: "/about",
     category: "Leadership",
     icon: "person",
     tag: "National Treasurer",
@@ -55,7 +55,7 @@ export const searchIndex: SearchResult[] = [
   {
     title: "Benea Alukwe Amakhungu",
     description: "National Education Coordinator – Coast Region Bishop",
-    href: "/about#council",
+    href: "/about",
     category: "Leadership",
     icon: "person",
     tag: "Education",
@@ -63,7 +63,7 @@ export const searchIndex: SearchResult[] = [
   {
     title: "Simon Ngure Ben",
     description: "National Prayer Coordinator – Western Region Bishop",
-    href: "/about#council",
+    href: "/about",
     category: "Leadership",
     icon: "person",
     tag: "Prayer",
@@ -71,7 +71,7 @@ export const searchIndex: SearchResult[] = [
   {
     title: "Protus Pamba Orima",
     description: "Regional Bishop – North Western Region",
-    href: "/about#council",
+    href: "/about",
     category: "Leadership",
     icon: "person",
     tag: "Regional Bishop",
@@ -79,7 +79,7 @@ export const searchIndex: SearchResult[] = [
   {
     title: "Paul Obadha Ohuare",
     description: "National Convention Coordinator – Nyanza Region Bishop",
-    href: "/about#council",
+    href: "/about",
     category: "Leadership",
     icon: "person",
     tag: "Convention",
@@ -87,7 +87,7 @@ export const searchIndex: SearchResult[] = [
   {
     title: "Council of Bishops",
     description: "Regional leadership covering North Central, Nairobi, Coast, Western, North Western, and Nyanza",
-    href: "/about#council",
+    href: "/about",
     category: "Leadership",
     icon: "person",
     tag: "Council",
@@ -363,7 +363,7 @@ export const searchIndex: SearchResult[] = [
   {
     title: "Latest News",
     description: "Stories, updates, and announcements from across the NTCOGK community",
-    href: "/news",
+    href: "/contact",
     category: "Community",
     icon: "community",
     tag: "News",
@@ -379,7 +379,7 @@ export const searchIndex: SearchResult[] = [
   {
     title: "Member Portal",
     description: "Access your church membership records, contribution history, and member resources",
-    href: "/portals/member",
+    href: "/auth",
     category: "Portals",
     icon: "page",
     tag: "Members",
@@ -387,7 +387,7 @@ export const searchIndex: SearchResult[] = [
   {
     title: "Clergy Portal",
     description: "Resource center for ordained leaders, pastors, and clergy members",
-    href: "/portals/clergy",
+    href: "/auth",
     category: "Portals",
     icon: "page",
     tag: "Clergy",
