@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const ChildrenPage = () => {
   return (
-    <div className="bg-white dark:bg-zinc-950 min-h-screen">
+    <div className="bg-black min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[50vh] min-h-[400px] w-full flex items-center justify-center overflow-hidden bg-black">
         <Image
@@ -32,25 +32,25 @@ const ChildrenPage = () => {
       </section>
 
       {/* Mission Section */}
-      <section className="py-24 px-6 border-b border-zinc-100 dark:border-zinc-900">
+      <section className="py-24 px-6 border-b border-zinc-900">
         <div className="container mx-auto max-w-5xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div className="space-y-8 order-2 md:order-1">
               <div className="space-y-4">
                 <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-500">Our Vision</h2>
-                <h3 className="text-2xl md:text-3xl font-black text-zinc-900 dark:text-white uppercase tracking-tight">Small Hearts, <br />Big Faith</h3>
+                <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight">Small Hearts, <br />Big Faith</h3>
               </div>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+              <p className="text-sm text-zinc-400 leading-relaxed">
                 At NTCOGK, we believe that children are not just the future of the church, but a vital part of it today. Our Children's Ministry is dedicated to helping every child encounter God's love through age-appropriate teaching, creative activities, and mentorship.
               </p>
               <div className="flex items-center gap-6">
-                <div className="p-4 bg-zinc-50 dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800">
+                <div className="p-4 bg-zinc-900 rounded-2xl border border-zinc-800">
                   <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Safety First</p>
-                  <p className="text-xs font-bold text-zinc-900 dark:text-white">Vetted Volunteers</p>
+                  <p className="text-xs font-bold text-white">Vetted Volunteers</p>
                 </div>
-                <div className="p-4 bg-zinc-50 dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800">
+                <div className="p-4 bg-zinc-900 rounded-2xl border border-zinc-800">
                   <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Engaging</p>
-                  <p className="text-xs font-bold text-zinc-900 dark:text-white">Bible-Based Fun</p>
+                  <p className="text-xs font-bold text-white">Bible-Based Fun</p>
                 </div>
               </div>
             </div>
@@ -73,14 +73,14 @@ const ChildrenPage = () => {
       </section>
 
       {/* Gallery Section */}
-      <section className="py-24 px-6 bg-zinc-50 dark:bg-black">
+      <section className="py-24 px-6 bg-black">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center max-w-2xl mx-auto space-y-6 mb-16">
             <div className="space-y-4">
               <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-500">Ministry Highlights</h2>
-              <h3 className="text-2xl md:text-3xl font-black text-zinc-900 dark:text-white uppercase tracking-tight leading-tight">Life at <br className="hidden md:block" /> Kingdom Kids</h3>
+              <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight leading-tight">Life at <br className="hidden md:block" /> Kingdom Kids</h3>
             </div>
-            <p className="text-xs text-zinc-500 dark:text-zinc-500 leading-relaxed">
+            <p className="text-xs text-zinc-500 leading-relaxed">
               A glimpse into the joy, learning, and spiritual growth happening every week in our children's departments.
             </p>
           </div>
@@ -155,11 +155,11 @@ const ChildrenPage = () => {
       </section>
 
       {/* Connect CTA */}
-      <section className="py-24 px-6 text-center bg-white dark:bg-zinc-950">
+      <section className="py-24 px-6 text-center bg-black">
         <div className="max-w-2xl mx-auto space-y-8">
           <div className="space-y-4">
             <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-blue-500">Parents & Guardians</h2>
-            <h3 className="text-3xl font-black text-zinc-900 dark:text-white uppercase tracking-tighter leading-none">Bring Your Little Ones.</h3>
+            <h3 className="text-3xl font-black text-white uppercase tracking-tighter leading-none">Bring Your Little Ones.</h3>
           </div>
           <p className="text-xs text-zinc-500 leading-relaxed">
             We offer age-appropriate classes every Sunday. Get in touch with our children's ministry team to learn more about registration and safety protocols.
@@ -167,7 +167,7 @@ const ChildrenPage = () => {
           <div className="flex flex-col md:flex-row items-center justify-center gap-4">
             <Link 
               href="/contact?dept=children" 
-              className="w-full md:w-auto px-10 py-4 bg-zinc-900 dark:bg-white text-white dark:text-black text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white transition-all"
+              className="w-full md:w-auto px-10 py-4 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-blue-500 hover:text-white transition-all"
             >
               Get In Touch
             </Link>

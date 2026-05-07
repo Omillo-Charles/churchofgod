@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const YouthPage = () => {
   return (
-    <div className="bg-white dark:bg-zinc-950 min-h-screen">
+    <div className="bg-black min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[60vh] min-h-[500px] w-full flex items-center justify-center overflow-hidden bg-black">
         <Image
@@ -38,24 +38,24 @@ const YouthPage = () => {
       </section>
 
       {/* Core Values / Mission */}
-      <section className="py-24 px-6 border-b border-zinc-100 dark:border-zinc-900">
+      <section className="py-24 px-6 border-b border-zinc-900">
         <div className="container mx-auto max-w-5xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
                 <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-amber-500">Our Mission</h2>
-                <h3 className="text-2xl md:text-3xl font-black text-zinc-900 dark:text-white uppercase tracking-tight">Rising to the <br />Call of Destiny</h3>
+                <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight">Rising to the <br />Call of Destiny</h3>
               </div>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+              <p className="text-sm text-zinc-400 leading-relaxed">
                 The Youth Ministry at NTCOGK is a vibrant community of young people committed to spiritual growth, authentic worship, and social transformation. We believe in providing a safe space where every young person can discover their God-given identity.
               </p>
               <div className="grid grid-cols-2 gap-8">
                 <div className="space-y-2">
-                  <span className="text-2xl font-black text-zinc-900 dark:text-white">500+</span>
+                  <span className="text-2xl font-black text-white">500+</span>
                   <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Active Youth</p>
                 </div>
                 <div className="space-y-2">
-                  <span className="text-2xl font-black text-zinc-900 dark:text-white">28+</span>
+                  <span className="text-2xl font-black text-white">28+</span>
                   <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Regions</p>
                 </div>
               </div>
@@ -86,9 +86,9 @@ const YouthPage = () => {
           <div className="text-center max-w-2xl mx-auto space-y-6 mb-16">
             <div className="space-y-4">
               <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-amber-500">Community Life</h2>
-              <h3 className="text-2xl md:text-3xl font-black text-zinc-900 dark:text-white uppercase tracking-tight leading-tight">Moments in <br className="hidden md:block" /> the Movement</h3>
+              <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight leading-tight">Moments in <br className="hidden md:block" /> the Movement</h3>
             </div>
-            <p className="text-xs text-zinc-500 dark:text-zinc-500 leading-relaxed">
+            <p className="text-xs text-zinc-500 leading-relaxed">
               Capturing the energy, passion, and genuine connection within our youth community across Kenya.
             </p>
           </div>
@@ -139,11 +139,11 @@ const YouthPage = () => {
       </section>
 
       {/* Final Call to Action */}
-      <section className="py-24 px-6 text-center bg-white dark:bg-zinc-950">
+      <section className="py-24 px-6 text-center bg-black">
         <div className="max-w-2xl mx-auto space-y-8">
           <div className="space-y-4">
             <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500">Connect With Us</h2>
-            <h3 className="text-3xl font-black text-zinc-900 dark:text-white uppercase tracking-tighter">Your Journey Starts Here.</h3>
+            <h3 className="text-3xl font-black text-white uppercase tracking-tighter">Your Journey Starts Here.</h3>
           </div>
           <p className="text-xs text-zinc-500 leading-relaxed">
             Ready to find your place in our community? Reach out to our youth leadership team and get involved in our next gathering.
@@ -151,13 +151,13 @@ const YouthPage = () => {
           <div className="flex flex-col md:flex-row items-center justify-center gap-4">
             <Link 
               href="/contact?dept=youth" 
-              className="w-full md:w-auto px-10 py-4 bg-zinc-900 dark:bg-white text-white dark:text-black text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-amber-500 dark:hover:bg-amber-500 hover:text-white dark:hover:text-white transition-all"
+              className="w-full md:w-auto px-10 py-4 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-amber-500 hover:text-white transition-all"
             >
               Get In Touch
             </Link>
             <a 
               href="#" 
-              className="w-full md:w-auto px-10 py-4 border border-zinc-200 dark:border-zinc-800 text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all"
+              className="w-full md:w-auto px-10 py-4 border border-zinc-800 text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-zinc-900 transition-all"
             >
               Follow @ntcogk_youth
             </a>
