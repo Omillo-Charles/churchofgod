@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const Hero = () => {
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black flex flex-col items-center justify-center -mt-32 md:-mt-20">
+    <section className="relative h-screen w-full overflow-hidden bg-black flex flex-col items-center justify-center -mt-[120px] md:-mt-16">
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
         <video
