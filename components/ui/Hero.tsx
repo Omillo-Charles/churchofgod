@@ -57,7 +57,33 @@ const Hero = () => {
           </p>
         </div>
 
+      </div>
 
+      {/* Mobile Scroll Indicator – absolutely positioned, never affects layout */}
+      <div className="md:hidden absolute bottom-10 left-0 right-0 z-30 flex flex-col items-center gap-2 pointer-events-none">
+        {/* Mouse outline */}
+        <div className="relative w-6 h-10 rounded-full border-2 border-amber-400/70 flex justify-center pt-1.5 shadow-[0_0_14px_rgba(245,158,11,0.4)]">
+          {/* Scrolling dot */}
+          <div
+            className="w-1.5 h-1.5 rounded-full bg-amber-400"
+            style={{ animation: "scrollDot 1.6s ease-in-out infinite" }}
+          />
+        </div>
+        {/* Label */}
+        <span className="text-[10px] uppercase tracking-[0.35em] text-zinc-500 font-semibold">
+          Scroll
+        </span>
+        {/* Gradient tail */}
+        <div className="w-px h-5 bg-gradient-to-b from-amber-400/40 to-transparent" />
+
+        <style jsx>{`
+          @keyframes scrollDot {
+            0%   { opacity: 1; transform: translateY(0); }
+            60%  { opacity: 0; transform: translateY(10px); }
+            61%  { opacity: 0; transform: translateY(0); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+        `}</style>
       </div>
 
       {/* Desktop CTAs – absolutely positioned at bottom */}
