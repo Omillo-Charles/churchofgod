@@ -1,7 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+
+// Member Modals
+import GiveModal from "@/components/portals/memberModals/GiveModal";
+import MemberSermonModal from "@/components/portals/memberModals/MemberSermonModal";
+import MemberPrayerModal from "@/components/portals/memberModals/MemberPrayerModal";
+import MemberEventModal from "@/components/portals/memberModals/MemberEventModal";
 
 // --- Stat Cards ---
 const stats = [
@@ -103,53 +109,63 @@ const recentGiving = [
   { type: "Pledge",   amount: "KSh 2,000", date: "13 Apr 2026", status: "Pending"   },
 ];
 
-// --- Quick Actions ---
-const quickActions = [
-  {
-    label: "Give Online",
-    desc: "Make a tithe or offering",
-    href: "/give",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-      </svg>
-    ),
-  },
-  {
-    label: "Watch Sermon",
-    desc: "Latest messages",
-    href: "/portals/member/sermons",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <polygon points="5 3 19 12 5 21 5 3"/>
-      </svg>
-    ),
-  },
-  {
-    label: "Prayer Request",
-    desc: "Submit a request",
-    href: "/portals/member/prayer",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
-      </svg>
-    ),
-  },
-  {
-    label: "View Events",
-    desc: "Upcoming calendar",
-    href: "/portals/member/events",
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>
-      </svg>
-    ),
-  },
-];
-
 export default function MemberDashboardPage() {
+  const [isGiveOpen, setIsGiveOpen] = useState(false);
+  const [isSermonOpen, setIsSermonOpen] = useState(false);
+  const [isPrayerOpen, setIsPrayerOpen] = useState(false);
+  const [isEventOpen, setIsEventOpen] = useState(false);
+
+  const quickActions = [
+    {
+      label: "Give Online",
+      desc: "Make a tithe or offering",
+      onClick: () => setIsGiveOpen(true),
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+        </svg>
+      ),
+    },
+    {
+      label: "Watch Sermon",
+      desc: "Latest messages",
+      onClick: () => setIsSermonOpen(true),
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+      ),
+    },
+    {
+      label: "Prayer Request",
+      desc: "Submit a request",
+      onClick: () => setIsPrayerOpen(true),
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+        </svg>
+      ),
+    },
+    {
+      label: "View Events",
+      desc: "Upcoming calendar",
+      onClick: () => setIsEventOpen(true),
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>
+        </svg>
+      ),
+    },
+  ];
+
   return (
     <div className="p-4 md:p-6 lg:p-8 space-y-8 max-w-[1400px] mx-auto">
+
+      {/* Modals */}
+      <GiveModal isOpen={isGiveOpen} onClose={() => setIsGiveOpen(false)} />
+      <MemberSermonModal isOpen={isSermonOpen} onClose={() => setIsSermonOpen(false)} />
+      <MemberPrayerModal isOpen={isPrayerOpen} onClose={() => setIsPrayerOpen(false)} />
+      <MemberEventModal isOpen={isEventOpen} onClose={() => setIsEventOpen(false)} />
 
       {/* Welcome Banner */}
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 border border-white/5 p-6 md:p-8">
@@ -214,9 +230,9 @@ export default function MemberDashboardPage() {
         <h2 className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em] mb-3">Quick Actions</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {quickActions.map((action) => (
-            <Link
+            <button
               key={action.label}
-              href={action.href}
+              onClick={action.onClick}
               className="group flex flex-col items-center text-center gap-3 p-4 rounded-2xl bg-zinc-900/60 border border-white/5 hover:border-white/10 hover:bg-zinc-900 transition-all hover:-translate-y-0.5"
             >
               <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-zinc-400 group-hover:text-amber-400 group-hover:bg-amber-500/10 group-hover:border-amber-500/20 transition-all duration-200">
@@ -226,7 +242,7 @@ export default function MemberDashboardPage() {
                 <p className="text-xs font-bold text-white">{action.label}</p>
                 <p className="text-[9px] text-zinc-600 mt-0.5">{action.desc}</p>
               </div>
-            </Link>
+            </button>
           ))}
         </div>
       </div>

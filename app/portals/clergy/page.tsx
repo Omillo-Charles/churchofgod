@@ -1,7 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+
+// Specific Modals
+import AnnouncementModal from "@/components/portals/clergyModals/AnnouncementModal";
+import SermonModal from "@/components/portals/clergyModals/SermonModal";
+import EventModal from "@/components/portals/clergyModals/EventModal";
+import FinanceModal from "@/components/portals/clergyModals/FinanceModal";
 
 const stats = [
   {
@@ -90,17 +96,6 @@ const recentSermons = [
   { title: "Pentecost Sunday Message",  date: "Draft",       views: 0,   status: "Draft"     },
 ];
 
-const quickActions = [
-  { label: "Add Announcement", href: "/portals/clergy/announcements",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg> },
-  { label: "Upload Sermon",    href: "/portals/clergy/sermons",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg> },
-  { label: "Create Event",     href: "/portals/clergy/events",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><line x1="12" x2="12" y1="14" y2="18"/><line x1="10" x2="14" y1="16" y2="16"/></svg> },
-  { label: "Finance Report",   href: "/portals/clergy/finance",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg> },
-];
-
 const typeColors: Record<string, string> = {
   Worship:   "bg-amber-500/10 text-amber-400 border-amber-500/20",
   Admin:     "bg-zinc-500/10 text-zinc-400 border-zinc-500/20",
@@ -109,8 +104,42 @@ const typeColors: Record<string, string> = {
 };
 
 export default function ClergyDashboardPage() {
+  const [isAnnouncementOpen, setIsAnnouncementOpen] = useState(false);
+  const [isSermonOpen, setIsSermonOpen] = useState(false);
+  const [isEventOpen, setIsEventOpen] = useState(false);
+  const [isFinanceOpen, setIsFinanceOpen] = useState(false);
+
+  const quickActions = [
+    { 
+      label: "Add Announcement", 
+      onClick: () => setIsAnnouncementOpen(true),
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg> 
+    },
+    { 
+      label: "Upload Sermon", 
+      onClick: () => setIsSermonOpen(true),
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg> 
+    },
+    { 
+      label: "Create Event", 
+      onClick: () => setIsEventOpen(true),
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><line x1="12" x2="12" y1="14" y2="18"/><line x1="10" x2="14" y1="16" y2="16"/></svg> 
+    },
+    { 
+      label: "Finance Report", 
+      onClick: () => setIsFinanceOpen(true),
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg> 
+    },
+  ];
+
   return (
     <div className="p-4 md:p-6 lg:p-8 space-y-8 max-w-[1400px] mx-auto">
+      
+      {/* Modals */}
+      <AnnouncementModal isOpen={isAnnouncementOpen} onClose={() => setIsAnnouncementOpen(false)} />
+      <SermonModal isOpen={isSermonOpen} onClose={() => setIsSermonOpen(false)} />
+      <EventModal isOpen={isEventOpen} onClose={() => setIsEventOpen(false)} />
+      <FinanceModal isOpen={isFinanceOpen} onClose={() => setIsFinanceOpen(false)} />
 
       {/* Welcome Banner */}
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0a1628] via-[#0d1f3c] to-[#060a10] border border-sky-500/10 p-6 md:p-8">
@@ -177,16 +206,16 @@ export default function ClergyDashboardPage() {
         <h2 className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em] mb-3">Quick Actions</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {quickActions.map((action) => (
-            <Link
+            <button
               key={action.label}
-              href={action.href}
+              onClick={action.onClick}
               className="group flex flex-col items-center text-center gap-3 p-4 rounded-2xl bg-zinc-900/40 border border-white/5 hover:border-sky-500/30 hover:bg-sky-500/5 transition-all hover:-translate-y-0.5"
             >
               <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-zinc-400 group-hover:text-sky-400 group-hover:bg-sky-500/10 group-hover:border-sky-500/20 transition-all duration-200">
                 {action.icon}
               </div>
               <p className="text-xs font-bold text-white">{action.label}</p>
-            </Link>
+            </button>
           ))}
         </div>
       </div>
