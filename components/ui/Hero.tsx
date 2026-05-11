@@ -57,30 +57,7 @@ const Hero = () => {
           </p>
         </div>
 
-        {/* Mobile CTAs – inline below text */}
-        <div className="md:hidden mt-10 flex flex-col gap-3 w-full px-0">
-          <Link
-            href="/visit"
-            className="block w-full px-8 py-3 bg-white text-black font-bold rounded-2xl text-center shadow-lg active:scale-[0.98] transition-transform flex items-center justify-center gap-2"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            Join a Service
-          </Link>
-          <Link
-            href="/ministries"
-            className="block w-full px-8 py-3 bg-zinc-900/50 backdrop-blur-md border border-white/10 text-white font-bold rounded-2xl text-center active:scale-[0.98] transition-transform flex items-center justify-center gap-2"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-            Explore Ministries
-          </Link>
-          <Link
-            href="/give"
-            className="block w-full px-8 py-3 bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-amber-500 font-bold rounded-2xl text-center active:scale-[0.98] transition-transform flex items-center justify-center gap-2"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-            Giving
-          </Link>
-        </div>
+
       </div>
 
       {/* Desktop CTAs – absolutely positioned at bottom */}
