@@ -5,9 +5,8 @@ import Link from "next/link";
 
 // Member Modals
 import GiveModal from "@/components/portals/memberModals/GiveModal";
-import MemberSermonModal from "@/components/portals/memberModals/MemberSermonModal";
+import FeedbackModal from "@/components/portals/memberModals/FeedbackModal";
 import MemberPrayerModal from "@/components/portals/memberModals/MemberPrayerModal";
-import MemberEventModal from "@/components/portals/memberModals/MemberEventModal";
 
 // --- Stat Cards ---
 const stats = [
@@ -19,7 +18,7 @@ const stats = [
     period: "This year",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
       </svg>
     ),
     color: "amber",
@@ -33,7 +32,7 @@ const stats = [
     period: "This year",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/>
+        <rect width="18" height="18" x="3" y="4" rx="2" ry="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" /><path d="m9 16 2 2 4-4" />
       </svg>
     ),
     color: "emerald",
@@ -47,7 +46,7 @@ const stats = [
     period: "This month",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
       </svg>
     ),
     color: "violet",
@@ -61,7 +60,7 @@ const stats = [
     period: "Open requests",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" /><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
       </svg>
     ),
     color: "sky",
@@ -70,10 +69,10 @@ const stats = [
 ];
 
 const colorMap: Record<string, { bg: string; text: string; ring: string; glow: string }> = {
-  amber:   { bg: "bg-amber-500/10",   text: "text-amber-400",   ring: "ring-amber-500/20",  glow: "shadow-amber-500/10" },
+  amber: { bg: "bg-amber-500/10", text: "text-amber-400", ring: "ring-amber-500/20", glow: "shadow-amber-500/10" },
   emerald: { bg: "bg-emerald-500/10", text: "text-emerald-400", ring: "ring-emerald-500/20", glow: "shadow-emerald-500/10" },
-  violet:  { bg: "bg-violet-500/10",  text: "text-violet-400",  ring: "ring-violet-500/20",  glow: "shadow-violet-500/10" },
-  sky:     { bg: "bg-sky-500/10",     text: "text-sky-400",     ring: "ring-sky-500/20",     glow: "shadow-sky-500/10" },
+  violet: { bg: "bg-violet-500/10", text: "text-violet-400", ring: "ring-violet-500/20", glow: "shadow-violet-500/10" },
+  sky: { bg: "bg-sky-500/10", text: "text-sky-400", ring: "ring-sky-500/20", glow: "shadow-sky-500/10" },
 };
 
 // --- Upcoming Events ---
@@ -103,17 +102,16 @@ const upcomingEvents = [
 
 // --- Recent Giving ---
 const recentGiving = [
-  { type: "Tithe",    amount: "KSh 5,000", date: "04 May 2026", status: "Confirmed" },
-  { type: "Offering", amount: "KSh 500",   date: "27 Apr 2026", status: "Confirmed" },
-  { type: "Tithe",    amount: "KSh 5,000", date: "20 Apr 2026", status: "Confirmed" },
-  { type: "Pledge",   amount: "KSh 2,000", date: "13 Apr 2026", status: "Pending"   },
+  { type: "Tithe", amount: "KSh 5,000", date: "04 May 2026", status: "Confirmed" },
+  { type: "Offering", amount: "KSh 500", date: "27 Apr 2026", status: "Confirmed" },
+  { type: "Tithe", amount: "KSh 5,000", date: "20 Apr 2026", status: "Confirmed" },
+  { type: "Pledge", amount: "KSh 2,000", date: "13 Apr 2026", status: "Pending" },
 ];
 
 export default function MemberDashboardPage() {
   const [isGiveOpen, setIsGiveOpen] = useState(false);
-  const [isSermonOpen, setIsSermonOpen] = useState(false);
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [isPrayerOpen, setIsPrayerOpen] = useState(false);
-  const [isEventOpen, setIsEventOpen] = useState(false);
 
   const quickActions = [
     {
@@ -122,17 +120,17 @@ export default function MemberDashboardPage() {
       onClick: () => setIsGiveOpen(true),
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
         </svg>
       ),
     },
     {
-      label: "Watch Sermon",
-      desc: "Latest messages",
-      onClick: () => setIsSermonOpen(true),
+      label: "Give Feedback",
+      desc: "Share your thoughts",
+      onClick: () => setIsFeedbackOpen(true),
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <polygon points="5 3 19 12 5 21 5 3"/>
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
         </svg>
       ),
     },
@@ -142,17 +140,17 @@ export default function MemberDashboardPage() {
       onClick: () => setIsPrayerOpen(true),
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+          <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" /><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
         </svg>
       ),
     },
     {
       label: "View Events",
       desc: "Upcoming calendar",
-      onClick: () => setIsEventOpen(true),
+      href: "/events",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>
+          <rect width="18" height="18" x="3" y="4" rx="2" ry="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" />
         </svg>
       ),
     },
@@ -163,9 +161,8 @@ export default function MemberDashboardPage() {
 
       {/* Modals */}
       <GiveModal isOpen={isGiveOpen} onClose={() => setIsGiveOpen(false)} />
-      <MemberSermonModal isOpen={isSermonOpen} onClose={() => setIsSermonOpen(false)} />
+      <FeedbackModal isOpen={isFeedbackOpen} onClose={() => setIsFeedbackOpen(false)} />
       <MemberPrayerModal isOpen={isPrayerOpen} onClose={() => setIsPrayerOpen(false)} />
-      <MemberEventModal isOpen={isEventOpen} onClose={() => setIsEventOpen(false)} />
 
       {/* Welcome Banner */}
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 border border-white/5 p-6 md:p-8">
@@ -229,21 +226,39 @@ export default function MemberDashboardPage() {
       <div>
         <h2 className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em] mb-3">Quick Actions</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {quickActions.map((action) => (
-            <button
-              key={action.label}
-              onClick={action.onClick}
-              className="group flex flex-col items-center text-center gap-3 p-4 rounded-2xl bg-zinc-900/60 border border-white/5 hover:border-white/10 hover:bg-zinc-900 transition-all hover:-translate-y-0.5"
-            >
-              <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-zinc-400 group-hover:text-amber-400 group-hover:bg-amber-500/10 group-hover:border-amber-500/20 transition-all duration-200">
-                {action.icon}
-              </div>
-              <div>
-                <p className="text-xs font-bold text-white">{action.label}</p>
-                <p className="text-[9px] text-zinc-600 mt-0.5">{action.desc}</p>
-              </div>
-            </button>
-          ))}
+          {quickActions.map((action) => {
+            const content = (
+              <>
+                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-zinc-400 group-hover:text-amber-400 group-hover:bg-amber-500/10 group-hover:border-amber-500/20 transition-all duration-200">
+                  {action.icon}
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-white">{action.label}</p>
+                  <p className="text-[9px] text-zinc-600 mt-0.5">{action.desc}</p>
+                </div>
+              </>
+            );
+
+            const className = "group flex flex-col items-center text-center gap-3 p-4 rounded-2xl bg-zinc-900/60 border border-white/5 hover:border-white/10 hover:bg-zinc-900 transition-all hover:-translate-y-0.5";
+
+            if ("href" in action && action.href) {
+              return (
+                <Link key={action.label} href={action.href} className={className}>
+                  {content}
+                </Link>
+              );
+            }
+
+            if ("onClick" in action && action.onClick) {
+              return (
+                <button key={action.label} onClick={action.onClick} className={className}>
+                  {content}
+                </button>
+              );
+            }
+
+            return null;
+          })}
         </div>
       </div>
 
@@ -290,7 +305,7 @@ export default function MemberDashboardPage() {
               <div key={i} className="flex items-center gap-4 px-5 py-4 hover:bg-white/[0.02] transition-colors">
                 <div className="shrink-0 w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-400">
-                    <line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    <line x1="12" x2="12" y1="2" y2="22" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
                   </svg>
                 </div>
                 <div className="flex-1 min-w-0">
@@ -299,9 +314,8 @@ export default function MemberDashboardPage() {
                 </div>
                 <div className="text-right shrink-0">
                   <p className="text-xs font-black text-white">{item.amount}</p>
-                  <span className={`text-[8px] font-black uppercase tracking-widest ${
-                    item.status === "Confirmed" ? "text-emerald-400" : "text-amber-400"
-                  }`}>
+                  <span className={`text-[8px] font-black uppercase tracking-widest ${item.status === "Confirmed" ? "text-emerald-400" : "text-amber-400"
+                    }`}>
                     {item.status}
                   </span>
                 </div>
@@ -349,9 +363,8 @@ export default function MemberDashboardPage() {
                 {Array.from({ length: m.total }).map((_, i) => (
                   <div
                     key={i}
-                    className={`w-full h-1.5 rounded-full transition-all ${
-                      i < m.attended ? "bg-amber-500" : "bg-zinc-800"
-                    }`}
+                    className={`w-full h-1.5 rounded-full transition-all ${i < m.attended ? "bg-amber-500" : "bg-zinc-800"
+                      }`}
                   />
                 ))}
               </div>
