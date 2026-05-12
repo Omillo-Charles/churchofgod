@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import SiteShell from "@/components/ui/SiteShell";
+import { Toaster } from "sonner";
 
 const ubuntu = localFont({
   src: [
@@ -59,6 +60,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans">
         <SiteShell>{children}</SiteShell>
+        <Toaster position="top-right" richColors theme="light" />
       </body>
     </html>
   );
