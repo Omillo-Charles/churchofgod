@@ -3,7 +3,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import api from "@/lib/axios";
+import { toast } from "sonner";
 
 interface ClergySidebarProps {
   isMobileOpen: boolean;
@@ -150,7 +152,19 @@ const navItems = [
 
 const ClergySidebar: React.FC<ClergySidebarProps> = ({ isMobileOpen, onMobileClose }) => {
   const pathname = usePathname();
+  const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+  const handleSignOut = async () => {
+    try {
+      await api.post("/auth/signout");
+    } catch {
+      // Proceed with redirect even if API call fails
+    }
+    toast.success("You have been signed out.");
+    router.push("/auth");
+  };
 
   const SidebarContent = () => (
     <div className="flex flex-col h-full">
@@ -270,15 +284,15 @@ const ClergySidebar: React.FC<ClergySidebarProps> = ({ isMobileOpen, onMobileClo
             </div>
           )}
           {!collapsed && (
-            <Link
-              href="/auth"
-              className="p-1.5 rounded-lg text-zinc-500 hover:text-white hover:bg-white/5 transition-all"
+            <button
+              onClick={() => setShowLogoutModal(true)}
               title="Sign out"
+              className="p-1.5 rounded-lg text-zinc-500 hover:text-rose-400 hover:bg-rose-500/10 transition-all"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/>
               </svg>
-            </Link>
+            </button>
           )}
         </div>
       </div>
@@ -287,6 +301,46 @@ const ClergySidebar: React.FC<ClergySidebarProps> = ({ isMobileOpen, onMobileClo
 
   return (
     <>
+      {/* Logout Confirmation Modal */}
+      {showLogoutModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            onClick={() => setShowLogoutModal(false)}
+          />
+          {/* Modal */}
+          <div className="relative z-10 w-full max-w-sm bg-zinc-950 border border-white/10 rounded-2xl shadow-2xl p-6 space-y-5 animate-in fade-in zoom-in-95 duration-200">
+            {/* Icon */}
+            <div className="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center mx-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-rose-400">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/>
+              </svg>
+            </div>
+            {/* Text */}
+            <div className="text-center space-y-1">
+              <h2 className="text-sm font-black text-white uppercase tracking-wide">Sign Out?</h2>
+              <p className="text-xs text-zinc-500">Are you sure you want to sign out of your clergy portal?</p>
+            </div>
+            {/* Actions */}
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowLogoutModal(false)}
+                className="flex-1 py-2.5 rounded-xl border border-white/10 text-[11px] font-bold text-zinc-400 hover:text-white hover:border-white/20 uppercase tracking-widest transition-all"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSignOut}
+                className="flex-1 py-2.5 rounded-xl bg-rose-500/90 hover:bg-rose-500 text-[11px] font-bold text-white uppercase tracking-widest transition-all"
+              >
+                Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Mobile Overlay */}
       <div
         className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden transition-opacity duration-300 ${
