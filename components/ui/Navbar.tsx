@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import Sidebar from "./Sidebar";
 import { searchIndex, SearchResult } from "@/lib/searchData";
+import { useAuth } from "@/lib/useAuth";
 
 const iconMap = {
   page: (
@@ -47,6 +48,7 @@ const Navbar = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const router = useRouter();
+  const { authenticated, loading: authLoading } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -378,15 +380,20 @@ const Navbar = () => {
 
           {/* Auth Icon */}
           <Link
-            href="/auth"
-            className="p-2 text-zinc-400 hover:text-white transition-all hover:bg-zinc-800 rounded-full"
+            href={authLoading ? "#" : authenticated ? "/portals/member" : "/auth"}
+            title={authenticated ? "Go to your portal" : "Sign in"}
+            className={`p-2 transition-all rounded-full ${
+              authenticated
+                ? "text-amber-400 hover:text-amber-300 hover:bg-amber-500/10"
+                : "text-zinc-400 hover:text-white hover:bg-zinc-800"
+            } ${authLoading ? "pointer-events-none opacity-40" : ""}`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="22"
               height="22"
               viewBox="0 0 24 24"
-              fill="none"
+              fill={authenticated ? "currentColor" : "none"}
               stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"

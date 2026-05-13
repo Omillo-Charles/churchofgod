@@ -29,8 +29,7 @@ const AuthPage = () => {
       } else {
         const res = await api.post("/auth/signin", { email, password });
         toast.success(res.data.message || "Welcome back!");
-        // Redirect to portal or dashboard
-        router.push("/");
+        router.push("/portals/member");
       }
     } catch (error: any) {
       toast.error(error.response?.data?.message || "An error occurred. Please try again.");
