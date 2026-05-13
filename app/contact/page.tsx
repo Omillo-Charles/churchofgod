@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import api from "@/lib/axios";
+import { toast } from "sonner";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +14,28 @@ const ContactPage = () => {
     subject: "General Inquiry",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await api.post("/contact", formData);
+      toast.success(res.data.message || "Message sent successfully!");
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "General Inquiry",
+        message: "",
+      });
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const regions = [
     {
@@ -88,13 +112,15 @@ const ContactPage = () => {
               </p>
             </div>
 
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">Full Name *</label>
                   <input
                     type="text"
                     required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="John Doe"
                     className="w-full px-5 py-3 bg-zinc-900 border border-zinc-800 rounded-2xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all"
                   />
@@ -104,6 +130,8 @@ const ContactPage = () => {
                   <input
                     type="email"
                     required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="john@example.com"
                     className="w-full px-5 py-3 bg-zinc-900 border border-zinc-800 rounded-2xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all"
                   />
@@ -115,13 +143,19 @@ const ContactPage = () => {
                   <label className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">Phone Number (Optional)</label>
                   <input
                     type="tel"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="+254..."
                     className="w-full px-5 py-3 bg-zinc-900 border border-zinc-800 rounded-2xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all"
                   />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">Subject *</label>
-                  <select className="w-full px-5 py-3 bg-zinc-900 border border-zinc-800 rounded-2xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all appearance-none">
+                  <select 
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    className="w-full px-5 py-3 bg-zinc-900 border border-zinc-800 rounded-2xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all appearance-none"
+                  >
                     <option>General Inquiry</option>
                     <option>Prayer Request</option>
                     <option>Salvation & Baptism</option>
@@ -138,13 +172,18 @@ const ContactPage = () => {
                 <textarea
                   required
                   rows={6}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="How can we help you?"
                   className="w-full px-5 py-3 bg-zinc-900 border border-zinc-800 rounded-2xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all resize-none"
                 />
               </div>
 
-              <button className="px-10 py-3 bg-amber-500 text-white font-black rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-xl shadow-amber-500/20 uppercase tracking-widest text-[11px]">
-                Send Message
+              <button 
+                disabled={loading}
+                className="px-10 py-3 bg-amber-500 text-white font-black rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-xl shadow-amber-500/20 uppercase tracking-widest text-[11px] disabled:opacity-50 disabled:scale-100"
+              >
+                {loading ? "Sending..." : "Send Message"}
               </button>
             </form>
           </div>
