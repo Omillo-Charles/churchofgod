@@ -32,7 +32,7 @@ const StorePage = () => {
   return (
     <div className="bg-black min-h-screen">
       {/* 1. Hero Section */}
-      <section className="relative h-[40vh] min-h-[400px] w-full flex items-center justify-center overflow-hidden bg-black">
+      <section className="relative h-[30vh] min-h-[300px] w-full flex items-center justify-center overflow-hidden bg-black">
         <Image
           src="/contactImages/contact1.png"
           alt="NTCOGK Store"
@@ -40,15 +40,16 @@ const StorePage = () => {
           className="object-cover opacity-50 mix-blend-luminosity"
           priority
         />
-        {/* About Page Style Tint */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black" />
         
-        <div className="relative z-10 text-center space-y-4 px-6 max-w-4xl">
-          <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500">Equipping the Saints</h3>
-          <h1 className="text-3xl md:text-5xl font-black tracking-tight text-white uppercase leading-tight">
-            Church <span className="text-amber-500">Store</span>
+        <div className="relative z-10 text-center space-y-4 px-6">
+          <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500">
+            Equipping the Saints
+          </h2>
+          <h1 className="text-2xl md:text-3xl font-black tracking-tight text-white uppercase">
+            Church Store
           </h1>
-          <p className="text-zinc-400 max-w-2xl mx-auto font-medium text-xs md:text-sm leading-relaxed">
+          <p className="text-zinc-400 max-w-2xl mx-auto font-medium text-[10px] md:text-xs leading-relaxed">
             Spiritual resources, church merchandise, and multimedia materials to support your growth and our mission.
           </p>
         </div>

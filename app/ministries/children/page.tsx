@@ -8,24 +8,23 @@ const ChildrenPage = () => {
   return (
     <div className="bg-black min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[50vh] min-h-[400px] w-full flex items-center justify-center overflow-hidden bg-black">
+      <section className="relative h-[30vh] min-h-[300px] w-full flex items-center justify-center overflow-hidden bg-black">
         <Image
           src="/childrenImages/child1.png"
           alt="Children's Ministry"
           fill
-          className="object-cover opacity-50 mix-blend-luminosity scale-105"
+          className="object-cover opacity-50 mix-blend-luminosity"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black" />
         
-        <div className="relative z-10 text-center px-6 max-w-4xl space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 backdrop-blur-md border border-blue-500/20 text-[10px] font-bold uppercase tracking-widest text-blue-400 mb-2">
+        <div className="relative z-10 text-center space-y-4 px-6">
+          <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-blue-500">
             Kingdom Kids
-          </div>
-          <h1 className="text-3xl md:text-6xl font-black text-white uppercase tracking-tighter leading-tight">
-            Nurturing <br />
-            <span className="text-blue-400">Faith Early.</span>
+          </h2>
+          <h1 className="text-2xl md:text-3xl font-black tracking-tight text-white uppercase">
+            Nurturing Faith Early
           </h1>
-          <p className="text-xs md:text-sm text-zinc-300 max-w-xl mx-auto leading-relaxed font-medium">
+          <p className="text-zinc-400 max-w-2xl mx-auto font-medium text-[10px] md:text-xs leading-relaxed">
             Building a strong foundation of biblical truth and love for the next generation in a fun, safe, and engaging environment.
           </p>
         </div>
@@ -36,9 +35,9 @@ const ChildrenPage = () => {
         <div className="container mx-auto max-w-5xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div className="space-y-8 order-2 md:order-1">
-              <div className="space-y-4">
+              <div className="space-y-2">
                 <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-500">Our Vision</h2>
-                <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight">Small Hearts, <br />Big Faith</h3>
+                <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">Small Hearts, Big Faith</h3>
               </div>
               <p className="text-sm text-zinc-400 leading-relaxed">
                 At NTCOGK, we believe that children are not just the future of the church, but a vital part of it today. Our Children's Ministry is dedicated to helping every child encounter God's love through age-appropriate teaching, creative activities, and mentorship.
@@ -76,9 +75,9 @@ const ChildrenPage = () => {
       <section className="py-24 px-6 bg-black">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center max-w-2xl mx-auto space-y-6 mb-16">
-            <div className="space-y-4">
+            <div className="space-y-2">
               <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-500">Ministry Highlights</h2>
-              <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight leading-tight">Life at <br className="hidden md:block" /> Kingdom Kids</h3>
+              <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight leading-tight">Life at Kingdom Kids</h3>
             </div>
             <p className="text-xs text-zinc-500 leading-relaxed">
               A glimpse into the joy, learning, and spiritual growth happening every week in our children's departments.
@@ -157,9 +156,9 @@ const ChildrenPage = () => {
       {/* Connect CTA */}
       <section className="py-24 px-6 text-center bg-black">
         <div className="max-w-2xl mx-auto space-y-8">
-          <div className="space-y-4">
+          <div className="space-y-2">
             <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-blue-500">Parents & Guardians</h2>
-            <h3 className="text-3xl font-black text-white uppercase tracking-tighter leading-none">Bring Your Little Ones.</h3>
+            <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">Bring Your Little Ones</h3>
           </div>
           <p className="text-xs text-zinc-500 leading-relaxed">
             We offer age-appropriate classes every Sunday. Get in touch with our children's ministry team to learn more about registration and safety protocols.

@@ -91,10 +91,10 @@ const ContactPage = () => {
           <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500">
             Get in Touch
           </h2>
-          <h1 className="text-2xl md:text-4xl font-black tracking-tight text-white uppercase">
+          <h1 className="text-2xl md:text-3xl font-black tracking-tight text-white uppercase">
             Contact Us
           </h1>
-          <p className="text-zinc-400 max-w-xl mx-auto font-medium text-xs md:text-sm leading-relaxed">
+          <p className="text-zinc-400 max-w-2xl mx-auto font-medium text-[10px] md:text-xs leading-relaxed">
             We would love to hear from you. Connect with our church family across Kenya.
           </p>
         </div>

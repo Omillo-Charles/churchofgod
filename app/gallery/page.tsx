@@ -136,28 +136,24 @@ const GalleryPage = () => {
   return (
     <div className="bg-black min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[45vh] min-h-[380px] w-full flex items-center justify-center overflow-hidden bg-black">
+      <section className="relative h-[30vh] min-h-[300px] w-full flex items-center justify-center overflow-hidden bg-black">
         <Image
           src="/clergyImages/clergy1.png"
           alt="NTCOGK Gallery"
           fill
-          className="object-cover opacity-40 mix-blend-luminosity scale-105"
+          className="object-cover opacity-50 mix-blend-luminosity"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black" />
-        <div className="relative z-10 text-center space-y-5 px-6 max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 mb-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-            <span className="text-[10px] font-bold uppercase tracking-widest">Our Memories</span>
-          </div>
-          <h1 className="text-4xl md:text-7xl font-black tracking-tight text-white uppercase leading-none">
-            Photo <span className="text-amber-500">Gallery</span>
+        <div className="relative z-10 text-center space-y-4 px-6">
+          <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500">
+            Our Memories
+          </h2>
+          <h1 className="text-2xl md:text-3xl font-black tracking-tight text-white uppercase">
+            Photo Gallery
           </h1>
-          <p className="text-zinc-400 max-w-2xl mx-auto font-medium text-xs md:text-sm leading-relaxed">
+          <p className="text-zinc-400 max-w-2xl mx-auto font-medium text-[10px] md:text-xs leading-relaxed">
             A visual journey through our community, ministries, and the moments that define our shared faith.
-          </p>
-          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500">
-            {allImages.length} Photographs
           </p>
         </div>
       </section>

@@ -106,32 +106,25 @@ const CollegePage = () => {
   return (
     <div className="bg-black min-h-screen">
       {/* 1. Hero Section */}
-      <section className="relative h-[60vh] min-h-[500px] w-full flex items-center justify-center overflow-hidden bg-black">
+      <section className="relative h-[30vh] min-h-[300px] w-full flex items-center justify-center overflow-hidden bg-black">
         <Image
           src="/heroImages/hero6.png"
           alt="Discipleship College"
           fill
-          className="object-cover opacity-60 mix-blend-luminosity"
+          className="object-cover opacity-50 mix-blend-luminosity"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black" />
-        <div className="relative z-10 text-center space-y-6 px-6 max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span className="text-[10px] font-bold uppercase tracking-widest">Equipping for Ministry</span>
-          </div>
-          <h1 className="text-4xl md:text-6xl font-black tracking-tight text-white uppercase leading-tight">
-            Discipleship <br /><span className="text-amber-500">Courses</span>
+        <div className="relative z-10 text-center space-y-4 px-6">
+          <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500">
+            Equipping for Ministry
+          </h2>
+          <h1 className="text-2xl md:text-3xl font-black tracking-tight text-white uppercase">
+            Discipleship College
           </h1>
-          <p className="text-zinc-300 max-w-2xl mx-auto font-medium text-sm md:text-base leading-relaxed">
-            Grow in Faith, Equip for Ministry, Transform Lives
+          <p className="text-zinc-400 max-w-2xl mx-auto font-medium text-[10px] md:text-xs leading-relaxed">
+            Grow in Faith, Equip for Ministry, Transform Lives. Join our community of learners at the NTCOGK Kenya Eldoret Campus.
           </p>
-          <div className="pt-4 flex flex-col items-center gap-2">
-            <div className="flex items-center gap-2 text-zinc-400 text-[10px] md:text-xs uppercase tracking-[0.2em] font-bold">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-500"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              NTCOG Kenya – Eldoret Campus, Pioneer Estate
-            </div>
-          </div>
         </div>
       </section>
 

@@ -9,31 +9,25 @@ const YouthPage = () => {
   return (
     <div className="bg-black min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[500px] w-full flex items-center justify-center overflow-hidden bg-black">
+      <section className="relative h-[30vh] min-h-[300px] w-full flex items-center justify-center overflow-hidden bg-black">
         <Image
           src="/youthImages/youth2.png" 
           alt="Youth Ministry"
           fill
-          className="object-cover opacity-50 mix-blend-luminosity scale-105"
+          className="object-cover opacity-50 mix-blend-luminosity"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black" />
         
-        <div className="relative z-10 text-center px-6 max-w-4xl space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 backdrop-blur-md border border-amber-500/20 text-[10px] font-bold uppercase tracking-widest text-amber-500 mb-2">
+        <div className="relative z-10 text-center space-y-4 px-6">
+          <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500">
             The Next Generation
-          </div>
-          <h1 className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9]">
-            Igniting <br />
-            <span className="text-amber-500">The Future.</span>
+          </h2>
+          <h1 className="text-2xl md:text-3xl font-black tracking-tight text-white uppercase">
+            Igniting The Future
           </h1>
-          <p className="text-xs md:text-sm text-zinc-300 max-w-xl mx-auto leading-relaxed font-medium">
+          <p className="text-zinc-400 max-w-2xl mx-auto font-medium text-[10px] md:text-xs leading-relaxed">
             Empowering youth to live out their faith with passion, purpose, and impact in a modern world.
           </p>
-          <div className="pt-4">
-            <button className="px-8 py-3 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-amber-500 hover:text-white transition-all active:scale-95">
-              Join The Movement
-            </button>
-          </div>
         </div>
       </section>
 
@@ -42,9 +36,9 @@ const YouthPage = () => {
         <div className="container mx-auto max-w-5xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
-              <div className="space-y-4">
+              <div className="space-y-2">
                 <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-amber-500">Our Mission</h2>
-                <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight">Rising to the <br />Call of Destiny</h3>
+                <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">Rising to the Call of Destiny</h3>
               </div>
               <p className="text-sm text-zinc-400 leading-relaxed">
                 The Youth Ministry at NTCOGK is a vibrant community of young people committed to spiritual growth, authentic worship, and social transformation. We believe in providing a safe space where every young person can discover their God-given identity.
@@ -84,9 +78,9 @@ const YouthPage = () => {
       <section className="py-24 px-6 overflow-hidden">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center max-w-2xl mx-auto space-y-6 mb-16">
-            <div className="space-y-4">
+            <div className="space-y-2">
               <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-amber-500">Community Life</h2>
-              <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight leading-tight">Moments in <br className="hidden md:block" /> the Movement</h3>
+              <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight leading-tight">Moments in the Movement</h3>
             </div>
             <p className="text-xs text-zinc-500 leading-relaxed">
               Capturing the energy, passion, and genuine connection within our youth community across Kenya.
@@ -141,9 +135,9 @@ const YouthPage = () => {
       {/* Final Call to Action */}
       <section className="py-24 px-6 text-center bg-black">
         <div className="max-w-2xl mx-auto space-y-8">
-          <div className="space-y-4">
+          <div className="space-y-2">
             <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500">Connect With Us</h2>
-            <h3 className="text-3xl font-black text-white uppercase tracking-tighter">Your Journey Starts Here.</h3>
+            <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">Your Journey Starts Here</h3>
           </div>
           <p className="text-xs text-zinc-500 leading-relaxed">
             Ready to find your place in our community? Reach out to our youth leadership team and get involved in our next gathering.

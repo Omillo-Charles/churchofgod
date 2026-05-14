@@ -44,7 +44,7 @@ const GivePage = () => {
   return (
     <div className="bg-black min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[40vh] min-h-[400px] w-full flex items-center justify-center overflow-hidden bg-black">
+      <section className="relative h-[30vh] min-h-[300px] w-full flex items-center justify-center overflow-hidden bg-black">
         <Image
           src="/heroImages/hero3.png"
           alt="Giving"
@@ -53,15 +53,14 @@ const GivePage = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black" />
         
-        <div className="relative z-10 text-center px-6 max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-bold uppercase tracking-widest text-white mb-6">
+        <div className="relative z-10 text-center space-y-4 px-6">
+          <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500">
             Generosity & Faith
-          </div>
-          <h1 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-4 leading-tight">
-            Supporting the <br />
-            <span className="text-amber-500">Work of God.</span>
+          </h2>
+          <h1 className="text-2xl md:text-3xl font-black tracking-tight text-white uppercase">
+            Supporting the Work of God
           </h1>
-          <p className="text-xs md:text-sm text-zinc-300 max-w-xl mx-auto leading-relaxed">
+          <p className="text-zinc-400 max-w-2xl mx-auto font-medium text-[10px] md:text-xs leading-relaxed">
             Every gift helps us extend our reach and impact lives across Kenya. Thank you for your faithful support.
           </p>
         </div>
