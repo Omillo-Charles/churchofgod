@@ -1,14 +1,33 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 const EventsPage = () => {
   const [activeTab, setActiveTab] = useState<"listing" | "calendar">("listing");
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [hasMounted, setHasMounted] = useState(false);
 
-  const mockEvents: any[] = [];
+  useEffect(() => {
+    setHasMounted(true);
+    setCurrentDate(new Date());
+  }, []);
+
+  const mockEvents: any[] = [
+    {
+      id: "youth-explosion-szn3",
+      title: "Youth Explosion Season 3",
+      category: "Youth Ministry",
+      date: new Date(2026, 11, 8), // Dec 8th, 2026
+      endDate: new Date(2026, 11, 12),
+      time: "8:00 AM - 5:00 PM",
+      location: "High Life Cathedral Nairobi",
+      desc: "Join us for an explosive 5-day spiritual journey designed specifically for this generation. Experience powerful worship, transformative teachings, and community fellowships.",
+      image: "/youthexplosionszn3.jpeg",
+      fee: "KES 1,000",
+    }
+  ];
 
   // Calendar Logic
   const daysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
@@ -58,6 +77,8 @@ const EventsPage = () => {
   };
 
   const selectedEvents = useMemo(() => getEventsForDay(selectedDate), [selectedDate, currentDate]);
+
+  if (!hasMounted) return null;
 
   return (
     <div className="bg-black min-h-screen">
@@ -119,69 +140,70 @@ const EventsPage = () => {
         <div className="container mx-auto px-6">
           {activeTab === "listing" ? (
             /* Listing View */
-            <div className="max-w-5xl mx-auto space-y-12">
-              <div className="flex items-center justify-between mb-12">
-                <h2 className="text-xl md:text-2xl font-black text-white uppercase">Upcoming Events</h2>
-                <div className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-                  Showing {mockEvents.length} Events
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 gap-8 md:gap-12">
+            <div className="max-w-4xl mx-auto">
+              <div className="space-y-16">
                 {mockEvents.length > 0 ? (
                   mockEvents.sort((a, b) => a.date.getTime() - b.date.getTime()).map((event) => (
-                    <div key={event.id} className="group flex flex-col md:flex-row gap-8 items-start bg-zinc-900/30 p-6 md:p-8 rounded-[2.5rem] border border-zinc-800 hover:border-amber-500/20 transition-all duration-500">
-                      {/* Date Badge */}
-                      <div className="flex flex-col items-center justify-center min-w-[80px] h-[80px] bg-zinc-800 rounded-3xl text-white">
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-amber-500">
-                          {event.date.toLocaleString("default", { month: "short" })}
-                        </span>
-                        <span className="text-2xl font-black">{event.date.getDate()}</span>
-                      </div>
-
-                      {/* Content */}
-                      <div className="flex-1 space-y-4">
-                        <div className="flex flex-wrap items-center gap-3">
-                          <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[9px] font-black uppercase tracking-widest">
-                            {event.category}
-                          </span>
-                          <div className="flex items-center gap-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                            {event.time}
-                          </div>
-                          <div className="flex items-center gap-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                            {event.location}
-                          </div>
-                        </div>
-
-                        <h3 className="text-lg md:text-xl font-black text-white uppercase leading-tight group-hover:text-amber-500 transition-colors">
-                          {event.title}
-                        </h3>
-                        
-                        <p className="text-[11px] md:text-xs text-zinc-400 leading-relaxed font-medium max-w-2xl">
-                          {event.desc}
-                        </p>
-
-                        <div className="pt-2">
-                          <Link
-                            href={`/events/${event.id}`}
-                            className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white hover:text-amber-500 transition-colors"
-                          >
-                            Details & Registration
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                          </Link>
-                        </div>
-                      </div>
-
-                      {/* Image Thumbnail (Desktop) */}
-                      <div className="hidden lg:block relative w-48 h-32 rounded-3xl overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
-                        <Image
+                    <div key={event.id} className="group grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+                      {/* Original Image Container */}
+                      <div className="lg:col-span-3 relative rounded-[2rem] overflow-hidden bg-zinc-900 border border-white/5 shadow-2xl transition-all duration-500 hover:border-amber-500/20">
+                        <img
                           src={event.image}
                           alt={event.title}
-                          fill
-                          className="object-cover"
+                          className="w-full h-auto block object-contain"
                         />
+                      </div>
+
+                      {/* Clean Details */}
+                      <div className="lg:col-span-2 space-y-8">
+                        <div className="space-y-4">
+                          <div className="flex items-center gap-3">
+                            <span className="w-8 h-[1px] bg-amber-500" />
+                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-500">
+                              {event.date.toLocaleString("default", { month: "long" })} {event.date.getDate()}
+                            </span>
+                          </div>
+                          
+                          <h2 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight leading-tight">
+                            {event.title}
+                          </h2>
+                          
+                          <p className="text-sm text-zinc-400 font-medium leading-relaxed">
+                            {event.desc}
+                          </p>
+                        </div>
+
+                        {/* Minimal Metadata */}
+                        <div className="space-y-4">
+                          <div className="flex items-center gap-4 text-xs font-bold text-zinc-300">
+                            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-amber-500">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            {event.location}
+                          </div>
+                          <div className="flex items-center gap-4 text-xs font-bold text-zinc-300">
+                            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-amber-500">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            </div>
+                            {event.time}
+                          </div>
+                          <div className="flex items-center gap-4 text-xs font-bold text-amber-500">
+                            <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            </div>
+                            Registration: {event.fee}
+                          </div>
+                        </div>
+
+                        <div className="pt-4">
+                          <Link
+                            href={`/events/${event.id}`}
+                            className="inline-flex items-center gap-4 px-10 py-5 rounded-2xl bg-white text-black text-[11px] font-black uppercase tracking-widest hover:bg-amber-500 hover:text-white transition-all duration-300 shadow-xl"
+                          >
+                            Register Now
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   ))
