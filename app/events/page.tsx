@@ -30,7 +30,7 @@ const EventsPage = () => {
       date: new Date(2026, 11, 8), // Dec 8th, 2026
       endDate: new Date(2026, 11, 12),
       time: "8:00 AM - 5:00 PM",
-      location: "High Life Cathedral Nairobi",
+      location: "Life Spring Christian Academy",
       desc: "Join us for an explosive 5-day spiritual journey designed specifically for this generation. Experience powerful worship, transformative teachings, and community fellowships.",
       image: "/youthexplosionszn3.jpeg",
       fee: "KES 1,000",
@@ -368,15 +368,26 @@ const EventsPage = () => {
                   {selectedEvents.length > 0 ? (
                     <div className="grid grid-cols-1 gap-3">
                       {selectedEvents.map((event) => (
-                        <div key={event.id} className="p-4 bg-zinc-900 rounded-2xl border border-zinc-800 flex items-center gap-4">
+                        <button
+                          key={event.id}
+                          onClick={() => {
+                            if (!user) {
+                              toast.error("Please login to register for events.");
+                              return router.push("/auth");
+                            }
+                            setSelectedEvent(event);
+                            setIsRegisterOpen(true);
+                          }}
+                          className="p-4 bg-zinc-900 rounded-2xl border border-zinc-800 flex items-center gap-4 hover:border-amber-500/20 hover:bg-zinc-800 transition-all text-left w-full group"
+                        >
                           <div className="flex-1">
-                            <h5 className="text-xs font-black text-white uppercase">{event.title}</h5>
+                            <h5 className="text-xs font-black text-white uppercase group-hover:text-amber-500 transition-colors">{event.title}</h5>
                             <p className="text-[10px] text-zinc-400 font-medium">{event.time} • {event.location}</p>
                           </div>
-                          <Link href={`/events/${event.id}`} className="p-2 rounded-xl bg-zinc-800 text-zinc-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                          </Link>
-                        </div>
+                          <div className="p-2 rounded-xl bg-zinc-800 text-zinc-400 group-hover:text-white group-hover:bg-amber-500 transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                          </div>
+                        </button>
                       ))}
                     </div>
                   ) : (
