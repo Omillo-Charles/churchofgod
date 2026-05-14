@@ -156,13 +156,13 @@ const ContactPage = () => {
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     className="w-full px-5 py-3 bg-zinc-900 border border-zinc-800 rounded-2xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 transition-all appearance-none"
                   >
-                    <option>General Inquiry</option>
-                    <option>Prayer Request</option>
-                    <option>Salvation & Baptism</option>
-                    <option>Ministry Opportunities</option>
-                    <option>Counseling</option>
-                    <option>Church Planting</option>
-                    <option>Other</option>
+                    <option className="bg-zinc-900 text-white">General Inquiry</option>
+                    <option className="bg-zinc-900 text-white">Prayer Request</option>
+                    <option className="bg-zinc-900 text-white">Salvation & Baptism</option>
+                    <option className="bg-zinc-900 text-white">Ministry Opportunities</option>
+                    <option className="bg-zinc-900 text-white">Counseling</option>
+                    <option className="bg-zinc-900 text-white">Church Planting</option>
+                    <option className="bg-zinc-900 text-white">Other</option>
                   </select>
                 </div>
               </div>

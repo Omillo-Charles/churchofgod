@@ -34,10 +34,10 @@ export default function GiveModal({ isOpen, onClose }: Props) {
             </label>
             <div className="relative">
               <select className="w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white focus:outline-none focus:border-amber-500/50 focus:bg-white/[0.06] transition-all appearance-none cursor-pointer">
-                <option>Tithe</option>
-                <option>Offering</option>
-                <option>Building Fund</option>
-                <option>Missions</option>
+                <option className="bg-zinc-900 text-white">Tithe</option>
+                <option className="bg-zinc-900 text-white">Offering</option>
+                <option className="bg-zinc-900 text-white">Building Fund</option>
+                <option className="bg-zinc-900 text-white">Missions</option>
               </select>
               <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500">
                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -52,9 +52,9 @@ export default function GiveModal({ isOpen, onClose }: Props) {
             </label>
             <div className="relative">
               <select className="w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white focus:outline-none focus:border-amber-500/50 focus:bg-white/[0.06] transition-all appearance-none cursor-pointer">
-                <option>M-Pesa</option>
-                <option>Card</option>
-                <option>Bank Transfer</option>
+                <option className="bg-zinc-900 text-white">M-Pesa</option>
+                <option className="bg-zinc-900 text-white">Card</option>
+                <option className="bg-zinc-900 text-white">Bank Transfer</option>
               </select>
               <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500">
                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">

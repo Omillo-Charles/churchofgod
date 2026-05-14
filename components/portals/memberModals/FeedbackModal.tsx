@@ -23,11 +23,11 @@ export default function FeedbackModal({ isOpen, onClose }: Props) {
           </label>
           <div className="relative">
             <select className="w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white focus:outline-none focus:border-amber-500/50 focus:bg-white/[0.06] transition-all appearance-none cursor-pointer">
-              <option>General Feedback</option>
-              <option>Service Experience</option>
-              <option>Ministry Suggestion</option>
-              <option>Technical Issue</option>
-              <option>Other</option>
+              <option className="bg-zinc-900 text-white">General Feedback</option>
+              <option className="bg-zinc-900 text-white">Service Experience</option>
+              <option className="bg-zinc-900 text-white">Ministry Suggestion</option>
+              <option className="bg-zinc-900 text-white">Technical Issue</option>
+              <option className="bg-zinc-900 text-white">Other</option>
             </select>
             <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500">
               <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
