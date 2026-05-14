@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useAuth } from "@/lib/useAuth";
 
 // Member Modals
-import QuickActionModal from "@/components/portals/memberModals/QuickActionModal";
+import QuickActionModal from "@/components/modals/QuickActionModal";
 
 // --- Stat Cards ---
 const stats = [

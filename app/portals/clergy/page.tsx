@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 // Clergy Modals
-import ClergyActionModal from "@/components/portals/clergyModals/ClergyActionModal";
+import ClergyActionModal from "@/components/modals/ClergyActionModal";
 
 const stats = [
   {

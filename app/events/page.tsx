@@ -3,7 +3,10 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import EventRegistrationModal from "@/components/modals/EventRegistrationModal";
+import { useAuth } from "@/lib/useAuth";
+import { toast } from "sonner";
 
 const EventsPage = () => {
   const [activeTab, setActiveTab] = useState<"listing" | "calendar">("listing");
@@ -11,6 +14,8 @@ const EventsPage = () => {
   const [hasMounted, setHasMounted] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
+  const { user } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     setHasMounted(true);
@@ -208,6 +213,10 @@ const EventsPage = () => {
                         <div className="pt-2">
                           <button
                             onClick={() => {
+                              if (!user) {
+                                toast.error("Please login to register for events.");
+                                return router.push("/auth");
+                              }
                               setSelectedEvent(event);
                               setIsRegisterOpen(true);
                             }}
