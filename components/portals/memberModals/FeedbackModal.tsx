@@ -1,7 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Modal from "@/components/modals/modal";
+import api from "@/lib/axios";
+import { toast } from "sonner";
 
 interface Props {
   isOpen: boolean;
@@ -9,6 +11,27 @@ interface Props {
 }
 
 export default function FeedbackModal({ isOpen, onClose }: Props) {
+  const [subject, setSubject] = useState("General Feedback");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async () => {
+    if (!message.trim()) {
+      return toast.error("Please enter a message.");
+    }
+
+    setLoading(true);
+    try {
+      const res = await api.post("/feedback", { subject, message });
+      toast.success(res.data.message || "Feedback sent successfully!");
+      setMessage("");
+      onClose();
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || "Failed to send feedback.");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <Modal
       isOpen={isOpen}
@@ -22,7 +45,11 @@ export default function FeedbackModal({ isOpen, onClose }: Props) {
             Subject
           </label>
           <div className="relative">
-            <select className="w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white focus:outline-none focus:border-amber-500/50 focus:bg-white/[0.06] transition-all appearance-none cursor-pointer">
+            <select 
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              className="w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white focus:outline-none focus:border-amber-500/50 focus:bg-white/[0.06] transition-all appearance-none cursor-pointer"
+            >
               <option className="bg-zinc-900 text-white">General Feedback</option>
               <option className="bg-zinc-900 text-white">Service Experience</option>
               <option className="bg-zinc-900 text-white">Ministry Suggestion</option>
@@ -42,6 +69,8 @@ export default function FeedbackModal({ isOpen, onClose }: Props) {
           </label>
           <textarea
             rows={5}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             placeholder="Tell us what's on your mind..."
             className="w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-500/50 focus:bg-white/[0.06] transition-all resize-none"
           />
@@ -54,9 +83,11 @@ export default function FeedbackModal({ isOpen, onClose }: Props) {
             Cancel
           </button>
           <button
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-[10px] font-black text-white uppercase tracking-[0.15em] transition-all active:scale-[0.97] shadow-xl shadow-amber-500/20"
+            onClick={handleSubmit}
+            disabled={loading}
+            className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-[10px] font-black text-white uppercase tracking-[0.15em] transition-all active:scale-[0.97] shadow-xl shadow-amber-500/20 disabled:opacity-50"
           >
-            Send Feedback
+            {loading ? "Sending..." : "Send Feedback"}
           </button>
         </div>
       </div>
