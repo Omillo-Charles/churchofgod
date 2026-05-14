@@ -5,9 +5,7 @@ import Link from "next/link";
 import { useAuth } from "@/lib/useAuth";
 
 // Member Modals
-import GiveModal from "@/components/portals/memberModals/GiveModal";
-import FeedbackModal from "@/components/portals/memberModals/FeedbackModal";
-import MemberPrayerModal from "@/components/portals/memberModals/MemberPrayerModal";
+import QuickActionModal from "@/components/portals/memberModals/QuickActionModal";
 
 // --- Stat Cards ---
 const stats = [
@@ -110,16 +108,14 @@ const recentGiving = [
 ];
 
 export default function MemberDashboardPage() {
-  const [isGiveOpen, setIsGiveOpen] = useState(false);
-  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
-  const [isPrayerOpen, setIsPrayerOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState<"give" | "feedback" | "prayer" | null>(null);
   const { user } = useAuth();
 
   const quickActions = [
     {
-      label: "Give Online",
-      desc: "Make a tithe or offering",
-      onClick: () => setIsGiveOpen(true),
+      label: "Give Now",
+      desc: "Stewardship & tithes",
+      onClick: () => setActiveModal("give"),
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
@@ -129,7 +125,7 @@ export default function MemberDashboardPage() {
     {
       label: "Give Feedback",
       desc: "Share your thoughts",
-      onClick: () => setIsFeedbackOpen(true),
+      onClick: () => setActiveModal("feedback"),
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
@@ -139,7 +135,7 @@ export default function MemberDashboardPage() {
     {
       label: "Prayer Request",
       desc: "Submit a request",
-      onClick: () => setIsPrayerOpen(true),
+      onClick: () => setActiveModal("prayer"),
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" /><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
@@ -161,10 +157,14 @@ export default function MemberDashboardPage() {
   return (
     <div className="p-4 md:p-6 lg:p-8 space-y-8 max-w-[1400px] mx-auto">
 
-      {/* Modals */}
-      <GiveModal isOpen={isGiveOpen} onClose={() => setIsGiveOpen(false)} />
-      <FeedbackModal isOpen={isFeedbackOpen} onClose={() => setIsFeedbackOpen(false)} />
-      <MemberPrayerModal isOpen={isPrayerOpen} onClose={() => setIsPrayerOpen(false)} />
+      {/* Consolidated Action Modal */}
+      {activeModal && (
+        <QuickActionModal 
+          isOpen={!!activeModal} 
+          onClose={() => setActiveModal(null)} 
+          type={activeModal} 
+        />
+      )}
 
       {/* Welcome Banner */}
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 border border-white/5 p-6 md:p-8">
@@ -183,6 +183,12 @@ export default function MemberDashboardPage() {
               Here&apos;s a snapshot of your church life. Sunday service is in{" "}
               <span className="text-white font-bold">2 days</span>.
             </p>
+            <button
+              onClick={() => setActiveModal("feedback")}
+              className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-[10px] font-black text-white uppercase tracking-widest hover:bg-white/10 transition-all"
+            >
+              Share Feedback
+            </button>
           </div>
           <div className="flex flex-col sm:items-end gap-2">
             <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/5">
