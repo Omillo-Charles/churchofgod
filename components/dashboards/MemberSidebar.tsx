@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import api from "@/lib/axios";
 import { toast } from "sonner";
+import { useAuth } from "@/lib/useAuth";
 
 interface MemberSidebarProps {
   isMobileOpen: boolean;
@@ -140,6 +141,7 @@ const MemberSidebar: React.FC<MemberSidebarProps> = ({ isMobileOpen, onMobileClo
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const { user } = useAuth();
 
   const handleSignOut = async () => {
     try {
@@ -256,12 +258,14 @@ const MemberSidebar: React.FC<MemberSidebarProps> = ({ isMobileOpen, onMobileClo
       <div className={`border-t border-white/5 p-3`}>
         <div className={`flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 transition-all cursor-pointer ${collapsed ? "justify-center" : ""}`}>
           <div className="relative w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shrink-0">
-            <span className="text-[10px] font-black text-black">JD</span>
+            <span className="text-[10px] font-black text-black">
+              {user?.fullName ? user.fullName.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2) : "M"}
+            </span>
           </div>
           {!collapsed && (
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-bold text-white truncate">John Doe</p>
-              <p className="text-[9px] text-zinc-500 truncate">john@ntcogk.org</p>
+              <p className="text-xs font-bold text-white truncate">{user?.fullName || "Member"}</p>
+              <p className="text-[9px] text-zinc-500 truncate">{user?.email || "member@ntcogk.org"}</p>
             </div>
           )}
           {!collapsed && (

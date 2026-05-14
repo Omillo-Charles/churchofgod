@@ -1,9 +1,17 @@
 import { useState, useEffect } from "react";
 
+interface User {
+  id: string;
+  fullName: string;
+  email: string;
+  role: string;
+  createdAt: string;
+}
+
 interface AuthState {
   authenticated: boolean;
   loading: boolean;
-  role?: string;
+  user?: User;
 }
 
 /**
@@ -14,11 +22,14 @@ export function useAuth(): AuthState {
   const [state, setState] = useState<AuthState>({ authenticated: false, loading: true });
 
   useEffect(() => {
-    fetch("/api/auth/me", { credentials: "include" })
+    // We call the backend directly since it has the credentials (cookies)
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5500/api/v1";
+    
+    fetch(`${apiUrl}/users/me`, { credentials: "include" })
       .then(async (res) => {
         if (res.ok) {
-          const data = await res.json();
-          setState({ authenticated: true, loading: false, role: data.user?.role });
+          const result = await res.json();
+          setState({ authenticated: true, loading: false, user: result.data });
         } else {
           setState({ authenticated: false, loading: false });
         }

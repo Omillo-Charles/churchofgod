@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useAuth } from "@/lib/useAuth";
 
 // Member Modals
 import GiveModal from "@/components/portals/memberModals/GiveModal";
@@ -112,6 +113,7 @@ export default function MemberDashboardPage() {
   const [isGiveOpen, setIsGiveOpen] = useState(false);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [isPrayerOpen, setIsPrayerOpen] = useState(false);
+  const { user } = useAuth();
 
   const quickActions = [
     {
@@ -175,7 +177,7 @@ export default function MemberDashboardPage() {
             </div>
             <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight">
               Welcome back,{" "}
-              <span className="text-amber-400">John! 👋</span>
+              <span className="text-amber-400">{user?.fullName ? user.fullName.split(" ")[0] : "Member"}! 👋</span>
             </h2>
             <p className="text-zinc-400 text-sm mt-1 max-w-md">
               Here&apos;s a snapshot of your church life. Sunday service is in{" "}
@@ -185,11 +187,13 @@ export default function MemberDashboardPage() {
           <div className="flex flex-col sm:items-end gap-2">
             <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/5">
               <div className="relative w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shrink-0">
-                <span className="text-sm font-black text-black">JD</span>
+                <span className="text-sm font-black text-black">
+                  {user?.fullName ? user.fullName.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2) : "M"}
+                </span>
               </div>
               <div>
-                <p className="text-xs font-black text-white">John Doe</p>
-                <p className="text-[9px] text-zinc-500">Karen Chapel • Member since 2018</p>
+                <p className="text-xs font-black text-white">{user?.fullName || "Member"}</p>
+                <p className="text-[9px] text-zinc-500">Karen Chapel • Member since {user?.createdAt ? new Date(user.createdAt).getFullYear() : "2024"}</p>
               </div>
             </div>
           </div>
