@@ -24,7 +24,7 @@ const AuthPage = () => {
     if (name === "email") {
       isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
     } else if (name === "password") {
-      isValid = value.length >= 6;
+      isValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(value);
     } else if (name === "fullName") {
       isValid = value.trim().length >= 3;
     }
