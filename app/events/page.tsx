@@ -3,11 +3,14 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import EventRegistrationModal from "@/components/modals/EventRegistrationModal";
 
 const EventsPage = () => {
   const [activeTab, setActiveTab] = useState<"listing" | "calendar">("listing");
   const [currentDate, setCurrentDate] = useState(new Date());
   const [hasMounted, setHasMounted] = useState(false);
+  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<any>(null);
 
   useEffect(() => {
     setHasMounted(true);
@@ -82,6 +85,13 @@ const EventsPage = () => {
 
   return (
     <div className="bg-black min-h-screen">
+      {/* Registration Modal */}
+      <EventRegistrationModal 
+        isOpen={isRegisterOpen} 
+        onClose={() => setIsRegisterOpen(false)} 
+        event={selectedEvent} 
+      />
+
       {/* 1. Hero Section */}
       <section className="relative h-[40vh] min-h-[400px] w-full flex items-center justify-center overflow-hidden bg-black">
         <Image
@@ -195,14 +205,17 @@ const EventsPage = () => {
                           </div>
                         </div>
 
-                        <div className="pt-4">
-                          <Link
-                            href={`/events/${event.id}`}
-                            className="inline-flex items-center gap-4 px-10 py-5 rounded-2xl bg-white text-black text-[11px] font-black uppercase tracking-widest hover:bg-amber-500 hover:text-white transition-all duration-300 shadow-xl"
+                        <div className="pt-2">
+                          <button
+                            onClick={() => {
+                              setSelectedEvent(event);
+                              setIsRegisterOpen(true);
+                            }}
+                            className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl bg-white text-black text-[10px] font-black uppercase tracking-widest hover:bg-amber-500 hover:text-white transition-all duration-300 group/btn shadow-xl shadow-white/5"
                           >
-                            Register Now
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                          </Link>
+                            Details & Registration
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="group-hover/btn:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                          </button>
                         </div>
                       </div>
                     </div>
