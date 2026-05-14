@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/lib/useAuth";
 
 interface ClergyNavbarProps {
   onMobileMenuToggle: () => void;
@@ -11,6 +12,7 @@ interface ClergyNavbarProps {
 const ClergyNavbar: React.FC<ClergyNavbarProps> = ({ onMobileMenuToggle }) => {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     const el = document.getElementById("clergy-main");
@@ -97,7 +99,9 @@ const ClergyNavbar: React.FC<ClergyNavbarProps> = ({ onMobileMenuToggle }) => {
         {/* Avatar */}
         <div className="pl-2">
           <div className="relative w-8 h-8 rounded-full bg-gradient-to-br from-sky-400 to-sky-600 flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-sky-500/50 transition-all">
-            <span className="text-[10px] font-black text-white">PM</span>
+            <span className="text-[10px] font-black text-white">
+              {user?.fullName ? user.fullName.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2) : "C"}
+            </span>
           </div>
         </div>
       </div>

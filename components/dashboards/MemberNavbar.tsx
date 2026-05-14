@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/lib/useAuth";
 
 interface MemberNavbarProps {
   onMobileMenuToggle: () => void;
@@ -11,6 +12,7 @@ interface MemberNavbarProps {
 const MemberNavbar: React.FC<MemberNavbarProps> = ({ onMobileMenuToggle }) => {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     const el = document.getElementById("dashboard-main");
@@ -87,7 +89,9 @@ const MemberNavbar: React.FC<MemberNavbarProps> = ({ onMobileMenuToggle }) => {
         {/* Avatar */}
         <div className="flex items-center gap-2 pl-2">
           <div className="relative w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-amber-500/50 transition-all">
-            <span className="text-[10px] font-black text-black">JD</span>
+            <span className="text-[10px] font-black text-black">
+              {user?.fullName ? user.fullName.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2) : "M"}
+            </span>
           </div>
         </div>
       </div>
