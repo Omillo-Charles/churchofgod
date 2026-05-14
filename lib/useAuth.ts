@@ -5,6 +5,12 @@ interface User {
   fullName: string;
   email: string;
   role: string;
+  phone?: string;
+  homeCounty?: string;
+  churchName?: string;
+  ministry?: string;
+  address?: string;
+  bio?: string;
   createdAt: string;
 }
 

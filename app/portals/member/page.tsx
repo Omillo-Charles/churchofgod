@@ -193,7 +193,7 @@ export default function MemberDashboardPage() {
               </div>
               <div>
                 <p className="text-xs font-black text-white">{user?.fullName || "Member"}</p>
-                <p className="text-[9px] text-zinc-500">Karen Chapel • Member since {user?.createdAt ? new Date(user.createdAt).getFullYear() : "2024"}</p>
+                <p className="text-[9px] text-zinc-500">Member since {user?.createdAt ? new Date(user.createdAt).getFullYear() : "2024"}</p>
               </div>
             </div>
           </div>

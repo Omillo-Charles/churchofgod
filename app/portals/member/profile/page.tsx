@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "@/lib/useAuth";
 import { toast } from "sonner";
+import api from "@/lib/axios";
 
 export default function ProfilePage() {
   const { user, loading } = useAuth();
@@ -18,14 +19,20 @@ export default function ProfilePage() {
     address: "",
     bio: "",
   });
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     if (user) {
-      setFormData((prev) => ({
-        ...prev,
+      setFormData({
         fullName: user.fullName || "",
         email: user.email || "",
-      }));
+        phone: user.phone || "",
+        homeCounty: user.homeCounty || "",
+        churchName: user.churchName || "",
+        ministry: user.ministry || "",
+        address: user.address || "",
+        bio: user.bio || "",
+      });
     }
   }, [user]);
 
@@ -42,9 +49,17 @@ export default function ProfilePage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Profile updated successfully (frontend only for now)!");
+    setIsSaving(true);
+    try {
+      const res = await api.patch("/users/me", formData);
+      toast.success(res.data.message || "Profile updated successfully!");
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || "Failed to update profile.");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -133,18 +148,14 @@ export default function ProfilePage() {
             <div className="space-y-4">
               <div className="space-y-1.5">
                 <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1">Local Church</label>
-                <select
+                <input
+                  type="text"
                   name="churchName"
                   value={formData.churchName}
                   onChange={handleChange}
-                  className="w-full px-5 py-3 bg-zinc-950 border border-white/5 rounded-2xl text-sm text-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500/50 outline-none transition-all appearance-none"
-                >
-                  <option>Karen Chapel</option>
-                  <option>Nairobi West</option>
-                  <option>Mombasa Central</option>
-                  <option>Kisumu Lakeside</option>
-                  <option>Eldoret Highlands</option>
-                </select>
+                  placeholder="e.g. Karen Chapel"
+                  className="w-full px-5 py-3 bg-zinc-950 border border-white/5 rounded-2xl text-sm text-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500/50 outline-none transition-all"
+                />
               </div>
 
               <div className="space-y-1.5">
@@ -200,9 +211,10 @@ export default function ProfilePage() {
           </button>
           <button
             type="submit"
-            className="w-full sm:w-auto px-10 py-3 bg-white text-black font-black rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-xl shadow-white/5 uppercase tracking-widest text-[11px]"
+            disabled={isSaving}
+            className="w-full sm:w-auto px-10 py-3 bg-white text-black font-black rounded-2xl hover:scale-105 active:scale-95 transition-all shadow-xl shadow-white/5 uppercase tracking-widest text-[11px] disabled:opacity-50"
           >
-            Save Profile Changes
+            {isSaving ? "Saving..." : "Save Profile Changes"}
           </button>
         </div>
       </form>
