@@ -27,6 +27,23 @@ export default function QuickActionModal({ isOpen, onClose, type }: Props) {
     isUrgent: false,
   });
 
+  const [errors, setErrors] = useState<Record<string, boolean>>({});
+
+  const validateField = (name: string, value: any) => {
+    let isValid = true;
+    if (typeof value === 'string') {
+      isValid = value.trim().length > 0;
+    } else if (typeof value === 'number') {
+      isValid = value > 0;
+    }
+    setErrors(prev => ({ ...prev, [name]: !isValid }));
+    return isValid;
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    validateField(e.target.name, e.target.value);
+  };
+
   const titles = {
     give: { title: "Give Online", subtitle: "Stewardship & Support" },
     feedback: { title: "Give Feedback", subtitle: "Help us improve" },
@@ -85,8 +102,9 @@ export default function QuickActionModal({ isOpen, onClose, type }: Props) {
                 name="amount"
                 value={formData.amount}
                 onChange={handleInputChange}
+                onBlur={handleBlur}
                 placeholder="e.g. 1000"
-                className="w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-500/50 focus:bg-white/[0.06] transition-all"
+                className={`w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border ${errors.amount ? 'border-red-500' : 'border-white/10'} text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-500/50 focus:bg-white/[0.06] transition-all`}
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -150,8 +168,9 @@ export default function QuickActionModal({ isOpen, onClose, type }: Props) {
                 rows={5}
                 value={formData.message}
                 onChange={handleInputChange}
+                onBlur={handleBlur}
                 placeholder="Tell us what's on your mind..."
-                className="w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-500/50 focus:bg-white/[0.06] transition-all resize-none"
+                className={`w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border ${errors.message ? 'border-red-500' : 'border-white/10'} text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-500/50 focus:bg-white/[0.06] transition-all resize-none`}
               />
             </div>
           </>
@@ -167,8 +186,9 @@ export default function QuickActionModal({ isOpen, onClose, type }: Props) {
                 name="subject"
                 value={formData.subject}
                 onChange={handleInputChange}
+                onBlur={handleBlur}
                 placeholder="e.g. Family, Healing, Career"
-                className="w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-500/50 focus:bg-white/[0.06] transition-all"
+                className={`w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border ${errors.subject ? 'border-red-500' : 'border-white/10'} text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-500/50 focus:bg-white/[0.06] transition-all`}
               />
             </div>
             <div className="space-y-1.5">
@@ -178,8 +198,9 @@ export default function QuickActionModal({ isOpen, onClose, type }: Props) {
                 rows={4}
                 value={formData.details}
                 onChange={handleInputChange}
+                onBlur={handleBlur}
                 placeholder="Share your request with the clergy..."
-                className="w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-500/50 focus:bg-white/[0.06] transition-all resize-none"
+                className={`w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border ${errors.details ? 'border-red-500' : 'border-white/10'} text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-500/50 focus:bg-white/[0.06] transition-all resize-none`}
               />
             </div>
             <div className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.02] border border-white/5">

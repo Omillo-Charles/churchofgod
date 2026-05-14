@@ -33,13 +33,35 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
     church: "",
   });
 
+  const [errors, setErrors] = useState<Record<string, boolean>>({});
+
+  const validateField = (name: string, value: string) => {
+    let isValid = true;
+    if (name === "email") {
+      isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    } else if (name === "phone") {
+      isValid = /^(?:\+254|0)[17]\d{8}$/.test(value);
+    } else if (name === "name") {
+      isValid = value.trim().length >= 3;
+    } else {
+      isValid = value.trim().length > 0;
+    }
+    setErrors(prev => ({ ...prev, [name]: !isValid }));
+    return isValid;
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) => {
+    validateField(e.target.name, e.target.value);
+  };
+
   if (!event) return null;
 
   const isFree = !event.fee || event.fee.toLowerCase().includes("free");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const finalValue = name === "email" ? value.toLowerCase() : value;
+    setFormData((prev) => ({ ...prev, [name]: finalValue }));
   };
 
   const nextTab = () => {
@@ -132,35 +154,71 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
             <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-500">
               <div className="space-y-1.5">
                 <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Full Name</label>
-                <input name="name" value={formData.name} onChange={handleInputChange} type="text" placeholder="John Doe" className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all" />
+                <input 
+                  name="name" 
+                  value={formData.name} 
+                  onChange={handleInputChange} 
+                  onBlur={handleBlur}
+                  type="text" 
+                  placeholder="John Doe" 
+                  className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.name ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`} 
+                />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Phone Number</label>
-                  <input name="phone" value={formData.phone} onChange={handleInputChange} type="tel" placeholder="0712..." className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all" />
+                  <input 
+                    name="phone" 
+                    value={formData.phone} 
+                    onChange={handleInputChange} 
+                    onBlur={handleBlur}
+                    type="tel" 
+                    placeholder="0712..." 
+                    className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.phone ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`} 
+                  />
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Email Address</label>
-                  <input name="email" value={formData.email} onChange={handleInputChange} type="email" placeholder="john@example.com" className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all" />
+                  <input 
+                    name="email" 
+                    value={formData.email} 
+                    onChange={handleInputChange} 
+                    onBlur={handleBlur}
+                    type="email" 
+                    placeholder="john@example.com" 
+                    className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.email ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`} 
+                  />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Age Group</label>
-                  <select name="age" value={formData.age} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all appearance-none cursor-pointer">
-                    <option className="bg-zinc-900">Select Age</option>
-                    <option className="bg-zinc-900">12-17</option>
-                    <option className="bg-zinc-900">18-24</option>
-                    <option className="bg-zinc-900">25-35</option>
-                    <option className="bg-zinc-900">35+</option>
+                  <select 
+                    name="age" 
+                    value={formData.age} 
+                    onChange={handleInputChange} 
+                    onBlur={handleBlur}
+                    className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.age ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all appearance-none cursor-pointer`}
+                  >
+                    <option className="bg-zinc-900" value="">Select Age</option>
+                    <option className="bg-zinc-900" value="12-17">12-17</option>
+                    <option className="bg-zinc-900" value="18-24">18-24</option>
+                    <option className="bg-zinc-900" value="25-35">25-35</option>
+                    <option className="bg-zinc-900" value="35+">35+</option>
                   </select>
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Gender</label>
-                  <select name="gender" value={formData.gender} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all appearance-none cursor-pointer">
-                    <option className="bg-zinc-900">Select Gender</option>
-                    <option className="bg-zinc-900">Male</option>
-                    <option className="bg-zinc-900">Female</option>
+                  <select 
+                    name="gender" 
+                    value={formData.gender} 
+                    onChange={handleInputChange} 
+                    onBlur={handleBlur}
+                    className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.gender ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all appearance-none cursor-pointer`}
+                  >
+                    <option className="bg-zinc-900" value="">Select Gender</option>
+                    <option className="bg-zinc-900" value="Male">Male</option>
+                    <option className="bg-zinc-900" value="Female">Female</option>
                   </select>
                 </div>
               </div>
@@ -171,15 +229,39 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
             <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-500">
               <div className="space-y-1.5">
                 <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Region</label>
-                <input name="region" value={formData.region} onChange={handleInputChange} type="text" placeholder="e.g. Nairobi" className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all" />
+                <input 
+                  name="region" 
+                  value={formData.region} 
+                  onChange={handleInputChange} 
+                  onBlur={handleBlur}
+                  type="text" 
+                  placeholder="e.g. Nairobi" 
+                  className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.region ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`} 
+                />
               </div>
               <div className="space-y-1.5">
                 <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">District</label>
-                <input name="district" value={formData.district} onChange={handleInputChange} type="text" placeholder="e.g. Karen" className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all" />
+                <input 
+                  name="district" 
+                  value={formData.district} 
+                  onChange={handleInputChange} 
+                  onBlur={handleBlur}
+                  type="text" 
+                  placeholder="e.g. Karen" 
+                  className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.district ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`} 
+                />
               </div>
               <div className="space-y-1.5">
                 <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Church Name</label>
-                <input name="church" value={formData.church} onChange={handleInputChange} type="text" placeholder="High Life Cathedral" className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all" />
+                <input 
+                  name="church" 
+                  value={formData.church} 
+                  onChange={handleInputChange} 
+                  onBlur={handleBlur}
+                  type="text" 
+                  placeholder="High Life Cathedral" 
+                  className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.church ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`} 
+                />
               </div>
             </div>
           )}

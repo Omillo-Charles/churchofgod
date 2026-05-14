@@ -17,8 +17,38 @@ const AuthPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [errors, setErrors] = useState<Record<string, boolean>>({});
+
+  const validateField = (name: string, value: string) => {
+    let isValid = true;
+    if (name === "email") {
+      isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    } else if (name === "password") {
+      isValid = value.length >= 6;
+    } else if (name === "fullName") {
+      isValid = value.trim().length >= 3;
+    }
+    setErrors(prev => ({ ...prev, [name]: !isValid }));
+    return isValid;
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    validateField(e.target.name, e.target.value);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Final validation check
+    const isEmailValid = validateField("email", email);
+    const isPasswordValid = validateField("password", password);
+    const isNameValid = mode === "signup" ? validateField("fullName", fullName) : true;
+
+    if (!isEmailValid || !isPasswordValid || !isNameValid) {
+      toast.error("Please fix the errors before proceeding.");
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -129,10 +159,12 @@ const AuthPage = () => {
                   <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1">Full Name</label>
                   <input
                     type="text"
+                    name="fullName"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
+                    onBlur={handleBlur}
                     placeholder="John Doe"
-                    className="w-full px-5 py-3.5 bg-zinc-900 border border-zinc-800 rounded-2xl text-xs focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all placeholder:text-zinc-400"
+                    className={`w-full px-5 py-3.5 bg-zinc-900 border ${errors.fullName ? 'border-red-500' : 'border-zinc-800'} rounded-2xl text-xs focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all placeholder:text-zinc-400`}
                     required
                   />
                 </div>
@@ -142,10 +174,12 @@ const AuthPage = () => {
                 <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1">Email Address</label>
                 <input
                   type="email"
+                  name="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value.toLowerCase())}
+                  onBlur={handleBlur}
                   placeholder="name@example.com"
-                  className="w-full px-5 py-3.5 bg-zinc-900 border border-zinc-800 rounded-2xl text-xs focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all placeholder:text-zinc-400"
+                  className={`w-full px-5 py-3.5 bg-zinc-900 border ${errors.email ? 'border-red-500' : 'border-zinc-800'} rounded-2xl text-xs focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all placeholder:text-zinc-400`}
                   required
                 />
               </div>
@@ -159,10 +193,12 @@ const AuthPage = () => {
                 </div>
                 <input
                   type="password"
+                  name="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  onBlur={handleBlur}
                   placeholder="••••••••"
-                  className="w-full px-5 py-3.5 bg-zinc-900 border border-zinc-800 rounded-2xl text-xs focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all placeholder:text-zinc-400"
+                  className={`w-full px-5 py-3.5 bg-zinc-900 border ${errors.password ? 'border-red-500' : 'border-zinc-800'} rounded-2xl text-xs focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all placeholder:text-zinc-400`}
                   required
                 />
               </div>
