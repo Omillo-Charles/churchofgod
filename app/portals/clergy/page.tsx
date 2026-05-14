@@ -3,11 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 
-// Specific Modals
-import AnnouncementModal from "@/components/portals/clergyModals/AnnouncementModal";
-import SermonModal from "@/components/portals/clergyModals/SermonModal";
-import EventModal from "@/components/portals/clergyModals/EventModal";
-import FinanceModal from "@/components/portals/clergyModals/FinanceModal";
+// Clergy Modals
+import ClergyActionModal from "@/components/portals/clergyModals/ClergyActionModal";
 
 const stats = [
   {
@@ -104,30 +101,27 @@ const typeColors: Record<string, string> = {
 };
 
 export default function ClergyDashboardPage() {
-  const [isAnnouncementOpen, setIsAnnouncementOpen] = useState(false);
-  const [isSermonOpen, setIsSermonOpen] = useState(false);
-  const [isEventOpen, setIsEventOpen] = useState(false);
-  const [isFinanceOpen, setIsFinanceOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState<"announcement" | "event" | "finance" | "sermon" | null>(null);
 
   const quickActions = [
     { 
       label: "Add Announcement", 
-      onClick: () => setIsAnnouncementOpen(true),
+      onClick: () => setActiveModal("announcement"),
       icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg> 
     },
     { 
       label: "Upload Sermon", 
-      onClick: () => setIsSermonOpen(true),
+      onClick: () => setActiveModal("sermon"),
       icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg> 
     },
     { 
       label: "Create Event", 
-      onClick: () => setIsEventOpen(true),
+      onClick: () => setActiveModal("event"),
       icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><line x1="12" x2="12" y1="14" y2="18"/><line x1="10" x2="14" y1="16" y2="16"/></svg> 
     },
     { 
       label: "Finance Report", 
-      onClick: () => setIsFinanceOpen(true),
+      onClick: () => setActiveModal("finance"),
       icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg> 
     },
   ];
@@ -135,11 +129,14 @@ export default function ClergyDashboardPage() {
   return (
     <div className="p-4 md:p-6 lg:p-8 space-y-8 max-w-[1400px] mx-auto">
       
-      {/* Modals */}
-      <AnnouncementModal isOpen={isAnnouncementOpen} onClose={() => setIsAnnouncementOpen(false)} />
-      <SermonModal isOpen={isSermonOpen} onClose={() => setIsSermonOpen(false)} />
-      <EventModal isOpen={isEventOpen} onClose={() => setIsEventOpen(false)} />
-      <FinanceModal isOpen={isFinanceOpen} onClose={() => setIsFinanceOpen(false)} />
+      {/* Consolidated Action Modal */}
+      {activeModal && (
+        <ClergyActionModal 
+          isOpen={!!activeModal} 
+          onClose={() => setActiveModal(null)} 
+          type={activeModal} 
+        />
+      )}
 
       {/* Welcome Banner */}
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0a1628] via-[#0d1f3c] to-[#060a10] border border-sky-500/10 p-6 md:p-8">
