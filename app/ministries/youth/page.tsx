@@ -11,13 +11,13 @@ const YouthPage = () => {
       {/* Hero Section */}
       <section className="relative h-[30vh] min-h-[300px] w-full flex items-center justify-center overflow-hidden bg-black">
         <Image
-          src="/youthImages/youth2.png" 
+          src="/youthImages/youth2.png"
           alt="Youth Ministry"
           fill
           className="object-cover opacity-50 mix-blend-luminosity"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black" />
-        
+
         <div className="relative z-10 text-center space-y-4 px-6">
           <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500">
             The Next Generation
@@ -125,8 +125,58 @@ const YouthPage = () => {
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth7.png" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
+            <div className="relative aspect-[4/3] md:col-span-2 rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth15.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth8.png" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+
+            {/* Row 5 - New Images */}
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth16.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth17.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth18.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth19.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+
+            {/* Row 6 */}
+            <div className="relative aspect-[16/9] md:col-span-2 rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth20.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth21.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth22.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+
+            {/* Row 7 */}
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth23.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div className="relative aspect-[3/4] md:row-span-2 rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth24.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth25.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth26.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+
+            {/* Row 8 */}
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth27.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth28.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
           </div>
         </div>
@@ -143,17 +193,17 @@ const YouthPage = () => {
             Ready to find your place in our community? Reach out to our youth leadership team and get involved in our next gathering.
           </p>
           <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-            <Link 
-              href="/contact?dept=youth" 
+            <Link
+              href="/contact?dept=youth"
               className="w-full md:w-auto px-10 py-4 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-amber-500 hover:text-white transition-all"
             >
               Get In Touch
             </Link>
-            <a 
-              href="#" 
+            <a
+              href="https://facebook.com/ntcogkenyayouth"
               className="w-full md:w-auto px-10 py-4 border border-zinc-800 text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-zinc-900 transition-all"
             >
-              Follow @ntcogk_youth
+              Follow @ntcogkkenyayouth
             </a>
           </div>
         </div>
