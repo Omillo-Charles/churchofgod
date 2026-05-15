@@ -227,6 +227,9 @@ const GalleryPage = () => {
                   className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
                   sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                 />
+                {/* Subtle tint */}
+                <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
+                
                 {/* Overlay on hover */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-500" />
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">

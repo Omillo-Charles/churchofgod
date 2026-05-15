@@ -88,66 +88,85 @@ const ChildrenPage = () => {
             {/* Batch 1 */}
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child1.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-[3/4] md:row-span-2 rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child10.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child11.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child12.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-[3/4] md:row-span-2 rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child13.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
 
             {/* Batch 2 */}
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child14.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child15.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child16.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
 
             {/* Batch 3 */}
             <div className="relative aspect-[4/5] md:col-span-2 rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child17.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child18.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child19.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child2.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
 
             {/* Batch 4 */}
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child20.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-[3/4] md:row-span-2 rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child3.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child5.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child6.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child7.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child8.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/childrenImages/child9.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
           </div>
         </div>

@@ -45,11 +45,11 @@ const YouthPage = () => {
               </p>
               <div className="grid grid-cols-2 gap-8">
                 <div className="space-y-2">
-                  <span className="text-2xl font-black text-white">500+</span>
+                  <span className="text-2xl font-black text-white">3000+</span>
                   <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Active Youth</p>
                 </div>
                 <div className="space-y-2">
-                  <span className="text-2xl font-black text-white">28+</span>
+                  <span className="text-2xl font-black text-white">6+</span>
                   <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Regions</p>
                 </div>
               </div>
@@ -91,107 +91,137 @@ const YouthPage = () => {
             {/* Row 1 */}
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth3.png" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-[3/4] md:row-span-2 rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth4.png" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth10.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-[3/4] md:row-span-2 rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth11.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
 
             {/* Row 2 */}
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth5.png" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth12.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
 
             {/* Row 3 */}
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth6.png" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-[4/5] md:col-span-2 rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth13.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth14.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
 
             {/* Row 4 */}
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth7.png" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-[4/3] md:col-span-2 rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth15.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth8.png" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
 
             {/* Row 5 - New Images */}
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth16.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth17.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth18.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth19.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
 
             {/* Row 6 */}
             <div className="relative aspect-[16/9] md:col-span-2 rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth20.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth21.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth22.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
 
             {/* Row 7 */}
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth23.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-[3/4] md:row-span-2 rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth24.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth25.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth26.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
 
             {/* Row 8 */}
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth27.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth28.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth29.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-[3/4] md:row-span-2 rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth30.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth31.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth32.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth33.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
           </div>
         </div>
