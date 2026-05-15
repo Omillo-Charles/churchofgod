@@ -27,7 +27,7 @@ export default function MemberPortalLayout({
         {/* Scrollable page content */}
         <main
           id="dashboard-main"
-          className="flex-1 overflow-y-auto no-scrollbar pt-4 md:pt-8"
+          className="flex-1 overflow-y-auto no-scrollbar pt-2 md:pt-4"
         >
           {children}
         </main>

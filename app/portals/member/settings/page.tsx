@@ -51,7 +51,7 @@ const MemberSettingsPage = () => {
   };
 
   return (
-    <div className="container mx-auto px-6 max-w-4xl space-y-10 pb-20">
+    <div className="container mx-auto px-6 max-w-4xl space-y-10 pb-20 pt-2 md:pt-4">
       {/* Page Header */}
       <div className="space-y-2">
         <h1 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight">Settings</h1>

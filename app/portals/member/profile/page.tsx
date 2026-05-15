@@ -63,7 +63,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="p-4 md:p-8 lg:p-12 max-w-4xl mx-auto space-y-10 animate-in fade-in duration-700">
+    <div className="p-4 md:pt-2 md:p-8 lg:pt-2 lg:p-12 max-w-4xl mx-auto space-y-10 animate-in fade-in duration-700">
       
       {/* Header Section */}
       <div className="space-y-2">
@@ -90,7 +90,6 @@ export default function ProfilePage() {
             <h2 className="text-xl font-bold text-white">{formData.fullName || "Member Name"}</h2>
             <p className="text-zinc-400 text-sm">{formData.email || "member@ntcogk.org"}</p>
             <div className="flex flex-wrap justify-center md:justify-start gap-2 pt-2">
-              <span className="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-[10px] font-bold text-amber-400 uppercase tracking-widest">Active Member</span>
               <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold text-zinc-400 uppercase tracking-widest">{user?.role || "MEMBER"}</span>
             </div>
           </div>

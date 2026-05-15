@@ -171,10 +171,6 @@ export default function MemberDashboardPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(245,158,11,0.08),transparent_60%)]" />
         <div className="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-              <span className="text-[9px] font-black text-amber-400 uppercase tracking-widest">Active Member</span>
-            </div>
             <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight">
               Welcome back,{" "}
               <span className="text-amber-400">{user?.fullName ? user.fullName.split(" ")[0] : "Member"}! 👋</span>
