@@ -168,6 +168,22 @@ const ChildrenPage = () => {
               <Image src="/childrenImages/child9.png" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
               <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
             </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/childrenImages/child21.jpg" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/childrenImages/child22.jpg" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/childrenImages/child23.jpg" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/childrenImages/child24.jpg" alt="Children" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/20 transition-opacity duration-500 group-hover:bg-black/10" />
+            </div>
           </div>
         </div>
       </section>
