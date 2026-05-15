@@ -31,14 +31,23 @@ const MemberSettingsPage = () => {
     }
 
     setIsDeleting(true);
-    toast.info("Account deletion requested. This feature is coming soon.");
     
-    // Logic for backend deletion will be added later as per user instructions
-    setTimeout(() => {
+    try {
+      const res = await api.delete("/users/me");
+      
+      if (res.status === 200) {
+        toast.success("Your account has been permanently deleted.");
+        router.push("/auth");
+      } else {
+        toast.error("Failed to delete account. Please try again later.");
+      }
+    } catch (error) {
+      toast.error("An error occurred during account deletion.");
+    } finally {
       setIsDeleting(false);
       setShowDeleteConfirm(false);
       setConfirmEmail("");
-    }, 2000);
+    }
   };
 
   return (
