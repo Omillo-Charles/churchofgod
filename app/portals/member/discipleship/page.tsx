@@ -166,10 +166,6 @@ export default function DiscipleshipPage() {
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 border border-white/5 p-8 md:p-12">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(245,158,11,0.1),transparent_70%)]" />
         <div className="relative z-10 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-            <span className="text-[10px] font-black text-amber-400 uppercase tracking-widest">Spiritual Growth</span>
-          </div>
           <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-4 uppercase">
             Articles of <span className="text-amber-400">Faith</span>
           </h1>
