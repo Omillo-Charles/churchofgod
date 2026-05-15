@@ -76,10 +76,10 @@ const MinistriesGrid = () => {
 
         <div className="mt-12 md:mt-16 text-center">
           <Link
-            href="/ministries"
+            href="/visit"
             className="px-6 py-3 md:px-8 md:py-4 text-[10px] md:text-xs bg-white text-black font-bold rounded-2xl hover:scale-105 transition-all inline-block active:scale-95"
           >
-            View All Ministries
+            Plan Your Visit
           </Link>
         </div>
       </div>
