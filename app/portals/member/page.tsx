@@ -176,8 +176,7 @@ export default function MemberDashboardPage() {
               <span className="text-amber-400">{user?.fullName ? user.fullName.split(" ")[0] : "Member"}! 👋</span>
             </h2>
             <p className="text-zinc-400 text-sm mt-1 max-w-md">
-              Here&apos;s a snapshot of your church life. Sunday service is in{" "}
-              <span className="text-white font-bold">2 days</span>.
+              Stay connected with your community, manage your contributions, and keep track of upcoming fellowship opportunities.
             </p>
             <button
               onClick={() => setActiveModal("feedback")}
