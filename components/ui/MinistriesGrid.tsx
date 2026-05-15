@@ -60,10 +60,10 @@ const MinistriesGrid = () => {
               <div className="absolute inset-0 bg-black/50 z-[1]" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-transparent z-[2]" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-[2]" />
-              
+
               <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end z-[3]">
                 <div className={`w-8 h-8 md:w-10 md:h-10 rounded-xl ${m.color} backdrop-blur-md mb-3 md:mb-4 flex items-center justify-center`}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="md:w-5 md:h-5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="md:w-5 md:h-5"><path d="M5 12h14m-7-7 7 7-7 7" /></svg>
                 </div>
                 <h4 className="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">{m.title}</h4>
                 <p className="text-[9px] md:text-[11px] text-zinc-300 transition-opacity duration-500 leading-relaxed">
@@ -79,7 +79,7 @@ const MinistriesGrid = () => {
             href="/visit"
             className="px-6 py-3 md:px-8 md:py-4 text-[10px] md:text-xs bg-white text-black font-bold rounded-2xl hover:scale-105 transition-all inline-block active:scale-95"
           >
-            Plan Your Visit
+            Find a branch Near You
           </Link>
         </div>
       </div>
