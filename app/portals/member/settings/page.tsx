@@ -21,7 +21,7 @@ const MemberSettingsPage = () => {
       // Fallback
     }
     toast.success("Logged out successfully");
-    router.push("/auth");
+    window.location.href = "/auth";
   };
 
   const handleDeleteAccount = async () => {
@@ -37,7 +37,7 @@ const MemberSettingsPage = () => {
       
       if (res.status === 200) {
         toast.success("Your account has been permanently deleted.");
-        router.push("/auth");
+        window.location.href = "/auth";
       } else {
         toast.error("Failed to delete account. Please try again later.");
       }
