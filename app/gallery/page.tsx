@@ -57,6 +57,11 @@ const allImages: GalleryImage[] = [
   { src: "/youthImages/youth26.jpg", alt: "Youth community", category: "Youth" },
   { src: "/youthImages/youth27.jpg", alt: "Youth fellowship", category: "Youth", span: "tall" },
   { src: "/youthImages/youth28.jpg", alt: "Youth ministry", category: "Youth" },
+  { src: "/youthImages/youth29.jpg", alt: "Youth gathering", category: "Youth" },
+  { src: "/youthImages/youth30.jpg", alt: "Youth ministry", category: "Youth", span: "tall" },
+  { src: "/youthImages/youth31.jpg", alt: "Youth fellowship", category: "Youth" },
+  { src: "/youthImages/youth32.jpg", alt: "Youth service", category: "Youth" },
+  { src: "/youthImages/youth33.jpg", alt: "Youth community", category: "Youth", span: "wide" },
 
   // Children
   { src: "/childrenImages/child1.png", alt: "Children ministry", category: "Children", span: "wide" },

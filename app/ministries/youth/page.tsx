@@ -56,7 +56,7 @@ const YouthPage = () => {
             </div>
             <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl group">
               <Image
-                src="/youthImages/youth1.png"
+                src="/youthImages/youth24.jpg"
                 alt="Youth Community"
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-700"
@@ -177,6 +177,21 @@ const YouthPage = () => {
             </div>
             <div className="relative aspect-square rounded-3xl overflow-hidden group">
               <Image src="/youthImages/youth28.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth29.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div className="relative aspect-[3/4] md:row-span-2 rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth30.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth31.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth32.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden group">
+              <Image src="/youthImages/youth33.jpg" alt="Youth" fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
             </div>
           </div>
         </div>
