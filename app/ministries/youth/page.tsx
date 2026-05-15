@@ -247,6 +247,8 @@ const YouthPage = () => {
             <a
               href="https://facebook.com/ntcogkenyayouth"
               className="w-full md:w-auto px-10 py-4 border border-zinc-800 text-[10px] font-black uppercase tracking-widest rounded-full hover:bg-zinc-900 transition-all"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Follow @ntcogkkenyayouth
             </a>
