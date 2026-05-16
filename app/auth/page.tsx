@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import api from "@/lib/axios";
 
 const AuthPage = () => {
-  const [mode, setMode] = useState<"login" | "signup">("login");
+  const [mode, setMode] = useState<"login" | "signup" | "verify">("login");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -16,6 +16,7 @@ const AuthPage = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [otp, setOtp] = useState("");
 
   const [errors, setErrors] = useState<Record<string, boolean>>({});
 
@@ -54,15 +55,51 @@ const AuthPage = () => {
     try {
       if (mode === "signup") {
         const res = await api.post("/auth/signup", { fullName, email, password });
-        toast.success(res.data.message || "Account created successfully!");
-        setMode("login");
+        toast.success(res.data.message || "Account created! Please verify your email.");
+        setMode("verify");
       } else {
         const res = await api.post("/auth/signin", { email, password });
         toast.success(res.data.message || "Welcome back!");
         router.push("/portals/member");
       }
     } catch (error: any) {
-      toast.error(error.response?.data?.message || "An error occurred. Please try again.");
+      if (error.response?.data?.needsVerification) {
+        toast.info(error.response.data.message);
+        setMode("verify");
+      } else {
+        toast.error(error.response?.data?.message || "An error occurred. Please try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleVerifyOTP = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (otp.length !== 6) {
+      toast.error("Please enter a valid 6-digit OTP.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await api.post("/auth/verify-otp", { email, otp });
+      toast.success(res.data.message || "Email verified! Redirecting...");
+      router.push("/portals/member");
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || "Invalid OTP. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResendOTP = async () => {
+    setLoading(true);
+    try {
+      const res = await api.post("/auth/resend-otp", { email });
+      toast.success(res.data.message || "A new OTP has been sent.");
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || "Failed to resend OTP.");
     } finally {
       setLoading(false);
     }
@@ -122,95 +159,144 @@ const AuthPage = () => {
             </div>
 
             <h1 className="text-2xl font-black text-white uppercase tracking-tight">
-              {mode === "login" ? "Welcome Back" : "Create Account"}
+              {mode === "login" ? "Welcome Back" : mode === "signup" ? "Create Account" : "Verify Email"}
             </h1>
             <p className="text-zinc-500 text-xs md:text-sm">
               {mode === "login"
                 ? "Enter your credentials to access your portal."
-                : "Join the NTCOGK digital community today."}
+                : mode === "signup" 
+                  ? "Join the NTCOGK digital community today."
+                  : `Enter the 6-digit code sent to ${email}`}
             </p>
           </div>
 
           <div className="space-y-6">
-            <div className="flex p-1 bg-zinc-900 rounded-2xl">
-              <button
-                onClick={() => setMode("login")}
-                className={`flex-1 py-2 text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all ${mode === "login"
-                  ? "bg-zinc-800 text-white shadow-sm"
-                  : "text-zinc-500 hover:text-zinc-300"
-                  }`}
-              >
-                Login
-              </button>
-              <button
-                onClick={() => setMode("signup")}
-                className={`flex-1 py-2 text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all ${mode === "signup"
-                  ? "bg-zinc-800 text-white shadow-sm"
-                  : "text-zinc-500 hover:text-zinc-300"
-                  }`}
-              >
-                Sign Up
-              </button>
-            </div>
+            {mode !== "verify" && (
+              <div className="flex p-1 bg-zinc-900 rounded-2xl">
+                <button
+                  onClick={() => setMode("login")}
+                  className={`flex-1 py-2 text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all ${mode === "login"
+                    ? "bg-zinc-800 text-white shadow-sm"
+                    : "text-zinc-500 hover:text-zinc-300"
+                    }`}
+                >
+                  Login
+                </button>
+                <button
+                  onClick={() => setMode("signup")}
+                  className={`flex-1 py-2 text-[10px] font-bold uppercase tracking-widest rounded-xl transition-all ${mode === "signup"
+                    ? "bg-zinc-800 text-white shadow-sm"
+                    : "text-zinc-500 hover:text-zinc-300"
+                    }`}
+                >
+                  Sign Up
+                </button>
+              </div>
+            )}
 
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              {mode === "signup" && (
+            {mode === "verify" ? (
+              <form className="space-y-6" onSubmit={handleVerifyOTP}>
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1">Full Name</label>
+                  <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1 text-center block">Verification Code</label>
                   <input
                     type="text"
-                    name="fullName"
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                    onBlur={handleBlur}
-                    placeholder="John Doe"
-                    className={`w-full px-5 py-3.5 bg-zinc-900 border ${errors.fullName ? 'border-red-500' : 'border-zinc-800'} rounded-2xl text-xs focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all placeholder:text-zinc-400`}
+                    maxLength={6}
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
+                    placeholder="000000"
+                    className="w-full px-5 py-4 bg-zinc-900 border border-zinc-800 rounded-2xl text-2xl font-black text-center tracking-[0.5em] focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all placeholder:text-zinc-800"
                     required
                   />
                 </div>
-              )}
 
-              <div className="space-y-1.5">
-                <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1">Email Address</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value.toLowerCase())}
-                  onBlur={handleBlur}
-                  placeholder="name@example.com"
-                  className={`w-full px-5 py-3.5 bg-zinc-900 border ${errors.email ? 'border-red-500' : 'border-zinc-800'} rounded-2xl text-xs focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all placeholder:text-zinc-400`}
-                  required
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <div className="flex justify-between items-center px-1">
-                  <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest">Password</label>
-                  {mode === "login" && (
-                    <Link href="/auth/forgot-password" title="Forgot Password" className="text-[10px] font-bold text-amber-500 hover:text-amber-600 uppercase tracking-widest">Forgot?</Link>
-                  )}
+                <div className="space-y-3">
+                  <button
+                    type="submit"
+                    disabled={loading || otp.length !== 6}
+                    className="w-full py-4 bg-white text-black font-black uppercase tracking-widest text-[10px] rounded-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-white/5 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {loading ? "Verifying..." : "Verify Account"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleResendOTP}
+                    disabled={loading}
+                    className="w-full py-3 text-[10px] font-bold text-zinc-400 hover:text-white uppercase tracking-widest transition-colors"
+                  >
+                    Resend Code
+                  </button>
                 </div>
-                <input
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  onBlur={handleBlur}
-                  placeholder="••••••••"
-                  className={`w-full px-5 py-3.5 bg-zinc-900 border ${errors.password ? 'border-red-500' : 'border-zinc-800'} rounded-2xl text-xs focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all placeholder:text-zinc-400`}
-                  required
-                />
-              </div>
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-4 bg-white text-black font-black uppercase tracking-widest text-[10px] rounded-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-white/5 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {loading ? "Processing..." : (mode === "login" ? "Sign In to Portal" : "Create Account")}
-              </button>
-            </form>
+                <div className="text-center pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setMode("login")}
+                    className="text-[9px] font-black text-amber-500 hover:text-amber-400 uppercase tracking-widest transition-colors"
+                  >
+                    Back to Login
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <form className="space-y-4" onSubmit={handleSubmit}>
+                {mode === "signup" && (
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1">Full Name</label>
+                    <input
+                      type="text"
+                      name="fullName"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      onBlur={handleBlur}
+                      placeholder="John Doe"
+                      className={`w-full px-5 py-3.5 bg-zinc-900 border ${errors.fullName ? 'border-red-500' : 'border-zinc-800'} rounded-2xl text-xs focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all placeholder:text-zinc-400`}
+                      required
+                    />
+                  </div>
+                )}
+
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1">Email Address</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value.toLowerCase())}
+                    onBlur={handleBlur}
+                    placeholder="name@example.com"
+                    className={`w-full px-5 py-3.5 bg-zinc-900 border ${errors.email ? 'border-red-500' : 'border-zinc-800'} rounded-2xl text-xs focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all placeholder:text-zinc-400`}
+                    required
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <div className="flex justify-between items-center px-1">
+                    <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest">Password</label>
+                    {mode === "login" && (
+                      <Link href="/auth/forgot-password" title="Forgot Password" className="text-[10px] font-bold text-amber-500 hover:text-amber-600 uppercase tracking-widest">Forgot?</Link>
+                    )}
+                  </div>
+                  <input
+                    type="password"
+                    name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onBlur={handleBlur}
+                    placeholder="••••••••"
+                    className={`w-full px-5 py-3.5 bg-zinc-900 border ${errors.password ? 'border-red-500' : 'border-zinc-800'} rounded-2xl text-xs focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all placeholder:text-zinc-400`}
+                    required
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full py-4 bg-white text-black font-black uppercase tracking-widest text-[10px] rounded-2xl hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-white/5 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loading ? "Processing..." : (mode === "login" ? "Sign In to Portal" : "Create Account")}
+                </button>
+              </form>
+            )}
 
             <div className="relative py-4 flex items-center justify-center">
               <div className="absolute inset-x-0 h-px bg-zinc-800" />
