@@ -7,7 +7,7 @@ import api from "@/lib/axios";
 
 export default function ProfilePage() {
   const { user, loading } = useAuth();
-  
+
   // Local state for profile form
   const [formData, setFormData] = useState({
     fullName: "",
@@ -64,7 +64,7 @@ export default function ProfilePage() {
 
   return (
     <div className="p-4 md:pt-2 md:p-8 lg:pt-2 lg:p-12 max-w-4xl mx-auto space-y-10 animate-in fade-in duration-700">
-      
+
       {/* Header Section */}
       <div className="space-y-2">
         <h1 className="text-3xl font-black text-white uppercase tracking-tight">My Profile</h1>
@@ -72,17 +72,17 @@ export default function ProfilePage() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8">
-        
+
         {/* Profile Avatar Section */}
         <div className="flex flex-col md:flex-row items-center gap-8 p-8 rounded-3xl bg-zinc-900/50 border border-white/5 relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(245,158,11,0.05),transparent_50%)]" />
-          
+
           <div className="relative group">
             <div className="w-32 h-32 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-4xl font-black text-black shadow-2xl shadow-amber-500/20">
               {formData.fullName ? formData.fullName.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2) : "M"}
             </div>
             <button type="button" className="absolute bottom-1 right-1 p-2 rounded-full bg-zinc-800 border border-white/10 text-white hover:bg-amber-500 hover:text-black transition-all shadow-lg">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" /><circle cx="12" cy="13" r="3" /></svg>
             </button>
           </div>
 
@@ -97,11 +97,11 @@ export default function ProfilePage() {
 
         {/* Form Sections */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          
+
           {/* Basic Information */}
           <div className="space-y-6 p-6 rounded-3xl bg-zinc-900/50 border border-white/5">
             <h3 className="text-xs font-black text-zinc-500 uppercase tracking-[0.2em] mb-4">Basic Information</h3>
-            
+
             <div className="space-y-4">
               <div className="space-y-1.5">
                 <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1">Full Name</label>
@@ -143,7 +143,7 @@ export default function ProfilePage() {
           {/* Church & Community */}
           <div className="space-y-6 p-6 rounded-3xl bg-zinc-900/50 border border-white/5">
             <h3 className="text-xs font-black text-zinc-500 uppercase tracking-[0.2em] mb-4">Church & Community</h3>
-            
+
             <div className="space-y-4">
               <div className="space-y-1.5">
                 <label className="text-[10px] font-black text-zinc-400 uppercase tracking-widest ml-1">Local Church</label>
@@ -152,7 +152,7 @@ export default function ProfilePage() {
                   name="churchName"
                   value={formData.churchName}
                   onChange={handleChange}
-                  placeholder="e.g. Karen Chapel"
+                  placeholder="e.g. Busia Possibility Center"
                   className="w-full px-5 py-3 bg-zinc-950 border border-white/5 rounded-2xl text-sm text-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500/50 outline-none transition-all"
                 />
               </div>
@@ -164,7 +164,7 @@ export default function ProfilePage() {
                   name="homeCounty"
                   value={formData.homeCounty}
                   onChange={handleChange}
-                  placeholder="e.g. Nairobi"
+                  placeholder="e.g. Busia"
                   className="w-full px-5 py-3 bg-zinc-950 border border-white/5 rounded-2xl text-sm text-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500/50 outline-none transition-all"
                 />
               </div>
@@ -176,7 +176,7 @@ export default function ProfilePage() {
                   name="ministry"
                   value={formData.ministry}
                   onChange={handleChange}
-                  placeholder="e.g. Worship Team"
+                  placeholder="e.g. Youth Ministry"
                   className="w-full px-5 py-3 bg-zinc-950 border border-white/5 rounded-2xl text-sm text-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500/50 outline-none transition-all"
                 />
               </div>
