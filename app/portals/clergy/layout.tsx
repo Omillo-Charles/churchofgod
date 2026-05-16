@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/useAuth";
 import ClergySidebar from "@/components/dashboards/ClergySidebar";
 import ClergyNavbar from "@/components/dashboards/ClergyNavbar";
 
@@ -10,6 +12,29 @@ export default function ClergyPortalLayout({
   children: React.ReactNode;
 }) {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const { authenticated, loading, user } = useAuth();
+  const router = useRouter();
+
+  // Handle unauthorized or incorrect role access
+  React.useEffect(() => {
+    if (!loading) {
+      if (!authenticated) {
+        router.push("/auth");
+      } else if (user?.role !== "CLERGY" && user?.role !== "ADMIN") {
+        router.push("/portals/member");
+      }
+    }
+  }, [authenticated, loading, router, user]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-[#060a10]">
+        <div className="w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!authenticated || (user?.role !== "CLERGY" && user?.role !== "ADMIN")) return null;
 
   return (
     <div className="flex h-screen bg-[#060a10] overflow-hidden">
