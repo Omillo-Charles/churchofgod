@@ -9,7 +9,7 @@ export interface SearchResult {
 
 export const searchIndex: SearchResult[] = [
 
-  // ─── NATIONAL LEADERSHIP ──────────────────────────────────────────────────
+  //NATIONAL LEADERSHIP
   {
     title: "Dr. David Gilbert Bwire",
     description: "National Administrative Bishop – 5th National Overseer since 1977, 30+ years of pastoral service",
@@ -35,7 +35,7 @@ export const searchIndex: SearchResult[] = [
     tag: "Bishop",
   },
 
-  // ─── REGIONAL BISHOPS / COUNCIL ────────────────────────────────────────────
+  //REGIONAL BISHOPS / COUNCIL
   {
     title: "Samuel Wainaina",
     description: "National Secretary – North Central Region Bishop",
@@ -93,7 +93,7 @@ export const searchIndex: SearchResult[] = [
     tag: "Council",
   },
 
-  // ─── CHURCH HISTORY & IDENTITY ────────────────────────────────────────────
+  //CHURCH HISTORY & IDENTITY
   {
     title: "Founded in 1977",
     description: "NTCOGK was established on May 13, 1977 in Karatina, Nyeri District by Founder Francis Gachara",
@@ -151,7 +151,7 @@ export const searchIndex: SearchResult[] = [
     tag: "Stats",
   },
 
-  // ─── MINISTRIES ───────────────────────────────────────────────────────────
+  //MINISTRIES
   {
     title: "Youth Ministry",
     description: "Igniting the future – empowering young people aged 13–35 in faith, purpose, and community",
@@ -185,7 +185,7 @@ export const searchIndex: SearchResult[] = [
     tag: "Kingdom Kids",
   },
 
-  // ─── EDUCATION / COLLEGE ──────────────────────────────────────────────────
+  //EDUCATION / COLLEGE
   {
     title: "Discipleship College",
     description: "Theology, biblical studies, and vocational courses at Pioneer Estate, Eldoret campus",
@@ -259,7 +259,7 @@ export const searchIndex: SearchResult[] = [
     tag: "Campus",
   },
 
-  // ─── CONTACT & OFFICES ────────────────────────────────────────────────────
+  //CONTACT & OFFICES
   {
     title: "National Headquarters – Karen",
     description: "Karen, Langata, Nairobi · P.O. Box 75, 00502 Karen · Phone: +254 759 120 222",
@@ -309,7 +309,7 @@ export const searchIndex: SearchResult[] = [
     tag: "Regional",
   },
 
-  // ─── GIVING ───────────────────────────────────────────────────────────────
+  //GIVING
   {
     title: "Give / Donate Online",
     description: "Support NTCOGK through tithes, offerings, missions giving, and building fund contributions",
@@ -335,7 +335,7 @@ export const searchIndex: SearchResult[] = [
     tag: "Tithe",
   },
 
-  // ─── COMMUNITY & PAGES ───────────────────────────────────────────────────
+  //COMMUNITY & PAGES
   {
     title: "Church Events",
     description: "Upcoming services, seminars, conventions, and community gatherings across Kenya",

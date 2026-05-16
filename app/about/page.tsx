@@ -7,7 +7,7 @@ import Link from "next/link";
 const AboutPage = () => {
   const stats = [
     { label: "Members", value: "15,000+" },
-    { label: "Local Churches", value: "224" },
+    { label: "Local Churches", value: "224+" },
     { label: "Regional Offices", value: "6" },
     { label: "Districts", value: "28+" },
   ];
@@ -89,7 +89,7 @@ const AboutPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             <div className="p-8 md:p-12 bg-zinc-900 rounded-[2.5rem] md:rounded-[3rem] shadow-sm border border-zinc-800 space-y-4 md:space-y-6 relative overflow-hidden group">
               <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-110 transition-transform">
-                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="md:w-[120px] md:h-[120px]"><circle cx="12" cy="12" r="10"/><path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><circle cx="12" cy="12" r="1"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="md:w-[120px] md:h-[120px]"><circle cx="12" cy="12" r="10" /><path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" /><circle cx="12" cy="12" r="1" /></svg>
               </div>
               <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500">Our Vision</h3>
               <p className="text-base md:text-lg font-bold text-white leading-tight italic">
@@ -101,7 +101,7 @@ const AboutPage = () => {
             </div>
             <div className="p-8 md:p-12 bg-zinc-900 rounded-[2.5rem] md:rounded-[3rem] shadow-sm border border-zinc-800 space-y-4 md:space-y-6 relative overflow-hidden group">
               <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-110 transition-transform">
-                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="md:w-[120px] md:h-[120px]"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="md:w-[120px] md:h-[120px]"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" /></svg>
               </div>
               <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500">Our Mission</h3>
               <p className="text-base md:text-lg font-bold text-white leading-tight italic">
@@ -122,7 +122,7 @@ const AboutPage = () => {
             <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500">Our History</h3>
             <h2 className="text-xl md:text-2xl font-black text-white uppercase">A Legacy of Faith</h2>
           </div>
-          
+
           <div className="max-w-4xl mx-auto space-y-12 md:space-y-16">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-start">
               <div className="md:col-span-4 text-[10px] font-black uppercase tracking-[0.3em] text-amber-500 pt-1">1886 Global Origins</div>
@@ -177,7 +177,7 @@ const AboutPage = () => {
               <p className="text-[11px] md:text-xs text-zinc-400 leading-relaxed max-w-xl">
                 Dr. David Gilbert Bwire is the fifth National Overseer since 1977. With over 30 years of pastoral service, he leads with a unique blend of spiritual maturity and strategic professional expertise.
               </p>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-4">
                   <p className="text-[9px] font-black uppercase tracking-widest text-zinc-500">Academic Qualifications</p>
@@ -185,7 +185,7 @@ const AboutPage = () => {
                     <li>• Honorary Doctor in Divinity (USA)</li>
                     <li>• MBA Strategic Management (KeMU)</li>
                     <li>• BSc Christian Ministries (USA)</li>
-                    <li>• PhD in Leadership (Ongoing - JKUAT)</li>
+                    <li>• PhD in Leadership (JKUAT)</li>
                   </ul>
                 </div>
                 <div className="space-y-4">
@@ -210,7 +210,7 @@ const AboutPage = () => {
             <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-zinc-500">Regional Leadership</h3>
             <h2 className="text-xl md:text-2xl font-black text-white uppercase">Council of Bishops</h2>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 text-left">
             {regions.map((region) => (
               <div key={region.name} className="p-6 md:p-8 bg-zinc-900 rounded-3xl border border-zinc-800 hover:border-amber-500/20 transition-all">
@@ -229,7 +229,7 @@ const AboutPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 md:gap-16">
             <div className="space-y-4 md:space-y-6">
               <div className="w-8 h-8 md:w-10 md:h-10 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-500">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="md:w-5 md:h-5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="md:w-5 md:h-5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" /><path d="m9 12 2 2 4-4" /></svg>
               </div>
               <h3 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight">Community Care</h3>
               <p className="text-[11px] md:text-xs text-zinc-400 leading-relaxed">
@@ -238,7 +238,7 @@ const AboutPage = () => {
             </div>
             <div className="space-y-4 md:space-y-6">
               <div className="w-8 h-8 md:w-10 md:h-10 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="md:w-5 md:h-5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><circle cx="12" cy="8" r="3"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="md:w-5 md:h-5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" /><circle cx="12" cy="8" r="3" /></svg>
               </div>
               <h3 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight">Evangelism</h3>
               <p className="text-[11px] md:text-xs text-zinc-400 leading-relaxed">
@@ -247,7 +247,7 @@ const AboutPage = () => {
             </div>
             <div className="space-y-4 md:space-y-6">
               <div className="w-8 h-8 md:w-10 md:h-10 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-500">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="md:w-5 md:h-5"><path d="M12 22v-5"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><rect width="20" height="14" x="2" y="7" rx="2"/><path d="M12 11v4"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="md:w-5 md:h-5"><path d="M12 22v-5" /><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" /><rect width="20" height="14" x="2" y="7" rx="2" /><path d="M12 11v4" /></svg>
               </div>
               <h3 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight">Integrity</h3>
               <p className="text-[11px] md:text-xs text-zinc-400 leading-relaxed">
