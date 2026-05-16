@@ -14,7 +14,7 @@ interface Props {
   } | null;
 }
 
-type Tab = "bio" | "church" | "payment";
+type Tab = "bio" | "church" | "emergency" | "payment";
 
 export default function EventRegistrationModal({ isOpen, onClose, event }: Props) {
   const [activeTab, setActiveTab] = useState<Tab>("bio");
@@ -31,18 +31,25 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
     region: "",
     district: "",
     church: "",
+    emergencyName: "",
+    emergencyPhone: "",
+    emergencyEmail: "",
   });
 
   const [errors, setErrors] = useState<Record<string, boolean>>({});
 
   const validateField = (name: string, value: string) => {
     let isValid = true;
-    if (name === "email") {
+    if (name === "email" || name === "emergencyEmail") {
+      if (name === "emergencyEmail" && !value) return true; // Optional
       isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-    } else if (name === "phone") {
+    } else if (name === "phone" || name === "emergencyPhone") {
+      if (name === "emergencyPhone" && !value) return true; // Optional
       isValid = /^(?:\+254|0)[17]\d{8}$/.test(value);
     } else if (name === "name") {
       isValid = value.trim().length >= 3;
+    } else if (name.startsWith("emergency")) {
+      return true; // Optional fields
     } else {
       isValid = value.trim().length > 0;
     }
@@ -60,7 +67,7 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    const finalValue = name === "email" ? value.toLowerCase() : value;
+    const finalValue = (name === "email" || name === "emergencyEmail") ? value.toLowerCase() : value;
     setFormData((prev) => ({ ...prev, [name]: finalValue }));
   };
 
@@ -74,6 +81,8 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
       if (!formData.church) {
         return toast.error("Please provide your church name.");
       }
+      setActiveTab("emergency");
+    } else if (activeTab === "emergency") {
       if (isFree) {
         handleCompleteRegistration();
       } else {
@@ -84,7 +93,8 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
 
   const prevTab = () => {
     if (activeTab === "church") setActiveTab("bio");
-    if (activeTab === "payment") setActiveTab("church");
+    if (activeTab === "emergency") setActiveTab("church");
+    if (activeTab === "payment") setActiveTab("emergency");
   };
 
   const handleCompleteRegistration = () => {
@@ -104,6 +114,9 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
         region: "",
         district: "",
         church: "",
+        emergencyName: "",
+        emergencyPhone: "",
+        emergencyEmail: "",
       });
     }, 1500);
   };
@@ -122,26 +135,26 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
           {[
             { id: "bio", label: "Bio Data" },
             { id: "church", label: "Church" },
+            { id: "emergency", label: "Emergency" },
             { id: "payment", label: "Payment", hidden: isFree },
           ].map((step, idx) => (
             !step.hidden && (
               <React.Fragment key={step.id}>
                 <div className="flex flex-col items-center gap-2">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black transition-all duration-500 ${
-                    activeTab === step.id 
-                      ? "bg-amber-500 text-white ring-4 ring-amber-500/20" 
-                      : idx < (isFree && activeTab === "church" ? 2 : ["bio", "church", "payment"].indexOf(activeTab))
-                        ? "bg-emerald-500 text-white" 
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black transition-all duration-500 ${activeTab === step.id
+                      ? "bg-amber-500 text-white ring-4 ring-amber-500/20"
+                      : ["bio", "church", "emergency", "payment"].indexOf(step.id) < ["bio", "church", "emergency", "payment"].indexOf(activeTab)
+                        ? "bg-emerald-500 text-white"
                         : "bg-zinc-800 text-zinc-500"
-                  }`}>
-                    {idx < (isFree && activeTab === "church" ? 2 : ["bio", "church", "payment"].indexOf(activeTab)) ? "✓" : idx + 1}
+                    }`}>
+                    {["bio", "church", "emergency", "payment"].indexOf(step.id) < ["bio", "church", "emergency", "payment"].indexOf(activeTab) ? "✓" : idx + 1}
                   </div>
                   <span className={`text-[8px] font-black uppercase tracking-widest ${activeTab === step.id ? "text-white" : "text-zinc-600"}`}>
                     {step.label}
                   </span>
                 </div>
-                {idx < (isFree ? 1 : 2) && (
-                  <div className={`flex-1 h-[1px] mb-4 mx-2 ${idx < (isFree && activeTab === "church" ? 1 : ["bio", "church", "payment"].indexOf(activeTab)) ? "bg-emerald-500" : "bg-zinc-800"}`} />
+                {idx < (isFree ? 2 : 3) && (
+                  <div className={`flex-1 h-[1px] mb-4 mx-2 ${["bio", "church", "emergency", "payment"].indexOf(step.id) < ["bio", "church", "emergency", "payment"].indexOf(activeTab) ? "bg-emerald-500" : "bg-zinc-800"}`} />
                 )}
               </React.Fragment>
             )
@@ -154,49 +167,49 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
             <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-500">
               <div className="space-y-1.5">
                 <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Full Name</label>
-                <input 
-                  name="name" 
-                  value={formData.name} 
-                  onChange={handleInputChange} 
+                <input
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
                   onBlur={handleBlur}
-                  type="text" 
-                  placeholder="John Doe" 
-                  className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.name ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`} 
+                  type="text"
+                  placeholder="John Doe"
+                  className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.name ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`}
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Phone Number</label>
-                  <input 
-                    name="phone" 
-                    value={formData.phone} 
-                    onChange={handleInputChange} 
+                  <input
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
                     onBlur={handleBlur}
-                    type="tel" 
-                    placeholder="0712..." 
-                    className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.phone ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`} 
+                    type="tel"
+                    placeholder="0712..."
+                    className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.phone ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`}
                   />
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Email Address</label>
-                  <input 
-                    name="email" 
-                    value={formData.email} 
-                    onChange={handleInputChange} 
+                  <input
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     onBlur={handleBlur}
-                    type="email" 
-                    placeholder="john@example.com" 
-                    className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.email ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`} 
+                    type="email"
+                    placeholder="john@example.com"
+                    className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.email ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`}
                   />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Age Group</label>
-                  <select 
-                    name="age" 
-                    value={formData.age} 
-                    onChange={handleInputChange} 
+                  <select
+                    name="age"
+                    value={formData.age}
+                    onChange={handleInputChange}
                     onBlur={handleBlur}
                     className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.age ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all appearance-none cursor-pointer`}
                   >
@@ -209,10 +222,10 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Gender</label>
-                  <select 
-                    name="gender" 
-                    value={formData.gender} 
-                    onChange={handleInputChange} 
+                  <select
+                    name="gender"
+                    value={formData.gender}
+                    onChange={handleInputChange}
                     onBlur={handleBlur}
                     className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.gender ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all appearance-none cursor-pointer`}
                   >
@@ -229,38 +242,82 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
             <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-500">
               <div className="space-y-1.5">
                 <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Region</label>
-                <input 
-                  name="region" 
-                  value={formData.region} 
-                  onChange={handleInputChange} 
+                <input
+                  name="region"
+                  value={formData.region}
+                  onChange={handleInputChange}
                   onBlur={handleBlur}
-                  type="text" 
-                  placeholder="e.g. Nairobi" 
-                  className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.region ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`} 
+                  type="text"
+                  placeholder="e.g. Western"
+                  className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.region ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`}
                 />
               </div>
               <div className="space-y-1.5">
                 <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">District</label>
-                <input 
-                  name="district" 
-                  value={formData.district} 
-                  onChange={handleInputChange} 
+                <input
+                  name="district"
+                  value={formData.district}
+                  onChange={handleInputChange}
                   onBlur={handleBlur}
-                  type="text" 
-                  placeholder="e.g. Karen" 
-                  className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.district ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`} 
+                  type="text"
+                  placeholder="e.g. Busia"
+                  className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.district ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`}
                 />
               </div>
               <div className="space-y-1.5">
                 <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Church Name</label>
-                <input 
-                  name="church" 
-                  value={formData.church} 
-                  onChange={handleInputChange} 
+                <input
+                  name="church"
+                  value={formData.church}
+                  onChange={handleInputChange}
                   onBlur={handleBlur}
-                  type="text" 
-                  placeholder="High Life Cathedral" 
-                  className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.church ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`} 
+                  type="text"
+                  placeholder="e.g. Busia Possiblity Center"
+                  className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.church ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`}
+                />
+              </div>
+            </div>
+          )}
+
+          {activeTab === "emergency" && (
+            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-500">
+              <div className="p-4 rounded-xl bg-amber-500/5 border border-amber-500/10 mb-2">
+                <p className="text-[10px] text-amber-500 font-bold uppercase tracking-widest text-center">Optional Information</p>
+                <p className="text-[9px] text-zinc-500 text-center mt-1">Person to contact in case of an emergency.</p>
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Contact Name (Optional)</label>
+                <input
+                  name="emergencyName"
+                  value={formData.emergencyName}
+                  onChange={handleInputChange}
+                  type="text"
+                  placeholder="Contact Person Name"
+                  className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all"
+                />
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Phone Number (Optional)</label>
+                <input
+                  name="emergencyPhone"
+                  value={formData.emergencyPhone}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  type="tel"
+                  placeholder="0712..."
+                  className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.emergencyPhone ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`}
+                />
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Email Address (Optional)</label>
+                <input
+                  name="emergencyEmail"
+                  value={formData.emergencyEmail}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  type="email"
+                  placeholder="contact@example.com"
+                  className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.emergencyEmail ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`}
                 />
               </div>
             </div>
@@ -272,7 +329,7 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
                 <p className="text-[10px] font-black text-amber-500 uppercase tracking-widest">Total to Pay</p>
                 <p className="text-3xl font-black text-white">{event.fee}</p>
               </div>
-              
+
               <div className="space-y-4">
                 <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Select Payment Method</label>
                 <div className="p-4 rounded-xl border border-amber-500/30 bg-amber-500/10 flex items-center justify-between">
@@ -287,7 +344,7 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
                   </div>
                   <div className="w-4 h-4 rounded-full border-4 border-amber-500 bg-white" />
                 </div>
-                
+
                 <button
                   type="button"
                   onClick={() => {
@@ -299,10 +356,10 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
                   Pay Now
                 </button>
               </div>
-              
+
               <p className="text-[9px] text-zinc-500 text-center leading-relaxed italic">
-                {hasPaid 
-                  ? "Payment initiated. Please check your phone." 
+                {hasPaid
+                  ? "Payment initiated. Please check your phone."
                   : "Click 'Pay Now' to receive an M-Pesa prompt on your phone."}
               </p>
             </div>
@@ -317,16 +374,16 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
           >
             {activeTab === "bio" ? "Cancel" : "Back"}
           </button>
-          
+
           <button
-            onClick={activeTab === "payment" || (isFree && activeTab === "church") ? handleCompleteRegistration : nextTab}
+            onClick={activeTab === "payment" || (isFree && activeTab === "emergency") ? handleCompleteRegistration : nextTab}
             disabled={loading || (activeTab === "payment" && !hasPaid)}
             className="flex-1 py-4 rounded-xl bg-white text-black text-[10px] font-black uppercase tracking-widest hover:bg-amber-500 hover:text-white transition-all active:scale-[0.98] shadow-xl disabled:opacity-50"
           >
-            {loading 
-              ? "Processing..." 
-              : activeTab === "payment" || (isFree && activeTab === "church") 
-                ? `Complete Registration` 
+            {loading
+              ? "Processing..."
+              : activeTab === "payment" || (isFree && activeTab === "emergency")
+                ? `Complete Registration`
                 : "Next Step"}
           </button>
         </div>
