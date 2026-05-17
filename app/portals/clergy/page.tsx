@@ -5,6 +5,7 @@ import Link from "next/link";
 
 // Clergy Modals
 import ClergyActionModal from "@/components/modals/ClergyActionModal";
+import CreateEventModal from "@/components/modals/CreateEventModal";
 
 const stats = [
   {
@@ -130,11 +131,18 @@ export default function ClergyDashboardPage() {
     <div className="p-4 md:p-6 lg:p-8 space-y-8 max-w-[1400px] mx-auto">
       
       {/* Consolidated Action Modal */}
-      {activeModal && (
+      {activeModal && activeModal !== "event" && (
         <ClergyActionModal 
           isOpen={!!activeModal} 
           onClose={() => setActiveModal(null)} 
           type={activeModal} 
+        />
+      )}
+
+      {activeModal === "event" && (
+        <CreateEventModal 
+          isOpen={true} 
+          onClose={() => setActiveModal(null)} 
         />
       )}
 

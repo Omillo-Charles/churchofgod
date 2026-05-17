@@ -15,16 +15,14 @@ export default function ClergyPortalLayout({
   const { authenticated, loading, user } = useAuth();
   const router = useRouter();
 
-  // Handle unauthorized or incorrect role access
+  // Handle unauthorized access
   React.useEffect(() => {
     if (!loading) {
       if (!authenticated) {
         router.push("/auth");
-      } else if (user?.role !== "CLERGY" && user?.role !== "ADMIN") {
-        router.push("/portals/member");
       }
     }
-  }, [authenticated, loading, router, user]);
+  }, [authenticated, loading, router]);
 
   if (loading) {
     return (
@@ -34,7 +32,7 @@ export default function ClergyPortalLayout({
     );
   }
 
-  if (!authenticated || (user?.role !== "CLERGY" && user?.role !== "ADMIN")) return null;
+  if (!authenticated) return null;
 
   return (
     <div className="flex h-screen bg-[#060a10] overflow-hidden">
