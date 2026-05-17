@@ -24,7 +24,6 @@ export default function CreateEventModal({ isOpen, onClose, onSuccess }: Props) 
     category: "Worship Service",
     description: "",
     date: "",
-    time: "",
     location: "",
     fee: "",
   });
@@ -99,7 +98,6 @@ export default function CreateEventModal({ isOpen, onClose, onSuccess }: Props) 
       data.append("category", formData.category);
       data.append("description", formData.description);
       data.append("date", formData.date);
-      if (formData.time) data.append("time", formData.time);
       data.append("location", formData.location);
       data.append("fee", formData.fee || "0");
       if (imageFile) {
@@ -122,7 +120,6 @@ export default function CreateEventModal({ isOpen, onClose, onSuccess }: Props) 
           category: "Worship Service",
           description: "",
           date: "",
-          time: "",
           location: "",
           fee: "",
         });
@@ -253,33 +250,19 @@ export default function CreateEventModal({ isOpen, onClose, onSuccess }: Props) 
 
           {activeTab === "logistics" && (
             <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-500">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="block text-[9px] font-black text-zinc-500 uppercase tracking-[0.15em] px-1">
-                    Date <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    name="date"
-                    value={formData.date}
-                    onChange={handleInputChange}
-                    type="date"
-                    className={`w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border ${
-                      errors.date ? "border-red-500" : "border-white/10"
-                    } text-xs text-zinc-400 focus:outline-none focus:border-sky-500/50 focus:bg-white/[0.06] transition-all [color-scheme:dark]`}
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="block text-[9px] font-black text-zinc-500 uppercase tracking-[0.15em] px-1">
-                    Time
-                  </label>
-                  <input
-                    name="time"
-                    value={formData.time}
-                    onChange={handleInputChange}
-                    type="time"
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-zinc-400 focus:outline-none focus:border-sky-500/50 focus:bg-white/[0.06] transition-all [color-scheme:dark]"
-                  />
-                </div>
+              <div className="space-y-1.5">
+                <label className="block text-[9px] font-black text-zinc-500 uppercase tracking-[0.15em] px-1">
+                  Date <span className="text-red-500">*</span>
+                </label>
+                <input
+                  name="date"
+                  value={formData.date}
+                  onChange={handleInputChange}
+                  type="date"
+                  className={`w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border ${
+                    errors.date ? "border-red-500" : "border-white/10"
+                  } text-xs text-zinc-400 focus:outline-none focus:border-sky-500/50 focus:bg-white/[0.06] transition-all [color-scheme:dark]`}
+                />
               </div>
 
               <div className="space-y-1.5">

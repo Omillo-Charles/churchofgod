@@ -21,7 +21,6 @@ export default function ClergyActionModal({ isOpen, onClose, type }: Props) {
     content: "",
     eventName: "",
     eventDate: "",
-    eventTime: "",
     location: "",
     reportType: "Monthly Summary",
     period: "",
@@ -116,29 +115,16 @@ export default function ClergyActionModal({ isOpen, onClose, type }: Props) {
                 className={`w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border ${errors.eventName ? 'border-red-500' : 'border-white/10'} text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-sky-500/50 focus:bg-white/[0.06] transition-all`} 
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-1.5">
-                <label className="block text-[9px] font-black text-zinc-500 uppercase tracking-[0.15em] mb-2 px-1">Date</label>
-                <input 
-                  name="eventDate"
-                  value={formData.eventDate}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                  type="date" 
-                  className={`w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border ${errors.eventDate ? 'border-red-500' : 'border-white/10'} text-xs text-zinc-400 focus:outline-none focus:border-sky-500/50 focus:bg-white/[0.06] transition-all [color-scheme:dark]`} 
-                />
-              </div>
-              <div className="space-y-1.5">
-                <label className="block text-[9px] font-black text-zinc-500 uppercase tracking-[0.15em] mb-2 px-1">Time</label>
-                <input 
-                  name="eventTime"
-                  value={formData.eventTime}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                  type="time" 
-                  className={`w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border ${errors.eventTime ? 'border-red-500' : 'border-white/10'} text-xs text-zinc-400 focus:outline-none focus:border-sky-500/50 focus:bg-white/[0.06] transition-all [color-scheme:dark]`} 
-                />
-              </div>
+            <div className="space-y-1.5">
+              <label className="block text-[9px] font-black text-zinc-500 uppercase tracking-[0.15em] mb-2 px-1">Date</label>
+              <input 
+                name="eventDate"
+                value={formData.eventDate}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                type="date" 
+                className={`w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border ${errors.eventDate ? 'border-red-500' : 'border-white/10'} text-xs text-zinc-400 focus:outline-none focus:border-sky-500/50 focus:bg-white/[0.06] transition-all [color-scheme:dark]`} 
+              />
             </div>
             <div className="space-y-1.5">
               <label className="block text-[9px] font-black text-zinc-500 uppercase tracking-[0.15em] mb-2 px-1">Location</label>

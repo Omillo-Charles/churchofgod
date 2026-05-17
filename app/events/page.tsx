@@ -211,12 +211,6 @@ const EventsPage = () => {
                             </div>
                             {event.location}
                           </div>
-                          <div className="flex items-center gap-4 text-xs font-bold text-zinc-300">
-                            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-amber-500">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                            </div>
-                            {event.time}
-                          </div>
                           <div className="flex items-center gap-4 text-xs font-bold text-amber-500">
                             <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center">
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
@@ -349,7 +343,6 @@ const EventsPage = () => {
                                     className={`p-1.5 rounded-lg border md:block hidden overflow-hidden ${isSelected ? "bg-white/20 border-white/20" : "bg-zinc-800 border-zinc-700"}`}
                                   >
                                     <p className={`text-[8px] font-bold uppercase truncate ${isSelected ? "text-white" : "text-white"}`}>{event.title}</p>
-                                    <p className={`text-[7px] font-medium truncate ${isSelected ? "text-white/80" : "text-zinc-400"}`}>{event.time}</p>
                                   </div>
                                 ))}
                                 {dayEvents.length > 0 && (
@@ -395,7 +388,7 @@ const EventsPage = () => {
                         >
                           <div className="flex-1">
                             <h5 className="text-xs font-black text-white uppercase group-hover:text-amber-500 transition-colors">{event.title}</h5>
-                            <p className="text-[10px] text-zinc-400 font-medium">{event.time} • {event.location}</p>
+                            <p className="text-[10px] text-zinc-400 font-medium">{event.location}</p>
                           </div>
                           <div className="p-2 rounded-xl bg-zinc-800 text-zinc-400 group-hover:text-white group-hover:bg-amber-500 transition-all">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
