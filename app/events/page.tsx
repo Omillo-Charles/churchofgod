@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import EventRegistrationModal from "@/components/modals/EventRegistrationModal";
 import { useAuth } from "@/lib/useAuth";
 import { toast } from "sonner";
+import api from "@/lib/axios";
 
 const EventsPage = () => {
   const [activeTab, setActiveTab] = useState<"listing" | "calendar">("listing");
@@ -22,20 +23,32 @@ const EventsPage = () => {
     setCurrentDate(new Date());
   }, []);
 
-  const mockEvents: any[] = [
-    {
-      id: "youth-explosion-szn3",
-      title: "Youth Explosion Season 3",
-      category: "Youth Ministry",
-      date: new Date(2026, 11, 8), // Dec 8th, 2026
-      endDate: new Date(2026, 11, 12),
-      time: "8:00 AM - 5:00 PM",
-      location: "Life Spring Christian Academy",
-      desc: "Join us for an explosive 5-day spiritual journey designed specifically for this generation. Experience powerful worship, transformative teachings, and community fellowships.",
-      image: "/youthexplosionszn3.jpeg",
-      fee: "KES 1,000",
-    }
-  ];
+  const [events, setEvents] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await api.get("/events");
+        if (res.data.success) {
+          const parsed = res.data.data.map((e: any) => ({
+            ...e,
+            date: new Date(e.date),
+            endDate: e.endDate ? new Date(e.endDate) : null,
+            fee: e.fee && parseFloat(e.fee) > 0 ? `KES ${parseFloat(e.fee).toLocaleString()}` : "Free",
+            desc: e.description || "No description provided.",
+            image: e.imageUrl || "/youthexplosionszn3.jpeg",
+          }));
+          setEvents(parsed);
+        }
+      } catch (error) {
+        console.error("Failed to fetch events:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchEvents();
+  }, []);
 
   // Calendar Logic
   const daysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
@@ -76,7 +89,7 @@ const EventsPage = () => {
 
   const getEventsForDay = (day: number | null) => {
     if (!day) return [];
-    return mockEvents.filter(
+    return events.filter(
       (e) => 
         e.date.getDate() === day && 
         e.date.getMonth() === currentDate.getMonth() && 
@@ -84,7 +97,7 @@ const EventsPage = () => {
     );
   };
 
-  const selectedEvents = useMemo(() => getEventsForDay(selectedDate), [selectedDate, currentDate]);
+  const selectedEvents = useMemo(() => getEventsForDay(selectedDate), [selectedDate, currentDate, events]);
 
   if (!hasMounted) return null;
 
@@ -159,8 +172,8 @@ const EventsPage = () => {
             /* Listing View */
             <div className="max-w-4xl mx-auto">
               <div className="space-y-16">
-                {mockEvents.length > 0 ? (
-                  mockEvents.sort((a, b) => a.date.getTime() - b.date.getTime()).map((event) => (
+                {events.length > 0 ? (
+                  events.sort((a, b) => a.date.getTime() - b.date.getTime()).map((event) => (
                     <div key={event.id} className="group grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
                       {/* Original Image Container */}
                       <div className="lg:col-span-3 relative rounded-[2rem] overflow-hidden bg-zinc-900 border border-white/5 shadow-2xl transition-all duration-500 hover:border-amber-500/20">

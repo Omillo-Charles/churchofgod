@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Modal from "./modal";
 import { toast } from "sonner";
+import api from "@/lib/axios";
 
 interface Props {
   isOpen: boolean;
@@ -97,28 +98,61 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
     if (activeTab === "payment") setActiveTab("emergency");
   };
 
-  const handleCompleteRegistration = () => {
+  const handleCompleteRegistration = async () => {
     setLoading(true);
-    // Simulate API Call
-    setTimeout(() => {
-      setLoading(false);
-      toast.success("Registration successful! See you at the event.");
-      onClose();
-      setActiveTab("bio");
-      setFormData({
-        name: "",
-        phone: "",
-        email: "",
-        age: "",
-        gender: "",
-        region: "",
-        district: "",
-        church: "",
-        emergencyName: "",
-        emergencyPhone: "",
-        emergencyEmail: "",
+    try {
+      const parsedAmount = isFree ? 0 : parseFloat(event.fee?.replace(/[^\d.]/g, "") || "0");
+      
+      const res = await api.post("/payments/stkpush", {
+        eventId:        event.id,
+        amount:         parsedAmount,
+        phone:          formData.phone,
+        fullName:       formData.name,
+        email:          formData.email,
+        ageGroup:       formData.age,
+        gender:         formData.gender,
+        region:         formData.region,
+        district:       formData.district,
+        churchName:     formData.church,
+        emergencyName:  formData.emergencyName  || null,
+        emergencyPhone: formData.emergencyPhone || null,
+        emergencyEmail: formData.emergencyEmail || null,
       });
-    }, 1500);
+
+      if (res.data.success) {
+        if (isFree) {
+          toast.success("Registration successful! See you at the event.");
+        } else {
+          toast.success("STK push initiated! Enter your M-Pesa PIN on your phone to complete registration.");
+        }
+        
+        onClose();
+        setActiveTab("bio");
+        setFormData({
+          name: "",
+          phone: "",
+          email: "",
+          age: "",
+          gender: "",
+          region: "",
+          district: "",
+          church: "",
+          emergencyName: "",
+          emergencyPhone: "",
+          emergencyEmail: "",
+        });
+      } else {
+        toast.error(res.data.message || "Failed to complete registration.");
+      }
+    } catch (error: any) {
+      console.error("Registration error:", error);
+      toast.error(
+        error.response?.data?.message || 
+        "Something went wrong. Please check your details and try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -331,7 +365,7 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
               </div>
 
               <div className="space-y-4">
-                <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Select Payment Method</label>
+                <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">Payment Method</label>
                 <div className="p-4 rounded-xl border border-amber-500/30 bg-amber-500/10 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-lg bg-[#00be00] flex items-center justify-center overflow-hidden text-white font-black text-xs">
@@ -345,22 +379,22 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
                   <div className="w-4 h-4 rounded-full border-4 border-amber-500 bg-white" />
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => {
-                    toast.info(`STK Push sent to ${formData.phone}`);
-                    setHasPaid(true);
-                  }}
-                  className="w-full py-4 rounded-xl bg-[#00be00] text-white text-[10px] font-black uppercase tracking-widest hover:bg-[#00a000] transition-all active:scale-[0.98] shadow-lg shadow-emerald-500/20"
-                >
-                  Pay Now
-                </button>
+                <div className="space-y-1.5">
+                  <label className="text-[9px] font-black text-zinc-500 uppercase tracking-widest px-1">M-Pesa Phone Number</label>
+                  <input
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    type="tel"
+                    placeholder="0712..."
+                    className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.phone ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`}
+                  />
+                </div>
               </div>
 
               <p className="text-[9px] text-zinc-500 text-center leading-relaxed italic">
-                {hasPaid
-                  ? "Payment initiated. Please check your phone."
-                  : "Click 'Pay Now' to receive an M-Pesa prompt on your phone."}
+                Click 'Pay & Register' below to receive an M-Pesa prompt on your phone.
               </p>
             </div>
           )}
@@ -377,14 +411,16 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
 
           <button
             onClick={activeTab === "payment" || (isFree && activeTab === "emergency") ? handleCompleteRegistration : nextTab}
-            disabled={loading || (activeTab === "payment" && !hasPaid)}
+            disabled={loading}
             className="flex-1 py-4 rounded-xl bg-white text-black text-[10px] font-black uppercase tracking-widest hover:bg-amber-500 hover:text-white transition-all active:scale-[0.98] shadow-xl disabled:opacity-50"
           >
             {loading
               ? "Processing..."
-              : activeTab === "payment" || (isFree && activeTab === "emergency")
-                ? `Complete Registration`
-                : "Next Step"}
+              : activeTab === "payment"
+                ? "Pay & Register"
+                : isFree && activeTab === "emergency"
+                  ? "Complete Registration"
+                  : "Next Step"}
           </button>
         </div>
       </div>
