@@ -168,7 +168,12 @@ const EventsPage = () => {
       {/* 3. Content Section */}
       <main className="py-16 md:py-24">
         <div className="container mx-auto px-6">
-          {activeTab === "listing" ? (
+          {loading ? (
+            <div className="flex flex-col items-center justify-center py-20 space-y-4">
+              <div className="w-12 h-12 border-4 border-amber-500/20 border-t-amber-500 rounded-full animate-spin" />
+              <p className="text-[10px] font-black uppercase text-zinc-500 tracking-[0.2em] animate-pulse">Loading Events...</p>
+            </div>
+          ) : activeTab === "listing" ? (
             /* Listing View */
             <div className="max-w-4xl mx-auto">
               <div className="space-y-16">

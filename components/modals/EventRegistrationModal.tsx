@@ -64,7 +64,10 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
 
   if (!event) return null;
 
-  const isFree = !event.fee || event.fee.toLowerCase().includes("free");
+  const isFree =
+    !event.fee ||
+    event.fee.toLowerCase().includes("free") ||
+    parseFloat(String(event.fee).replace(/[^\d.]/g, "") || "0") === 0;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -74,13 +77,13 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
 
   const nextTab = () => {
     if (activeTab === "bio") {
-      if (!formData.name || !formData.phone || !formData.email) {
-        return toast.error("Please fill in basic contact details.");
+      if (!formData.name || !formData.phone || !formData.email || !formData.age || !formData.gender) {
+        return toast.error("Please fill in all contact and demographic details.");
       }
       setActiveTab("church");
     } else if (activeTab === "church") {
-      if (!formData.church) {
-        return toast.error("Please provide your church name.");
+      if (!formData.region || !formData.district || !formData.church) {
+        return toast.error("Please fill in region, district, and church name.");
       }
       setActiveTab("emergency");
     } else if (activeTab === "emergency") {
