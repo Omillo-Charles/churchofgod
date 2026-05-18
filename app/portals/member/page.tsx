@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useAuth } from "@/lib/useAuth";
+import api from "@/lib/axios";
 
 // Member Modals
 import QuickActionModal from "@/components/modals/QuickActionModal";
@@ -74,30 +75,7 @@ const colorMap: Record<string, { bg: string; text: string; ring: string; glow: s
   sky: { bg: "bg-sky-500/10", text: "text-sky-400", ring: "ring-sky-500/20", glow: "shadow-sky-500/10" },
 };
 
-// --- Upcoming Events ---
-const upcomingEvents = [
-  {
-    title: "Sunday Worship Service",
-    date: "Sun, 11 May 2026",
-    time: "9:00 AM – 12:00 PM",
-    location: "Main Sanctuary",
-    type: "Worship",
-  },
-  {
-    title: "Youth Fellowship Night",
-    date: "Fri, 16 May 2026",
-    time: "6:00 PM – 9:00 PM",
-    location: "Youth Hall",
-    type: "Ministry",
-  },
-  {
-    title: "Discipleship College Session 4",
-    date: "Sat, 17 May 2026",
-    time: "8:00 AM – 1:00 PM",
-    location: "Education Wing",
-    type: "Education",
-  },
-];
+
 
 // --- Recent Giving ---
 const recentGiving = [
@@ -110,6 +88,47 @@ const recentGiving = [
 export default function MemberDashboardPage() {
   const [activeModal, setActiveModal] = useState<"feedback" | "prayer" | null>(null);
   const { user } = useAuth();
+
+  const [events, setEvents] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await api.get("/events");
+        if (res.data.success) {
+          setEvents(res.data.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch events:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchEvents();
+  }, []);
+
+  const formatEventDate = (date: Date) => {
+    const weekday = date.toLocaleDateString("en-US", { weekday: "short" });
+    const day = date.getDate();
+    const month = date.toLocaleDateString("en-US", { month: "short" });
+    const year = date.getFullYear();
+    return {
+      weekday,
+      day,
+      month: `${month} ${year}`,
+      full: `${weekday}, ${day} ${month} ${year}`
+    };
+  };
+
+  const upcomingEvents = events
+    .map(e => ({ ...e, parsedDate: new Date(e.date) }))
+    .filter(e => {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return e.parsedDate >= today;
+    })
+    .sort((a, b) => a.parsedDate.getTime() - b.parsedDate.getTime());
 
   const quickActions = [
     {
@@ -274,26 +293,41 @@ export default function MemberDashboardPage() {
         <div className="rounded-2xl bg-zinc-900/60 border border-white/5 overflow-hidden">
           <div className="flex items-center justify-between px-5 py-4 border-b border-white/5">
             <h2 className="text-xs font-black text-white uppercase tracking-widest">Upcoming Events</h2>
-            <Link href="/portals/member/events" className="text-[9px] font-bold text-amber-500 hover:text-amber-400 uppercase tracking-widest transition-colors">
+            <Link href="/events" className="text-[9px] font-bold text-amber-500 hover:text-amber-400 uppercase tracking-widest transition-colors">
               View all →
             </Link>
           </div>
           <div className="divide-y divide-white/5">
-            {upcomingEvents.map((event, i) => (
-              <div key={i} className="flex items-start gap-4 px-5 py-4 hover:bg-white/[0.02] transition-colors group">
-                <div className="shrink-0 w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex flex-col items-center justify-center group-hover:bg-amber-500/10 group-hover:border-amber-500/20 transition-all">
-                  <span className="text-[8px] font-black text-zinc-500 uppercase">{event.date.split(",")[0]}</span>
-                  <span className="text-sm font-black text-white leading-none">{event.date.split(" ")[1]}</span>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs font-bold text-white truncate">{event.title}</p>
-                  <p className="text-[10px] text-zinc-500 mt-0.5">{event.time} · {event.location}</p>
-                </div>
-                <span className="shrink-0 text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                  {event.type}
-                </span>
+            {loading ? (
+              <div className="py-12 text-center space-y-3">
+                <div className="w-6 h-6 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin mx-auto" />
+                <p className="text-[9px] font-black uppercase text-zinc-500 tracking-widest animate-pulse">Loading events...</p>
               </div>
-            ))}
+            ) : upcomingEvents.length > 0 ? (
+              upcomingEvents.slice(0, 3).map((event) => {
+                const dateInfo = formatEventDate(event.parsedDate);
+                return (
+                  <div key={event.id} className="flex items-start gap-4 px-5 py-4 hover:bg-white/[0.02] transition-colors group">
+                    <div className="shrink-0 w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex flex-col items-center justify-center group-hover:bg-amber-500/10 group-hover:border-amber-500/20 transition-all">
+                      <span className="text-[8px] font-black text-zinc-500 uppercase">{dateInfo.weekday}</span>
+                      <span className="text-sm font-black text-white leading-none">{dateInfo.day}</span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-bold text-white truncate">{event.title}</p>
+                      <p className="text-[10px] text-zinc-500 mt-0.5">{event.location}</p>
+                    </div>
+                    <span className="shrink-0 text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                      {event.category || "Ministry"}
+                    </span>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="py-12 text-center space-y-2">
+                <p className="text-xs font-bold text-white uppercase tracking-wider">No Upcoming Events</p>
+                <p className="text-[9px] text-zinc-500 uppercase tracking-widest">Check back later or view past schedule</p>
+              </div>
+            )}
           </div>
         </div>
 
