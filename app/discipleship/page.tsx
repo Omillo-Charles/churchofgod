@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 const articlesOfFaith = [
   {
@@ -159,68 +160,85 @@ const articlesOfFaith = [
   },
 ];
 
-export default function DiscipleshipPage() {
+const DiscipleshipPage = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-8 pb-12">
-      {/* Header */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-800 border border-white/5 p-8 md:p-12">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(245,158,11,0.1),transparent_70%)]" />
-        <div className="relative z-10 max-w-2xl">
-          <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight mb-4 uppercase">
-            Articles of <span className="text-amber-400">Faith</span>
+    <div className="bg-black min-h-screen">
+      {/* Hero Section */}
+      <section className="relative h-[30vh] min-h-[300px] w-full flex items-center justify-center overflow-hidden bg-black">
+        <Image
+          src="/aboutImages/about2.png"
+          alt="Discipleship"
+          fill
+          className="object-cover opacity-50 mix-blend-luminosity"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black" />
+        <div className="relative z-10 text-center space-y-4 px-6">
+          <h2 className="text-[10px] font-bold uppercase tracking-[0.4em] text-amber-500">
+            Faith & Doctrine
+          </h2>
+          <h1 className="text-2xl md:text-3xl font-black tracking-tight text-white uppercase">
+            Articles of Faith
           </h1>
-          <p className="text-zinc-400 text-sm md:text-lg leading-relaxed">
-            The foundation of our belief and doctrine. Explore the scriptural pillars that guide our faith and practice at New Testament Church of God.
+          <p className="text-zinc-400 max-w-2xl mx-auto font-medium text-[10px] md:text-xs leading-relaxed">
+            The foundation of our belief and doctrine. Explore the scriptural pillars that guide our faith and practice at New Testament Church of God Kenya.
           </p>
         </div>
-      </div>
+      </section>
 
-      {/* Articles Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {articlesOfFaith.map((article) => (
-          <div
-            key={article.number}
-            className="group relative p-6 rounded-3xl bg-zinc-900/50 border border-white/5 hover:border-amber-500/30 transition-all duration-500 hover:bg-zinc-900 shadow-xl"
-          >
-            <div className="absolute top-4 right-6 text-4xl font-black text-white/5 group-hover:text-amber-500/10 transition-colors">
-              {article.number < 10 ? `0${article.number}` : article.number}
-            </div>
-            
-            <div className="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 mb-6 group-hover:scale-110 transition-transform duration-500">
-              {article.icon}
-            </div>
+      {/* Main Content */}
+      <main className="py-24 px-6 bg-black">
+        <div className="container mx-auto max-w-6xl space-y-16">
+          {/* Articles Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {articlesOfFaith.map((article) => (
+              <div
+                key={article.number}
+                className="group relative p-8 rounded-[2rem] bg-zinc-900/60 border border-white/5 hover:border-amber-500/30 transition-all duration-500 hover:bg-zinc-900 shadow-2xl"
+              >
+                <div className="absolute top-4 right-6 text-4xl font-black text-white/5 group-hover:text-amber-500/10 transition-colors">
+                  {article.number < 10 ? `0${article.number}` : article.number}
+                </div>
+                
+                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 mb-6 group-hover:scale-110 transition-transform duration-500">
+                  {article.icon}
+                </div>
 
-            <h3 className="text-lg font-black text-white mb-3 group-hover:text-amber-400 transition-colors leading-tight">
-              {article.title}
-            </h3>
-            
-            <p className="text-zinc-400 text-xs leading-relaxed mb-6 italic">
-              "{article.content}"
-            </p>
+                <h3 className="text-lg font-black text-white mb-3 group-hover:text-amber-400 transition-colors leading-tight">
+                  {article.title}
+                </h3>
+                
+                <p className="text-zinc-400 text-xs leading-relaxed mb-6 italic">
+                  "{article.content}"
+                </p>
 
-            <div className="space-y-3 pt-4 border-t border-white/5">
-              <p className="text-[9px] font-black text-zinc-500 uppercase tracking-widest">Bible Verses</p>
-              <div className="flex flex-wrap gap-2">
-                {article.verses.map((verse) => (
-                  <span
-                    key={verse}
-                    className="px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-[9px] font-bold text-zinc-300 group-hover:border-amber-500/20 transition-colors"
-                  >
-                    {verse}
-                  </span>
-                ))}
+                <div className="space-y-3 pt-4 border-t border-white/5">
+                  <p className="text-[9px] font-black text-zinc-500 uppercase tracking-widest">Bible Verses</p>
+                  <div className="flex flex-wrap gap-2">
+                    {article.verses.map((verse) => (
+                      <span
+                        key={verse}
+                        className="px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-[9px] font-bold text-zinc-300 group-hover:border-amber-500/20 transition-colors"
+                      >
+                        {verse}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      {/* Footer Note */}
-      <div className="p-8 rounded-3xl bg-zinc-900/30 border border-white/5 text-center">
-        <p className="text-zinc-500 text-xs italic">
-          "Study to shew thyself approved unto God, a workman that needeth not to be ashamed, rightly dividing the word of truth." — 2 Timothy 2:15
-        </p>
-      </div>
+          {/* Footer Note */}
+          <div className="p-8 rounded-3xl bg-zinc-900/30 border border-white/5 text-center">
+            <p className="text-zinc-500 text-xs italic">
+              "Study to shew thyself approved unto God, a workman that needeth not to be ashamed, rightly dividing the word of truth." — 2 Timothy 2:15
+            </p>
+          </div>
+        </div>
+      </main>
     </div>
   );
-}
+};
+
+export default DiscipleshipPage;
