@@ -13,6 +13,7 @@ const MemberSettingsPage = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [confirmEmail, setConfirmEmail] = useState("");
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -82,7 +83,7 @@ const MemberSettingsPage = () => {
                 <p className="text-[10px] text-zinc-500">Sign out of your current session on this device.</p>
               </div>
               <button
-                onClick={handleLogout}
+                onClick={() => setShowLogoutConfirm(true)}
                 className="px-6 py-2.5 rounded-xl bg-zinc-800 text-[10px] font-black uppercase tracking-widest text-white hover:bg-zinc-700 transition-all active:scale-95 border border-white/5"
               >
                 Sign Out
@@ -158,6 +159,41 @@ const MemberSettingsPage = () => {
                   {isDeleting ? "Deleting..." : "Confirm Delete"}
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Logout Confirmation Modal */}
+      {showLogoutConfirm && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+          {/* Modal */}
+          <div className="relative z-10 w-full max-w-sm bg-zinc-950 border border-white/10 rounded-[2.5rem] shadow-2xl p-6 space-y-5 animate-in fade-in zoom-in-95 duration-200">
+            {/* Icon */}
+            <div className="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center mx-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-rose-400">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" x2="9" y1="12" y2="12" />
+              </svg>
+            </div>
+            {/* Text */}
+            <div className="text-center space-y-1">
+              <h2 className="text-sm font-black text-white uppercase tracking-wide">Sign Out?</h2>
+              <p className="text-xs text-zinc-500">Are you sure you want to sign out of your member portal?</p>
+            </div>
+            {/* Actions */}
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowLogoutConfirm(false)}
+                className="flex-1 py-2.5 rounded-xl border border-white/10 text-[11px] font-bold text-zinc-400 hover:text-white hover:border-white/20 uppercase tracking-widest transition-all"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleLogout}
+                className="flex-1 py-2.5 rounded-xl bg-rose-500/90 hover:bg-rose-500 text-[11px] font-bold text-white uppercase tracking-widest transition-all"
+              >
+                Sign Out
+              </button>
             </div>
           </div>
         </div>
