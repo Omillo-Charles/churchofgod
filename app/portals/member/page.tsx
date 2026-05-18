@@ -77,12 +77,12 @@ const colorMap: Record<string, { bg: string; text: string; ring: string; glow: s
 
 
 
-// --- Recent Giving ---
-const recentGiving = [
-  { type: "Tithe", amount: "KSh 5,000", date: "04 May 2026", status: "Confirmed" },
-  { type: "Offering", amount: "KSh 500", date: "27 Apr 2026", status: "Confirmed" },
-  { type: "Tithe", amount: "KSh 5,000", date: "20 Apr 2026", status: "Confirmed" },
-  { type: "Pledge", amount: "KSh 2,000", date: "13 Apr 2026", status: "Pending" },
+// --- Giving Types ---
+const givingTypes = [
+  { name: "Tithe", desc: "Honoring God with the first fruits of our labor." },
+  { name: "General Offering", desc: "Supporting the day-to-day operations of the church." },
+  { name: "Missions", desc: "Empowering our outreach programs and global missions." },
+  { name: "Church Building", desc: "Contributing to our infrastructure and growth projects." },
 ];
 
 export default function MemberDashboardPage() {
@@ -331,40 +331,43 @@ export default function MemberDashboardPage() {
           </div>
         </div>
 
-        {/* Recent Giving */}
-        <div className="rounded-2xl bg-zinc-900/60 border border-white/5 overflow-hidden">
-          <div className="flex items-center justify-between px-5 py-4 border-b border-white/5">
-            <h2 className="text-xs font-black text-white uppercase tracking-widest">Recent Giving</h2>
-            <Link href="/portals/member/giving" className="text-[9px] font-bold text-amber-500 hover:text-amber-400 uppercase tracking-widest transition-colors">
-              View all →
+        {/* Giving & Stewardship */}
+        <div className="rounded-2xl bg-zinc-900/60 border border-white/5 overflow-hidden flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between px-5 py-4 border-b border-white/5">
+              <h2 className="text-xs font-black text-white uppercase tracking-widest">Giving & Stewardship</h2>
+              <Link href="/give" className="text-[9px] font-bold text-amber-500 hover:text-amber-400 uppercase tracking-widest transition-colors">
+                Give Now →
+              </Link>
+            </div>
+            <div className="divide-y divide-white/5">
+              {givingTypes.map((item, i) => (
+                <div key={i} className="flex items-start gap-4 px-5 py-4 hover:bg-white/[0.02] transition-colors">
+                  <div className="shrink-0 w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-400">
+                      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                    </svg>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-bold text-white">{item.name}</p>
+                    <p className="text-[10px] text-zinc-500 mt-0.5 leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Footer Note */}
+          <div className="px-5 py-4 bg-white/[0.02] border-t border-white/5 flex flex-col gap-3">
+            <p className="text-[9px] text-zinc-500 leading-normal uppercase tracking-wider text-center">
+              Please visit the official Giving page to access the M-Pesa Paybill & Equity Bank transfer details.
+            </p>
+            <Link 
+              href="/give" 
+              className="inline-flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl bg-white text-black text-[9px] font-black uppercase tracking-widest hover:bg-amber-500 hover:text-white transition-all duration-200"
+            >
+              Go to Giving Page
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </Link>
-          </div>
-          <div className="divide-y divide-white/5">
-            {recentGiving.map((item, i) => (
-              <div key={i} className="flex items-center gap-4 px-5 py-4 hover:bg-white/[0.02] transition-colors">
-                <div className="shrink-0 w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-400">
-                    <line x1="12" x2="12" y1="2" y2="22" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                  </svg>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs font-bold text-white">{item.type}</p>
-                  <p className="text-[10px] text-zinc-500">{item.date}</p>
-                </div>
-                <div className="text-right shrink-0">
-                  <p className="text-xs font-black text-white">{item.amount}</p>
-                  <span className={`text-[8px] font-black uppercase tracking-widest ${item.status === "Confirmed" ? "text-emerald-400" : "text-amber-400"
-                    }`}>
-                    {item.status}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-          {/* Total */}
-          <div className="px-5 py-4 bg-white/[0.02] border-t border-white/5 flex items-center justify-between">
-            <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Year Total</span>
-            <span className="text-sm font-black text-amber-400">KSh 45,200</span>
           </div>
         </div>
       </div>
