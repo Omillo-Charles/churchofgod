@@ -51,7 +51,7 @@ const navItems = [
       },
       {
         name: "Headquarters",
-        href: "/portals/member/headquarters",
+        href: "/hq",
         icon: (
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="3" y1="21" x2="21" y2="21"/><line x1="9" y1="21" x2="9" y2="11"/><line x1="15" y1="21" x2="15" y2="11"/><path d="M19 11l-7-7-7 7V21h14v-10z"/>
