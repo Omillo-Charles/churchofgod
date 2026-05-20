@@ -260,7 +260,7 @@ const EventsPage = () => {
                                   setSelectedEvent(event);
                                   setIsRetryOpen(true);
                                 }}
-                                className="text-[10px] font-bold text-zinc-500 hover:text-white uppercase tracking-widest transition-colors group/retry"
+                                className="text-[10px] font-bold text-zinc-500 hover:text-white uppercase tracking-widest transition-colors cursor-pointer group/retry"
                               >
                                 Registered but haven't paid? <span className="text-amber-500 group-hover/retry:text-amber-400 underline decoration-amber-500/30 underline-offset-2">Retry here</span>
                               </button>
@@ -438,7 +438,7 @@ const EventsPage = () => {
                                 setSelectedEvent(event);
                                 setIsRetryOpen(true);
                               }}
-                              className="text-[9px] font-bold text-zinc-500 hover:text-white uppercase tracking-widest transition-colors group/retry"
+                              className="text-[9px] font-bold text-zinc-500 hover:text-white uppercase tracking-widest transition-colors cursor-pointer group/retry"
                             >
                               Registered but haven't paid? <span className="text-amber-500 group-hover/retry:text-amber-400 underline decoration-amber-500/30 underline-offset-2">Retry here</span>
                             </button>
