@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import EventRegistrationModal from "@/components/modals/EventRegistrationModal";
+import RetryPaymentModal from "@/components/modals/RetryPaymentModal";
 import { useAuth } from "@/lib/useAuth";
 import { toast } from "sonner";
 import api from "@/lib/axios";
@@ -14,6 +15,7 @@ const EventsPage = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [hasMounted, setHasMounted] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+  const [isRetryOpen, setIsRetryOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const { user } = useAuth();
   const router = useRouter();
@@ -107,6 +109,13 @@ const EventsPage = () => {
       <EventRegistrationModal 
         isOpen={isRegisterOpen} 
         onClose={() => setIsRegisterOpen(false)} 
+        event={selectedEvent} 
+      />
+
+      {/* Retry Payment Modal */}
+      <RetryPaymentModal 
+        isOpen={isRetryOpen} 
+        onClose={() => setIsRetryOpen(false)} 
         event={selectedEvent} 
       />
 
@@ -239,6 +248,24 @@ const EventsPage = () => {
                             Details & Registration
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="group-hover/btn:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                           </button>
+                          
+                          {event.fee !== "Free" && (
+                            <div className="text-center mt-3">
+                              <button
+                                onClick={() => {
+                                  if (!user) {
+                                    toast.error("Please login to retry payment.");
+                                    return router.push("/auth");
+                                  }
+                                  setSelectedEvent(event);
+                                  setIsRetryOpen(true);
+                                }}
+                                className="text-[10px] font-bold text-zinc-500 hover:text-white uppercase tracking-widest transition-colors group/retry"
+                              >
+                                Registered but haven't paid? <span className="text-amber-500 group-hover/retry:text-amber-400 underline decoration-amber-500/30 underline-offset-2">Retry here</span>
+                              </button>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -379,8 +406,8 @@ const EventsPage = () => {
                   {selectedEvents.length > 0 ? (
                     <div className="grid grid-cols-1 gap-3">
                       {selectedEvents.map((event) => (
+                        <React.Fragment key={event.id}>
                         <button
-                          key={event.id}
                           onClick={() => {
                             if (!user) {
                               toast.error("Please login to register for events.");
@@ -399,6 +426,25 @@ const EventsPage = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                           </div>
                         </button>
+                        {event.fee !== "Free" && (
+                          <div className="text-center mt-1 mb-2">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (!user) {
+                                  toast.error("Please login to retry payment.");
+                                  return router.push("/auth");
+                                }
+                                setSelectedEvent(event);
+                                setIsRetryOpen(true);
+                              }}
+                              className="text-[9px] font-bold text-zinc-500 hover:text-white uppercase tracking-widest transition-colors group/retry"
+                            >
+                              Registered but haven't paid? <span className="text-amber-500 group-hover/retry:text-amber-400 underline decoration-amber-500/30 underline-offset-2">Retry here</span>
+                            </button>
+                          </div>
+                        )}
+                      </React.Fragment>
                       ))}
                     </div>
                   ) : (
