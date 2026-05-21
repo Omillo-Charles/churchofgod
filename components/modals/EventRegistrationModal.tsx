@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Modal from "./modal";
 import { toast } from "sonner";
 import api from "@/lib/axios";
@@ -21,6 +21,25 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
   const [activeTab, setActiveTab] = useState<Tab>("bio");
   const [loading, setLoading] = useState(false);
   const [hasPaid, setHasPaid] = useState(false);
+  const [isPollingPayment, setIsPollingPayment] = useState(false);
+  const pollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Clear polling interval on unmount
+  useEffect(() => {
+    return () => {
+      if (pollIntervalRef.current) {
+        clearInterval(pollIntervalRef.current);
+      }
+    };
+  }, []);
+
+  const handleClose = () => {
+    if (!isPollingPayment) {
+      onClose();
+    } else {
+      toast.warning("Please wait for payment verification to complete.");
+    }
+  };
 
   // Form State
   const [formData, setFormData] = useState({
@@ -125,25 +144,80 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
       if (res.data.success) {
         if (isFree) {
           toast.success("Registration successful! See you at the event.");
+          onClose();
+          setActiveTab("bio");
+          setFormData({
+            name: "",
+            phone: "",
+            email: "",
+            age: "",
+            gender: "",
+            region: "",
+            district: "",
+            church: "",
+            emergencyName: "",
+            emergencyPhone: "",
+            emergencyEmail: "",
+          });
         } else {
+          const { registrationId } = res.data;
           toast.success("STK push initiated! Enter your M-Pesa PIN on your phone to complete registration.");
+          setIsPollingPayment(true);
+          
+          let attempts = 0;
+          const maxAttempts = 24; // 60 seconds total polling
+          
+          pollIntervalRef.current = setInterval(async () => {
+            attempts++;
+            try {
+              const statusRes = await api.get(`/payments/status/${registrationId}`);
+              if (statusRes.data.success) {
+                const { paymentStatus } = statusRes.data.data;
+                if (paymentStatus === "COMPLETED") {
+                  if (pollIntervalRef.current) {
+                    clearInterval(pollIntervalRef.current);
+                    pollIntervalRef.current = null;
+                  }
+                  setIsPollingPayment(false);
+                  toast.success("Payment successful! Event registration confirmed. See you at the event.");
+                  onClose();
+                  setActiveTab("bio");
+                  setFormData({
+                    name: "",
+                    phone: "",
+                    email: "",
+                    age: "",
+                    gender: "",
+                    region: "",
+                    district: "",
+                    church: "",
+                    emergencyName: "",
+                    emergencyPhone: "",
+                    emergencyEmail: "",
+                  });
+                } else if (paymentStatus === "FAILED") {
+                  if (pollIntervalRef.current) {
+                    clearInterval(pollIntervalRef.current);
+                    pollIntervalRef.current = null;
+                  }
+                  setIsPollingPayment(false);
+                  toast.error("Payment not successful (cancelled, wrong PIN, or timeout). Please retry.");
+                }
+              }
+            } catch (pollErr) {
+              console.error("Error polling payment status:", pollErr);
+            }
+
+            if (attempts >= maxAttempts) {
+              if (pollIntervalRef.current) {
+                clearInterval(pollIntervalRef.current);
+                pollIntervalRef.current = null;
+              }
+              setIsPollingPayment(false);
+              toast.error("Payment verification timed out. If you already completed the payment, your status will update shortly. Otherwise, please use the retry button.");
+            }
+          }, 2500);
         }
-        
-        onClose();
-        setActiveTab("bio");
-        setFormData({
-          name: "",
-          phone: "",
-          email: "",
-          age: "",
-          gender: "",
-          region: "",
-          district: "",
-          church: "",
-          emergencyName: "",
-          emergencyPhone: "",
-          emergencyEmail: "",
-        });
       } else {
         toast.error(res.data.message || "Failed to complete registration.");
       }
@@ -161,7 +235,7 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
   return (
     <Modal
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={handleClose}
       title="Event Registration"
       subtitle={event.title}
       maxWidth="max-w-[480px]"
@@ -360,7 +434,17 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
             </div>
           )}
 
-          {activeTab === "payment" && (
+          {activeTab === "payment" && isPollingPayment ? (
+            <div className="space-y-6 flex flex-col items-center justify-center py-12 animate-in fade-in duration-500">
+              <div className="w-12 h-12 border-4 border-amber-500/20 border-t-amber-500 rounded-full animate-spin" />
+              <div className="text-center space-y-2">
+                <p className="text-[10px] font-black uppercase text-amber-500 tracking-[0.2em] animate-pulse">Waiting for payment...</p>
+                <p className="text-xs text-zinc-400 max-w-[280px] leading-relaxed mx-auto">
+                  Please enter your M-Pesa PIN on the prompt sent to your phone to complete your registration.
+                </p>
+              </div>
+            </div>
+          ) : activeTab === "payment" && (
             <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
               <div className="p-6 rounded-2xl border border-amber-500/20 bg-amber-500/5 text-center space-y-2">
                 <p className="text-[10px] font-black text-amber-500 uppercase tracking-widest">Total to Pay</p>
@@ -406,24 +490,27 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
         {/* Footer Actions */}
         <div className="flex items-center justify-between gap-4 pt-6 border-t border-white/5">
           <button
-            onClick={activeTab === "bio" ? onClose : prevTab}
-            className="text-[10px] font-black text-zinc-500 hover:text-zinc-300 uppercase tracking-widest px-4 transition-colors"
+            onClick={activeTab === "bio" ? handleClose : prevTab}
+            disabled={isPollingPayment}
+            className="text-[10px] font-black text-zinc-500 hover:text-zinc-300 uppercase tracking-widest px-4 transition-colors disabled:opacity-30"
           >
             {activeTab === "bio" ? "Cancel" : "Back"}
           </button>
 
           <button
             onClick={activeTab === "payment" || (isFree && activeTab === "emergency") ? handleCompleteRegistration : nextTab}
-            disabled={loading}
+            disabled={loading || isPollingPayment}
             className="flex-1 py-4 rounded-xl bg-white text-black text-[10px] font-black uppercase tracking-widest hover:bg-amber-500 hover:text-white transition-all active:scale-[0.98] shadow-xl disabled:opacity-50"
           >
-            {loading
-              ? "Processing..."
-              : activeTab === "payment"
-                ? "Pay & Register"
-                : isFree && activeTab === "emergency"
-                  ? "Complete Registration"
-                  : "Next Step"}
+            {isPollingPayment
+              ? "Verifying..."
+              : loading
+                ? "Processing..."
+                : activeTab === "payment"
+                  ? "Pay & Register"
+                  : isFree && activeTab === "emergency"
+                    ? "Complete Registration"
+                    : "Next Step"}
           </button>
         </div>
       </div>
