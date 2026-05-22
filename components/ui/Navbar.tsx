@@ -246,6 +246,94 @@ const Navbar = () => {
   ];
 
   return (
+    <>
+    <style>{`
+      @keyframes search-border-spin {
+        0%   { --search-angle: 0deg; }
+        100% { --search-angle: 360deg; }
+      }
+      @property --search-angle {
+        syntax: "<angle>";
+        initial-value: 0deg;
+        inherits: false;
+      }
+      .search-glow-wrapper {
+        --search-angle: 0deg;
+        animation: search-border-spin 3s linear infinite;
+        background: conic-gradient(
+          from var(--search-angle),
+          #b91c1c,
+          #d97706,
+          #1d4ed8,
+          #6b7280,
+          #111111,
+          #b91c1c
+        );
+        border-radius: 9999px;
+        padding: 0.75px;
+        position: relative;
+      }
+      .search-glow-wrapper:not(:focus-within) {
+        animation-play-state: running;
+      }
+      .search-glow-wrapper:focus-within {
+        animation-play-state: running;
+        background: conic-gradient(
+          from var(--search-angle),
+          #ef4444,
+          #f59e0b,
+          #3b82f6,
+          #9ca3af,
+          #1a1a1a,
+          #ef4444
+        );
+        box-shadow: 0 0 18px 2px rgba(239,68,68,0.18), 0 0 18px 2px rgba(59,130,246,0.13), 0 0 12px 2px rgba(245,158,11,0.13);
+      }
+      .search-inner {
+        background: #0f0f0f;
+        border-radius: 9999px;
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      /* Mobile variant uses rounded-xl */
+      .search-glow-wrapper-mobile {
+        --search-angle: 0deg;
+        animation: search-border-spin 3s linear infinite;
+        background: conic-gradient(
+          from var(--search-angle),
+          #b91c1c,
+          #d97706,
+          #1d4ed8,
+          #6b7280,
+          #111111,
+          #b91c1c
+        );
+        border-radius: 12px;
+        padding: 0.75px;
+        position: relative;
+      }
+      .search-glow-wrapper-mobile:focus-within {
+        animation-play-state: running;
+        background: conic-gradient(
+          from var(--search-angle),
+          #ef4444,
+          #f59e0b,
+          #3b82f6,
+          #9ca3af,
+          #1a1a1a,
+          #ef4444
+        );
+        box-shadow: 0 0 18px 2px rgba(239,68,68,0.18), 0 0 18px 2px rgba(59,130,246,0.13), 0 0 12px 2px rgba(245,158,11,0.13);
+      }
+      .search-inner-mobile {
+        background: #18181b;
+        border-radius: 10px;
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+    `}</style>
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
@@ -296,41 +384,46 @@ const Navbar = () => {
 
         {/* Center Section: Search Bar (Desktop) */}
         <div className="hidden lg:flex flex-1 max-w-md mx-8">
-          <div className="relative w-full group" ref={dropdownRef}>
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
-              <svg
-                className="h-4 w-4 text-zinc-400 group-focus-within:text-white transition-colors"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="11" cy="11" r="8" />
-                <path d="m21 21-4.3-4.3" />
-              </svg>
+          <div className="relative w-full" ref={dropdownRef}>
+            {/* Rotating gradient border wrapper */}
+            <div className="search-glow-wrapper w-full">
+              <div className="search-inner group">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-10">
+                  <svg
+                    className="h-4 w-4 text-zinc-400 group-focus-within:text-amber-400 transition-colors duration-300"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.3-4.3" />
+                  </svg>
+                </div>
+                <input
+                  ref={desktopInputRef}
+                  type="text"
+                  value={query}
+                  onChange={(e) => handleSearch(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  onFocus={() => query.length >= 2 && setIsDropdownOpen(true)}
+                  className="block w-full pl-10 pr-8 py-2 rounded-full bg-transparent text-sm text-white placeholder-zinc-500 focus:outline-none transition-all"
+                  placeholder="Search pages, ministries..."
+                  autoComplete="off"
+                />
+                {query && (
+                  <button
+                    onClick={() => { setQuery(""); setIsDropdownOpen(false); desktopInputRef.current?.focus(); }}
+                    className="absolute inset-y-0 right-3 flex items-center text-zinc-500 hover:text-amber-400 transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                  </button>
+                )}
+              </div>
             </div>
-            <input
-              ref={desktopInputRef}
-              type="text"
-              value={query}
-              onChange={(e) => handleSearch(e.target.value)}
-              onKeyDown={handleKeyDown}
-              onFocus={() => query.length >= 2 && setIsDropdownOpen(true)}
-              className="block w-full pl-10 pr-8 py-2 border border-zinc-800 rounded-full bg-zinc-900/50 text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-white/10 focus:border-zinc-600 transition-all"
-              placeholder="Search pages, ministries..."
-              autoComplete="off"
-            />
-            {query && (
-              <button
-                onClick={() => { setQuery(""); setIsDropdownOpen(false); desktopInputRef.current?.focus(); }}
-                className="absolute inset-y-0 right-3 flex items-center text-zinc-500 hover:text-white transition-colors"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-              </button>
-            )}
             {isDropdownOpen && renderDropdownResults()}
           </div>
         </div>
@@ -410,23 +503,28 @@ const Navbar = () => {
       {isSearchOpen && (
         <div className="lg:hidden px-4 pb-3 animate-in slide-in-from-top-2 duration-200">
           <div className="relative w-full">
-            <input
-              ref={mobileInputRef}
-              type="text"
-              autoFocus
-              value={query}
-              onChange={(e) => handleSearch(e.target.value)}
-              onKeyDown={handleKeyDown}
-              className="block w-full pl-4 pr-10 py-2.5 border border-zinc-800 rounded-xl bg-zinc-900 text-sm text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-white/10"
-              placeholder="Search pages, ministries..."
-              autoComplete="off"
-            />
-            <button
-              onClick={() => { setIsSearchOpen(false); setQuery(""); setIsDropdownOpen(false); }}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-zinc-400 hover:text-white transition-colors"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18M6 6l12 12" /></svg>
-            </button>
+            {/* Rotating gradient border wrapper — mobile */}
+            <div className="search-glow-wrapper-mobile w-full">
+              <div className="search-inner-mobile group">
+                <input
+                  ref={mobileInputRef}
+                  type="text"
+                  autoFocus
+                  value={query}
+                  onChange={(e) => handleSearch(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  className="block w-full pl-4 pr-10 py-2.5 rounded-[10px] bg-transparent text-sm text-white placeholder-zinc-500 focus:outline-none transition-all"
+                  placeholder="Search pages, ministries..."
+                  autoComplete="off"
+                />
+                <button
+                  onClick={() => { setIsSearchOpen(false); setQuery(""); setIsDropdownOpen(false); }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-zinc-400 hover:text-amber-400 transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18M6 6l12 12" /></svg>
+                </button>
+              </div>
+            </div>
             {isDropdownOpen && (
               <div className="absolute top-full left-0 right-0 mt-2 bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden z-50">
                 {results.length === 0 ? (
@@ -487,6 +585,7 @@ const Navbar = () => {
 
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
     </nav>
+    </>
   );
 };
 
