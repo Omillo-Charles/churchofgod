@@ -218,8 +218,7 @@ export default function ClergyDashboardPage() {
               {greeting}, <span className="text-sky-400">{firstName} 🙏</span>
             </h2>
             <p className="text-zinc-400 text-sm mt-1 max-w-md">
-              You have <span className="text-white font-bold">7 pending prayer requests</span> and{" "}
-              <span className="text-white font-bold">2 announcements</span> awaiting review.
+              Manage your congregation, events, and ministry resources from your central leadership dashboard.
             </p>
           </div>
           <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/5 self-start sm:self-auto">
