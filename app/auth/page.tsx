@@ -14,6 +14,14 @@ const AuthPage = () => {
   const router = useRouter();
   const { authenticated, loading: authLoading, user } = useAuth();
 
+  // Form states
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [errors, setErrors] = useState<Record<string, boolean>>({});
+
   // Redirect if already authenticated
   React.useEffect(() => {
     if (!authLoading && authenticated && user) {
@@ -31,15 +39,6 @@ const AuthPage = () => {
       </div>
     );
   }
-
-  // Form states
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [otp, setOtp] = useState("");
-
-  const [errors, setErrors] = useState<Record<string, boolean>>({});
 
   const validateField = (name: string, value: string) => {
     let isValid = true;
