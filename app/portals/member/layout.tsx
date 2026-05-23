@@ -22,12 +22,20 @@ export default function MemberPortalLayout({
     }
   }, [authenticated, loading, router]);
 
-  if (loading || !authenticated) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center h-screen bg-[#080808]">
-        <div className="flex flex-col items-center gap-4">
+        <div className="w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!authenticated) {
+    return (
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#080808] transition-opacity duration-500">
+        <div className="flex flex-col items-center gap-4 animate-in fade-in duration-700">
           <div className="w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin" />
-          {!loading && !authenticated && <p className="text-zinc-500 text-[10px] font-black uppercase tracking-widest">Redirecting to login...</p>}
+          <p className="text-zinc-500 text-[10px] font-black uppercase tracking-widest">Redirecting to login...</p>
         </div>
       </div>
     );

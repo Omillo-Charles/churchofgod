@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import SiteShell from "@/components/ui/SiteShell";
 import { Toaster } from "sonner";
+import { AuthProvider } from "@/lib/AuthContext";
 
 const ubuntu = localFont({
   src: [
@@ -59,8 +60,10 @@ export default function RootLayout({
       className={`${ubuntu.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
-        <SiteShell>{children}</SiteShell>
-        <Toaster position="top-right" richColors theme="light" />
+        <AuthProvider>
+          <SiteShell>{children}</SiteShell>
+          <Toaster position="top-right" richColors theme="light" />
+        </AuthProvider>
       </body>
     </html>
   );

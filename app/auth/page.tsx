@@ -17,13 +17,20 @@ const AuthPage = () => {
   // Redirect if already authenticated
   React.useEffect(() => {
     if (!authLoading && authenticated && user) {
-      if (user.role === "CLERGY" || user.role === "ADMIN") {
-        router.push("/portals/clergy");
-      } else {
-        router.push("/portals/member");
-      }
+      const destination = (user.role === "CLERGY" || user.role === "ADMIN")
+        ? "/portals/clergy"
+        : "/portals/member";
+      router.replace(destination);
     }
   }, [authenticated, authLoading, user, router]);
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   // Form states
   const [fullName, setFullName] = useState("");
@@ -53,7 +60,7 @@ const AuthPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Final validation check
     const isEmailValid = validateField("email", email);
     const isPasswordValid = validateField("password", password);
@@ -178,7 +185,7 @@ const AuthPage = () => {
             <p className="text-zinc-500 text-xs md:text-sm">
               {mode === "login"
                 ? "Enter your credentials to access your portal."
-                : mode === "signup" 
+                : mode === "signup"
                   ? "Join the NTCOGK digital community today."
                   : `Enter the 6-digit code sent to ${email}`}
             </p>
@@ -331,7 +338,7 @@ const AuthPage = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <button 
+              <button
                 onClick={() => window.location.href = `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5500/api/v1"}/auth/google`}
                 className="flex items-center justify-center gap-3 px-6 py-3 border border-zinc-800 rounded-2xl hover:bg-zinc-900 transition-colors group"
               >
@@ -340,7 +347,7 @@ const AuthPage = () => {
                 </svg>
                 <span className="text-[10px] font-bold text-white uppercase tracking-widest">Google</span>
               </button>
-              <button 
+              <button
                 onClick={() => window.location.href = `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5500/api/v1"}/auth/github`}
                 className="flex items-center justify-center gap-3 px-6 py-3 border border-zinc-800 rounded-2xl hover:bg-zinc-900 transition-colors group"
               >

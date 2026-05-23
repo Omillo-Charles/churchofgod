@@ -27,13 +27,22 @@ export default function ClergyPortalLayout({
     }
   }, [authenticated, loading, user, router]);
 
-  if (loading || !authenticated || (user && user.role !== "CLERGY" && user.role !== "ADMIN")) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center h-screen bg-[#060a10]">
-        <div className="flex flex-col items-center gap-4">
+        <div className="w-8 h-8 border-2 border-sky-500/20 border-t-sky-500 rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!authenticated || (user && user.role !== "CLERGY" && user.role !== "ADMIN")) {
+    return (
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#060a10] transition-opacity duration-500">
+        <div className="flex flex-col items-center gap-4 animate-in fade-in duration-700">
           <div className="w-8 h-8 border-2 border-sky-500/20 border-t-sky-500 rounded-full animate-spin" />
-          {!loading && !authenticated && <p className="text-zinc-500 text-[10px] font-black uppercase tracking-widest">Redirecting to login...</p>}
-          {!loading && authenticated && user && user.role !== "CLERGY" && user.role !== "ADMIN" && <p className="text-zinc-500 text-[10px] font-black uppercase tracking-widest">Redirecting to member portal...</p>}
+          <p className="text-zinc-500 text-[10px] font-black uppercase tracking-widest">
+            {!authenticated ? "Redirecting to login..." : "Unauthorized access..."}
+          </p>
         </div>
       </div>
     );
