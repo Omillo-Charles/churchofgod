@@ -41,8 +41,17 @@ const navItems = [
     section: "Congregation",
     items: [
       {
-        name: "Member Directory",
-        href: "/portals/clergy/members",
+        name: "Our Churches",
+        href: "/churches",
+        icon: (
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M3 21h18" /><path d="M4 21V10a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v11" /><path d="m12 8-5.4-5.4A1 1 0 0 0 5.9 2H4a2 2 0 0 0-2 2v17" /><path d="M14 22V15a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v7" />
+          </svg>
+        ),
+      },
+      {
+        name: "Member Portal",
+        href: "/portals/member",
         icon: (
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
@@ -50,23 +59,13 @@ const navItems = [
         ),
       },
       {
-        name: "Attendance Reports",
-        href: "/portals/clergy/attendance",
+        name: "Events",
+        href: "/events",
         icon: (
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect width="18" height="18" x="3" y="4" rx="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" /><path d="m9 16 2 2 4-4" />
+            <rect width="18" height="18" x="3" y="4" rx="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" />
           </svg>
         ),
-      },
-      {
-        name: "Prayer Requests",
-        href: "/portals/clergy/prayer",
-        icon: (
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" /><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-          </svg>
-        ),
-        badge: 7,
       },
     ],
   },
@@ -79,15 +78,6 @@ const navItems = [
         icon: (
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-          </svg>
-        ),
-      },
-      {
-        name: "Event Management",
-        href: "/portals/clergy/events",
-        icon: (
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect width="18" height="18" x="3" y="4" rx="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" />
           </svg>
         ),
       },
@@ -250,7 +240,7 @@ const ClergySidebar: React.FC<ClergySidebarProps> = ({ isMobileOpen, onMobileClo
                         <span className={`text-xs font-bold flex-1 ${isActive ? "text-sky-400" : ""}`}>
                           {item.name}
                         </span>
-                        {"badge" in item && item.badge && (
+                        {"badge" in item && typeof item.badge === "number" && item.badge > 0 && (
                           <span className="flex items-center justify-center w-5 h-5 rounded-full bg-sky-500 text-black text-[9px] font-black">
                             {item.badge}
                           </span>
@@ -301,37 +291,32 @@ const ClergySidebar: React.FC<ClergySidebarProps> = ({ isMobileOpen, onMobileClo
       {/* Logout Confirmation Modal */}
       {showLogoutModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          {/* Backdrop */}
           <div
             className="absolute inset-0 bg-black/70 backdrop-blur-sm"
             onClick={() => setShowLogoutModal(false)}
           />
-          {/* Modal */}
           <div className="relative z-10 w-full max-w-sm bg-zinc-950 border border-white/10 rounded-2xl shadow-2xl p-6 space-y-5 animate-in fade-in zoom-in-95 duration-200">
-            {/* Icon */}
-            <div className="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center mx-auto">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-rose-400">
+            <div className="w-16 h-16 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center mx-auto text-rose-500 mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" x2="9" y1="12" y2="12" />
               </svg>
             </div>
-            {/* Text */}
-            <div className="text-center space-y-1">
-              <h2 className="text-sm font-black text-white uppercase tracking-wide">Sign Out?</h2>
-              <p className="text-xs text-zinc-500">Are you sure you want to sign out of your clergy portal?</p>
+            <div className="text-center space-y-2">
+              <h3 className="text-xl font-black text-white uppercase tracking-tight">Sign Out?</h3>
+              <p className="text-zinc-400 text-sm">Are you sure you want to log out of your clergy portal session?</p>
             </div>
-            {/* Actions */}
-            <div className="flex gap-3">
-              <button
-                onClick={() => setShowLogoutModal(false)}
-                className="flex-1 py-2.5 rounded-xl border border-white/10 text-[11px] font-bold text-zinc-400 hover:text-white hover:border-white/20 uppercase tracking-widest transition-all"
-              >
-                Cancel
-              </button>
+            <div className="flex flex-col gap-3">
               <button
                 onClick={handleSignOut}
-                className="flex-1 py-2.5 rounded-xl bg-rose-500/90 hover:bg-rose-500 text-[11px] font-bold text-white uppercase tracking-widest transition-all"
+                className="w-full py-3.5 rounded-xl bg-rose-500 text-white text-[10px] font-black uppercase tracking-widest hover:bg-rose-600 transition-all active:scale-[0.98]"
               >
-                Sign Out
+                Yes, Sign Me Out
+              </button>
+              <button
+                onClick={() => setShowLogoutModal(false)}
+                className="w-full py-3.5 rounded-xl bg-white/5 border border-white/10 text-zinc-400 text-[10px] font-black uppercase tracking-widest hover:text-white hover:bg-white/10 transition-all"
+              >
+                Cancel
               </button>
             </div>
           </div>
@@ -339,26 +324,19 @@ const ClergySidebar: React.FC<ClergySidebarProps> = ({ isMobileOpen, onMobileClo
       )}
 
       {/* Mobile Overlay */}
-      <div
-        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden transition-opacity duration-300 ${isMobileOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
-        onClick={onMobileClose}
-      />
+      {isMobileOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+          onClick={onMobileClose}
+        />
+      )}
 
-      {/* Desktop Sidebar */}
+      {/* Sidebar Wrapper */}
       <aside
-        className={`hidden lg:flex flex-col h-screen bg-[#060a10] border-r border-white/5 transition-all duration-300 ease-in-out shrink-0
-          ${collapsed ? "w-[64px]" : "w-[240px]"}`}
-        style={{ position: "sticky", top: 0 }}
-      >
-        <SidebarContent />
-      </aside>
-
-      {/* Mobile Drawer */}
-      <aside
-        className={`fixed top-0 left-0 h-full w-[280px] bg-[#060a10] border-r border-white/5 z-50 lg:hidden
-          flex flex-col transition-transform duration-300 ease-in-out
-          ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed inset-y-0 left-0 z-50 flex flex-col bg-[#060a10] border-r border-white/5 transition-all duration-300 ease-in-out
+          ${collapsed ? "w-20" : "w-64"}
+          ${isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
+        `}
       >
         <SidebarContent />
       </aside>
