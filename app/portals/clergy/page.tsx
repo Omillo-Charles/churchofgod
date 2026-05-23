@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
 // Clergy Modals
@@ -17,8 +17,8 @@ const stats = [
     href: "/portals/clergy/members",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
     ),
   },
@@ -31,7 +31,7 @@ const stats = [
     href: "/portals/clergy/finance",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+        <line x1="12" x2="12" y1="2" y2="22" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
       </svg>
     ),
   },
@@ -44,9 +44,9 @@ const stats = [
     href: "/portals/clergy/attendance",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/>
-        <line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>
-        <path d="m9 16 2 2 4-4"/>
+        <rect width="18" height="18" x="3" y="4" rx="2" /><line x1="16" x2="16" y1="2" y2="6" />
+        <line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" />
+        <path d="m9 16 2 2 4-4" />
       </svg>
     ),
   },
@@ -59,45 +59,45 @@ const stats = [
     href: "/portals/clergy/prayer",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" /><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
       </svg>
     ),
   },
 ];
 
 const colorMap: Record<string, { bg: string; text: string; ring: string }> = {
-  sky:     { bg: "bg-sky-500/10",     text: "text-sky-400",     ring: "ring-sky-500/20" },
+  sky: { bg: "bg-sky-500/10", text: "text-sky-400", ring: "ring-sky-500/20" },
   emerald: { bg: "bg-emerald-500/10", text: "text-emerald-400", ring: "ring-emerald-500/20" },
-  amber:   { bg: "bg-amber-500/10",   text: "text-amber-400",   ring: "ring-amber-500/20" },
-  violet:  { bg: "bg-violet-500/10",  text: "text-violet-400",  ring: "ring-violet-500/20" },
+  amber: { bg: "bg-amber-500/10", text: "text-amber-400", ring: "ring-amber-500/20" },
+  violet: { bg: "bg-violet-500/10", text: "text-violet-400", ring: "ring-violet-500/20" },
 };
 
 const prayerRequests = [
-  { name: "Mary Wanjiku",    request: "Healing from illness",          time: "2h ago",   urgent: true  },
-  { name: "James Ochieng",  request: "Prayer for employment",          time: "5h ago",   urgent: false },
-  { name: "Grace Akinyi",   request: "Family reconciliation",          time: "1d ago",   urgent: false },
-  { name: "Peter Kamau",    request: "Upcoming surgery — Thu 15 May",  time: "1d ago",   urgent: true  },
-  { name: "Faith Njeri",    request: "Guidance on life decisions",     time: "2d ago",   urgent: false },
+  { name: "Mary Wanjiku", request: "Healing from illness", time: "2h ago", urgent: true },
+  { name: "James Ochieng", request: "Prayer for employment", time: "5h ago", urgent: false },
+  { name: "Grace Akinyi", request: "Family reconciliation", time: "1d ago", urgent: false },
+  { name: "Peter Kamau", request: "Upcoming surgery — Thu 15 May", time: "1d ago", urgent: true },
+  { name: "Faith Njeri", request: "Guidance on life decisions", time: "2d ago", urgent: false },
 ];
 
 const upcomingEvents = [
-  { title: "Sunday Worship Service",         date: "Sun 11 May", time: "9:00 AM", type: "Worship"   },
-  { title: "Leadership Team Meeting",        date: "Mon 12 May", time: "10:00 AM", type: "Admin"    },
-  { title: "Youth Friday Fellowship",        date: "Fri 16 May", time: "6:00 PM", type: "Ministry"  },
+  { title: "Sunday Worship Service", date: "Sun 11 May", time: "9:00 AM", type: "Worship" },
+  { title: "Leadership Team Meeting", date: "Mon 12 May", time: "10:00 AM", type: "Admin" },
+  { title: "Youth Friday Fellowship", date: "Fri 16 May", time: "6:00 PM", type: "Ministry" },
   { title: "Discipleship College — Sess 4", date: "Sat 17 May", time: "8:00 AM", type: "Education" },
 ];
 
 const recentSermons = [
-  { title: "Walking in Faith",          date: "04 May 2026", views: 312, status: "Published" },
-  { title: "The Power of Prayer",       date: "27 Apr 2026", views: 289, status: "Published" },
-  { title: "Grace and Accountability",  date: "20 Apr 2026", views: 251, status: "Published" },
-  { title: "Pentecost Sunday Message",  date: "Draft",       views: 0,   status: "Draft"     },
+  { title: "Walking in Faith", date: "04 May 2026", views: 312, status: "Published" },
+  { title: "The Power of Prayer", date: "27 Apr 2026", views: 289, status: "Published" },
+  { title: "Grace and Accountability", date: "20 Apr 2026", views: 251, status: "Published" },
+  { title: "Pentecost Sunday Message", date: "Draft", views: 0, status: "Draft" },
 ];
 
 const typeColors: Record<string, string> = {
-  Worship:   "bg-amber-500/10 text-amber-400 border-amber-500/20",
-  Admin:     "bg-zinc-500/10 text-zinc-400 border-zinc-500/20",
-  Ministry:  "bg-sky-500/10 text-sky-400 border-sky-500/20",
+  Worship: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+  Admin: "bg-zinc-500/10 text-zinc-400 border-zinc-500/20",
+  Ministry: "bg-sky-500/10 text-sky-400 border-sky-500/20",
   Education: "bg-violet-500/10 text-violet-400 border-violet-500/20",
 };
 
@@ -105,44 +105,44 @@ export default function ClergyDashboardPage() {
   const [activeModal, setActiveModal] = useState<"announcement" | "event" | "finance" | "sermon" | null>(null);
 
   const quickActions = [
-    { 
-      label: "Add Announcement", 
+    {
+      label: "Add Announcement",
       onClick: () => setActiveModal("announcement"),
-      icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg> 
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z" /></svg>
     },
-    { 
-      label: "Upload Sermon", 
+    {
+      label: "Upload Sermon",
       onClick: () => setActiveModal("sermon"),
-      icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg> 
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" x2="12" y1="3" y2="15" /></svg>
     },
-    { 
-      label: "Create Event", 
+    {
+      label: "Create Event",
       onClick: () => setActiveModal("event"),
-      icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><line x1="12" x2="12" y1="14" y2="18"/><line x1="10" x2="14" y1="16" y2="16"/></svg> 
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" /><line x1="12" x2="12" y1="14" y2="18" /><line x1="10" x2="14" y1="16" y2="16" /></svg>
     },
-    { 
-      label: "Finance Report", 
+    {
+      label: "Finance Report",
       onClick: () => setActiveModal("finance"),
-      icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg> 
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18" /><path d="m19 9-5 5-4-4-3 3" /></svg>
     },
   ];
 
   return (
     <div className="p-4 md:p-6 lg:p-8 space-y-8 max-w-[1400px] mx-auto">
-      
+
       {/* Consolidated Action Modal */}
       {activeModal && activeModal !== "event" && (
-        <ClergyActionModal 
-          isOpen={!!activeModal} 
-          onClose={() => setActiveModal(null)} 
-          type={activeModal} 
+        <ClergyActionModal
+          isOpen={!!activeModal}
+          onClose={() => setActiveModal(null)}
+          type={activeModal}
         />
       )}
 
       {activeModal === "event" && (
-        <CreateEventModal 
-          isOpen={true} 
-          onClose={() => setActiveModal(null)} 
+        <CreateEventModal
+          isOpen={true}
+          onClose={() => setActiveModal(null)}
         />
       )}
 
@@ -151,16 +151,12 @@ export default function ClergyDashboardPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(14,165,233,0.08),transparent_60%)]" />
         <div className="absolute top-0 right-0 w-64 h-64 opacity-5">
           <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-sky-400 fill-current">
-            <path d="M100 10 L100 190 M10 100 L190 100 M29 29 L171 171 M171 29 L29 171" stroke="currentColor" strokeWidth="1" fill="none"/>
-            <circle cx="100" cy="100" r="80" stroke="currentColor" strokeWidth="1" fill="none"/>
+            <path d="M100 10 L100 190 M10 100 L190 100 M29 29 L171 171 M171 29 L29 171" stroke="currentColor" strokeWidth="1" fill="none" />
+            <circle cx="100" cy="100" r="80" stroke="currentColor" strokeWidth="1" fill="none" />
           </svg>
         </div>
         <div className="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-              <span className="text-[9px] font-black text-sky-400 uppercase tracking-widest">Clergy Access — Senior Pastor</span>
-            </div>
             <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight">
               Good afternoon,{" "}
               <span className="text-sky-400">Pastor Mwangi 🙏</span>
@@ -303,7 +299,7 @@ export default function ClergyDashboardPage() {
             <div key={i} className="flex items-center gap-4 px-5 py-4 hover:bg-white/[0.02] transition-colors group">
               <div className="shrink-0 w-9 h-9 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
                 </svg>
               </div>
               <div className="flex-1 min-w-0">
@@ -314,16 +310,15 @@ export default function ClergyDashboardPage() {
                 {sermon.views > 0 && (
                   <div className="hidden sm:flex items-center gap-1.5 text-zinc-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
+                      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" />
                     </svg>
                     <span className="text-[10px] font-bold">{sermon.views}</span>
                   </div>
                 )}
-                <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg border ${
-                  sermon.status === "Published"
+                <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg border ${sermon.status === "Published"
                     ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
                     : "bg-amber-500/10 text-amber-400 border-amber-500/20"
-                }`}>
+                  }`}>
                   {sermon.status}
                 </span>
               </div>
@@ -345,10 +340,10 @@ export default function ClergyDashboardPage() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           {[
-            { label: "Tithes",    value: "KSh 184,000", pct: 65 },
-            { label: "Offerings", value: "KSh 62,000",  pct: 22 },
-            { label: "Pledges",   value: "KSh 28,000",  pct: 10 },
-            { label: "Missions",  value: "KSh 10,000",  pct: 3  },
+            { label: "Tithes", value: "KSh 184,000", pct: 65 },
+            { label: "Offerings", value: "KSh 62,000", pct: 22 },
+            { label: "Pledges", value: "KSh 28,000", pct: 10 },
+            { label: "Missions", value: "KSh 10,000", pct: 3 },
           ].map((item) => (
             <div key={item.label} className="space-y-2">
               <div className="flex items-center justify-between">
