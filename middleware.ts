@@ -8,8 +8,8 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get('ntcogk_token')?.value;
   const { pathname } = request.nextUrl;
 
-  // 1. Protect all routes starting with /portals/member
-  if (pathname.startsWith('/portals/member')) {
+  // 1. Protect all routes starting with /portals
+  if (pathname.startsWith('/portals/')) {
     if (!token) {
       // If no token exists, redirect to the auth page
       return NextResponse.redirect(new URL('/auth', request.url));
@@ -29,7 +29,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/portals/member/:path*',
+    '/portals/:path*',
     '/auth'
   ],
 };

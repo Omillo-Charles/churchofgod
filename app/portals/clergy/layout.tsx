@@ -20,9 +20,12 @@ export default function ClergyPortalLayout({
     if (!loading) {
       if (!authenticated) {
         router.push("/auth");
+      } else if (user && user.role !== "CLERGY" && user.role !== "ADMIN") {
+        // Redirect non-clergy/admin users to the member portal
+        router.push("/portals/member");
       }
     }
-  }, [authenticated, loading, router]);
+  }, [authenticated, loading, user, router]);
 
   if (loading) {
     return (
@@ -32,7 +35,10 @@ export default function ClergyPortalLayout({
     );
   }
 
-  if (!authenticated) return null;
+  // Prevent flash of content for unauthorized roles
+  if (!authenticated || (user && user.role !== "CLERGY" && user.role !== "ADMIN")) {
+    return null;
+  }
 
   return (
     <div className="flex h-screen bg-[#060a10] overflow-hidden">
