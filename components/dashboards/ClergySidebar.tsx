@@ -324,19 +324,26 @@ const ClergySidebar: React.FC<ClergySidebarProps> = ({ isMobileOpen, onMobileClo
       )}
 
       {/* Mobile Overlay */}
-      {isMobileOpen && (
-        <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
-          onClick={onMobileClose}
-        />
-      )}
+      <div
+        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden transition-opacity duration-300 ${isMobileOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+        onClick={onMobileClose}
+      />
 
-      {/* Sidebar Wrapper */}
+      {/* Desktop Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex flex-col bg-[#060a10] border-r border-white/5 transition-all duration-300 ease-in-out
-          ${collapsed ? "w-20" : "w-64"}
-          ${isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
-        `}
+        className={`hidden lg:flex flex-col h-screen bg-[#060a10] border-r border-white/5 transition-all duration-300 ease-in-out shrink-0
+          ${collapsed ? "w-20" : "w-64"}`}
+        style={{ position: "sticky", top: 0 }}
+      >
+        <SidebarContent />
+      </aside>
+
+      {/* Mobile Sidebar Drawer */}
+      <aside
+        className={`fixed top-0 left-0 h-full w-64 bg-[#060a10] border-r border-white/5 z-50 lg:hidden
+          flex flex-col transition-transform duration-300 ease-in-out
+          ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         <SidebarContent />
       </aside>
