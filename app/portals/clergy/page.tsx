@@ -105,6 +105,24 @@ export default function ClergyDashboardPage() {
 
   const firstName = user?.fullName ? user.fullName.split(" ")[0] : "Clergy";
 
+  const initials = user?.fullName
+    ? user.fullName
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2)
+    : "C";
+
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Good morning";
+    if (hour < 17) return "Good afternoon";
+    return "Good evening";
+  };
+
+  const greeting = getGreeting();
+
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -197,8 +215,7 @@ export default function ClergyDashboardPage() {
         <div className="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight">
-              Good afternoon,{" "}
-              <span className="text-sky-400">{firstName} 🙏</span>
+              {greeting}, <span className="text-sky-400">{firstName} 🙏</span>
             </h2>
             <p className="text-zinc-400 text-sm mt-1 max-w-md">
               You have <span className="text-white font-bold">7 pending prayer requests</span> and{" "}
@@ -207,11 +224,13 @@ export default function ClergyDashboardPage() {
           </div>
           <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/5 self-start sm:self-auto">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-sky-400 to-sky-600 flex items-center justify-center shrink-0">
-              <span className="text-sm font-black text-white">PM</span>
+              <span className="text-sm font-black text-white">{initials}</span>
             </div>
             <div>
-              <p className="text-xs font-black text-white">Pastor Mwangi</p>
-              <p className="text-[9px] text-zinc-500">Karen Chapel · Senior Pastor</p>
+              <p className="text-xs font-black text-white">{user?.fullName || "Clergy Member"}</p>
+              <p className="text-[9px] text-zinc-500">
+                {user?.churchName || "NTCOGK"} · {user?.role === "ADMIN" ? "Administrator" : "Clergy"}
+              </p>
             </div>
           </div>
         </div>

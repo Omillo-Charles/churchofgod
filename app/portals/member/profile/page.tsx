@@ -14,8 +14,8 @@ export default function ProfilePage() {
     email: "",
     phone: "",
     homeCounty: "",
-    churchName: "Karen Chapel", // Default or current church
-    ministry: "Worship Team",
+    churchName: "",
+    ministry: "",
     address: "",
     bio: "",
   });
