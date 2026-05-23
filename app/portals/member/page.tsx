@@ -197,12 +197,6 @@ export default function MemberDashboardPage() {
             <p className="text-zinc-400 text-sm mt-1 max-w-md">
               Stay connected with your community, manage your contributions, and keep track of upcoming fellowship opportunities.
             </p>
-            <button
-              onClick={() => setActiveModal("feedback")}
-              className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-[10px] font-black text-white uppercase tracking-widest hover:bg-white/10 transition-all"
-            >
-              Share Feedback
-            </button>
           </div>
           <div className="flex flex-col sm:items-end gap-2">
             <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/5">
