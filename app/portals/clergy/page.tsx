@@ -264,15 +264,15 @@ export default function ClergyDashboardPage() {
           <div>
             <div className="flex items-center justify-between px-5 py-4 border-b border-white/5">
               <h2 className="text-xs font-black text-white uppercase tracking-widest">Giving & Stewardship</h2>
-              <Link href="/give" className="text-[9px] font-bold text-amber-500 hover:text-amber-400 uppercase tracking-widest transition-colors">
+              <Link href="/give" className="text-[9px] font-bold text-sky-400 hover:text-sky-300 uppercase tracking-widest transition-colors">
                 Give Now →
               </Link>
             </div>
             <div className="divide-y divide-white/5">
               {givingTypes.map((item, i) => (
                 <div key={i} className="flex items-start gap-4 px-5 py-4 hover:bg-white/[0.02] transition-colors">
-                  <div className="shrink-0 w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-400">
+                  <div className="shrink-0 w-9 h-9 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400">
                       <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
                     </svg>
                   </div>
@@ -290,7 +290,7 @@ export default function ClergyDashboardPage() {
             </p>
             <Link
               href="/give"
-              className="inline-flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl bg-white text-black text-[9px] font-black uppercase tracking-widest hover:bg-amber-500 hover:text-white transition-all duration-200"
+              className="inline-flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl bg-white text-black text-[9px] font-black uppercase tracking-widest hover:bg-sky-500 hover:text-white transition-all duration-200"
             >
               Go to Giving Page
               <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
