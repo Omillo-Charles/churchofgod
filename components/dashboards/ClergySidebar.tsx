@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import { useAuth } from "@/lib/useAuth";
 import api from "@/lib/axios";
 import { toast } from "sonner";
 
@@ -153,8 +154,18 @@ const navItems = [
 const ClergySidebar: React.FC<ClergySidebarProps> = ({ isMobileOpen, onMobileClose }) => {
   const pathname = usePathname();
   const router = useRouter();
+  const { user } = useAuth();
   const [collapsed, setCollapsed] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+  const initials = user?.fullName
+    ? user.fullName
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2)
+    : "C";
 
   const handleSignOut = async () => {
     try {
@@ -262,12 +273,12 @@ const ClergySidebar: React.FC<ClergySidebarProps> = ({ isMobileOpen, onMobileClo
       <div className="border-t border-white/5 p-3">
         <div className={`flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 transition-all cursor-pointer ${collapsed ? "justify-center" : ""}`}>
           <div className="relative w-8 h-8 rounded-full bg-gradient-to-br from-sky-400 to-sky-600 flex items-center justify-center shrink-0">
-            <span className="text-[10px] font-black text-white">PM</span>
+            <span className="text-[10px] font-black text-white">{initials}</span>
           </div>
           {!collapsed && (
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-bold text-white truncate">Pastor Mwangi</p>
-              <p className="text-[9px] text-zinc-500 truncate">pastor@ntcogk.org</p>
+              <p className="text-xs font-bold text-white truncate">{user?.fullName || "Clergy User"}</p>
+              <p className="text-[9px] text-zinc-500 truncate">{user?.email || "clergy@ntcogk.org"}</p>
             </div>
           )}
           {!collapsed && (

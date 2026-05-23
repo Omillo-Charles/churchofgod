@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useAuth } from "@/lib/useAuth";
 import api from "@/lib/axios";
 
 // Clergy Modals
@@ -18,7 +19,7 @@ const stats = [
     href: "/about",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 21h18"/><path d="M4 21V10a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v11"/><path d="m12 8-5.4-5.4A1 1 0 0 0 5.9 2H4a2 2 0 0 0-2 2v17"/><path d="M14 22V15a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v7"/>
+        <path d="M3 21h18" /><path d="M4 21V10a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v11" /><path d="m12 8-5.4-5.4A1 1 0 0 0 5.9 2H4a2 2 0 0 0-2 2v17" /><path d="M14 22V15a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v7" />
       </svg>
     ),
   },
@@ -31,7 +32,7 @@ const stats = [
     href: "/about",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
     ),
   },
@@ -44,7 +45,7 @@ const stats = [
     href: "/about",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
       </svg>
     ),
   },
@@ -57,7 +58,7 @@ const stats = [
     href: "/about",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" />
       </svg>
     ),
   },
@@ -97,9 +98,12 @@ const recentSermons = [
 ];
 
 export default function ClergyDashboardPage() {
+  const { user } = useAuth();
   const [activeModal, setActiveModal] = useState<"announcement" | "event" | "finance" | "sermon" | null>(null);
   const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const firstName = user?.fullName ? user.fullName.split(" ")[0] : "Clergy";
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -194,7 +198,7 @@ export default function ClergyDashboardPage() {
           <div>
             <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight">
               Good afternoon,{" "}
-              <span className="text-sky-400">Pastor Mwangi 🙏</span>
+              <span className="text-sky-400">{firstName} 🙏</span>
             </h2>
             <p className="text-zinc-400 text-sm mt-1 max-w-md">
               You have <span className="text-white font-bold">7 pending prayer requests</span> and{" "}
@@ -293,7 +297,7 @@ export default function ClergyDashboardPage() {
               className="inline-flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl bg-white text-black text-[9px] font-black uppercase tracking-widest hover:bg-sky-500 hover:text-white transition-all duration-200"
             >
               Go to Giving Page
-              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
             </Link>
           </div>
         </div>
@@ -371,8 +375,8 @@ export default function ClergyDashboardPage() {
                   </div>
                 )}
                 <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg border ${sermon.status === "Published"
-                    ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
-                    : "bg-amber-500/10 text-amber-400 border-amber-500/20"
+                  ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+                  : "bg-amber-500/10 text-amber-400 border-amber-500/20"
                   }`}>
                   {sermon.status}
                 </span>
