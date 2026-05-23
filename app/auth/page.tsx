@@ -6,11 +6,24 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import api from "@/lib/axios";
+import { useAuth } from "@/lib/useAuth";
 
 const AuthPage = () => {
   const [mode, setMode] = useState<"login" | "signup" | "verify">("login");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { authenticated, loading: authLoading, user } = useAuth();
+
+  // Redirect if already authenticated
+  React.useEffect(() => {
+    if (!authLoading && authenticated && user) {
+      if (user.role === "CLERGY" || user.role === "ADMIN") {
+        router.push("/portals/clergy");
+      } else {
+        router.push("/portals/member");
+      }
+    }
+  }, [authenticated, authLoading, user, router]);
 
   // Form states
   const [fullName, setFullName] = useState("");

@@ -27,17 +27,16 @@ export default function ClergyPortalLayout({
     }
   }, [authenticated, loading, user, router]);
 
-  if (loading) {
+  if (loading || !authenticated || (user && user.role !== "CLERGY" && user.role !== "ADMIN")) {
     return (
       <div className="flex items-center justify-center h-screen bg-[#060a10]">
-        <div className="w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin" />
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-8 h-8 border-2 border-sky-500/20 border-t-sky-500 rounded-full animate-spin" />
+          {!loading && !authenticated && <p className="text-zinc-500 text-[10px] font-black uppercase tracking-widest">Redirecting to login...</p>}
+          {!loading && authenticated && user && user.role !== "CLERGY" && user.role !== "ADMIN" && <p className="text-zinc-500 text-[10px] font-black uppercase tracking-widest">Redirecting to member portal...</p>}
+        </div>
       </div>
     );
-  }
-
-  // Prevent flash of content for unauthorized roles
-  if (!authenticated || (user && user.role !== "CLERGY" && user.role !== "ADMIN")) {
-    return null;
   }
 
   return (

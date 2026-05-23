@@ -16,14 +16,6 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // 2. Prevent logged-in users from accessing the auth page
-  if (pathname === '/auth') {
-    if (token) {
-      // If token exists, redirect to the member portal
-      return NextResponse.redirect(new URL('/portals/member', request.url));
-    }
-  }
-
   return NextResponse.next();
 }
 
