@@ -367,7 +367,7 @@ export default function ClergyActionModal({ isOpen, onClose, type }: Props) {
                     value={formData.churchName}
                     onChange={handleInputChange}
                     type="text"
-                    placeholder="e.g. Karen Chapel"
+                    placeholder="e.g. Busia Possibility Center"
                     className={`w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border ${errors.churchName ? 'border-red-500' : 'border-white/10'} text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-sky-500/50 focus:bg-white/[0.06] transition-all`}
                   />
                 </div>
@@ -379,7 +379,7 @@ export default function ClergyActionModal({ isOpen, onClose, type }: Props) {
                       value={formData.region}
                       onChange={handleInputChange}
                       type="text"
-                      placeholder="e.g. Nairobi"
+                      placeholder="e.g. Western"
                       className="w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-sky-500/50 focus:bg-white/[0.06] transition-all"
                     />
                   </div>
@@ -390,7 +390,7 @@ export default function ClergyActionModal({ isOpen, onClose, type }: Props) {
                       value={formData.district}
                       onChange={handleInputChange}
                       type="text"
-                      placeholder="e.g. Lang'ata"
+                      placeholder="e.g. Busia"
                       className="w-full px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-sky-500/50 focus:bg-white/[0.06] transition-all"
                     />
                   </div>
