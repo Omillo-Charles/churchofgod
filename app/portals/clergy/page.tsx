@@ -271,48 +271,8 @@ export default function ClergyDashboardPage() {
         </div>
       </div>
 
-      {/* Middle Row: Giving + Upcoming Events */}
+      {/* Middle Row: Upcoming Events + Recent Announcements */}
       <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-
-        {/* Giving & Stewardship */}
-        <div className="rounded-2xl bg-zinc-900/60 border border-white/5 overflow-hidden flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between px-5 py-4 border-b border-white/5">
-              <h2 className="text-xs font-black text-white uppercase tracking-widest">Giving & Stewardship</h2>
-              <Link href="/give" className="text-[9px] font-bold text-sky-400 hover:text-sky-300 uppercase tracking-widest transition-colors">
-                Give Now →
-              </Link>
-            </div>
-            <div className="divide-y divide-white/5">
-              {givingTypes.map((item, i) => (
-                <div key={i} className="flex items-start gap-4 px-5 py-4 hover:bg-white/[0.02] transition-colors">
-                  <div className="shrink-0 w-9 h-9 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400">
-                      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                    </svg>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs font-bold text-white">{item.name}</p>
-                    <p className="text-[10px] text-zinc-500 mt-0.5 leading-relaxed">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="px-5 py-4 bg-white/[0.02] border-t border-white/5 flex flex-col gap-3">
-            <p className="text-[9px] text-zinc-500 leading-normal uppercase tracking-wider text-center">
-              Please visit the official Giving page to access the M-Pesa Paybill & Equity Bank transfer details.
-            </p>
-            <Link
-              href="/give"
-              className="inline-flex items-center justify-center gap-1.5 w-full py-2.5 rounded-xl bg-white text-black text-[9px] font-black uppercase tracking-widest hover:bg-sky-500 hover:text-white transition-all duration-200"
-            >
-              Go to Giving Page
-              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-            </Link>
-          </div>
-        </div>
-
         {/* Upcoming Events */}
         <div className="rounded-2xl bg-zinc-900/40 border border-white/5 overflow-hidden">
           <div className="flex items-center justify-between px-5 py-4 border-b border-white/5">
@@ -354,67 +314,68 @@ export default function ClergyDashboardPage() {
             )}
           </div>
         </div>
+
+        {/* Recent Announcements */}
+        <div className="rounded-2xl bg-zinc-900/40 border border-white/5 overflow-hidden flex flex-col">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-white/5">
+            <h2 className="text-xs font-black text-white uppercase tracking-widest">Recent Announcements</h2>
+            <Link href="/portals/clergy/announcements" className="text-[9px] font-bold text-sky-400 hover:text-sky-300 uppercase tracking-widest transition-colors">
+              View All →
+            </Link>
+          </div>
+          <div className="flex-1 flex flex-col items-center justify-center py-12 text-center space-y-3">
+            <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-zinc-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z" /></svg>
+            </div>
+            <div className="space-y-1">
+              <p className="text-xs font-bold text-zinc-400">No Announcements</p>
+              <p className="text-[10px] text-zinc-600 px-6">There are no recent announcements to display at this time.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Recent Announcements */}
+      {/* Giving Overview — May 2026 */}
       <div className="rounded-2xl bg-zinc-900/40 border border-white/5 p-5 md:p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-sm font-black text-white uppercase tracking-wider">Recent Announcements</h3>
-          <Link href="/portals/clergy/announcements" className="text-[10px] font-black text-sky-400 hover:text-sky-300 uppercase tracking-widest transition-colors">
-            View All
-          </Link>
-        </div>
-
-        <div className="flex flex-col items-center justify-center py-12 text-center space-y-3">
-          <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-zinc-600">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z" /></svg>
-          </div>
-          <div className="space-y-1">
-            <p className="text-xs font-bold text-zinc-400">No Announcements</p>
-            <p className="text-[10px] text-zinc-600">There are no recent announcements to display.</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Giving Breakdown */}
-      <div className="rounded-2xl bg-zinc-900/40 border border-white/5 p-5 md:p-6">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-5">
           <div>
             <h2 className="text-xs font-black text-white uppercase tracking-widest">Giving Overview — May 2026</h2>
-            <p className="text-[10px] text-zinc-500 mt-0.5">Congregation stewardship breakdown</p>
+            <p className="text-[10px] text-zinc-500 mt-0.5">Jan – May 2026</p>
           </div>
-          <Link href="/portals/clergy/finance" className="text-[9px] font-bold text-sky-400 hover:text-sky-300 uppercase tracking-widest transition-colors">
-            Full Report →
-          </Link>
+          <div className="text-right">
+            <p className="text-xl font-black text-white">Ksh 1.2M <span className="text-zinc-600 text-sm font-bold">/ 1.5M</span></p>
+            <p className="text-[9px] text-sky-400 font-bold uppercase tracking-widest">80% Target Reached</p>
+          </div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        {/* Progress bar */}
+        <div className="relative h-2 bg-zinc-800 rounded-full overflow-hidden mb-4">
+          <div
+            className="absolute left-0 top-0 h-full bg-gradient-to-r from-sky-500 to-sky-400 rounded-full transition-all duration-700"
+            style={{ width: "80%" }}
+          />
+        </div>
+        {/* Month breakdown */}
+        <div className="grid grid-cols-5 gap-2 mt-4">
           {[
-            { label: "Tithes", value: "KSh 184,000", pct: 65 },
-            { label: "Offerings", value: "KSh 62,000", pct: 22 },
-            { label: "Pledges", value: "KSh 28,000", pct: 10 },
-            { label: "Missions", value: "KSh 10,000", pct: 3 },
-          ].map((item) => (
-            <div key={item.label} className="space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">{item.label}</span>
-                <span className="text-[10px] font-black text-zinc-400">{item.pct}%</span>
+            { month: "Jan", reached: 4, total: 5 },
+            { month: "Feb", reached: 3, total: 5 },
+            { month: "Mar", reached: 5, total: 5 },
+            { month: "Apr", reached: 4, total: 5 },
+            { month: "May", reached: 2, total: 5 },
+          ].map((m) => (
+            <div key={m.month} className="flex flex-col items-center gap-2">
+              <div className="w-full flex flex-col gap-1 items-center">
+                {Array.from({ length: m.total }).map((_, i) => (
+                  <div
+                    key={i}
+                    className={`w-full h-1.5 rounded-full transition-all ${i < m.reached ? "bg-sky-500" : "bg-zinc-800"
+                      }`}
+                  />
+                ))}
               </div>
-              <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-sky-500 to-sky-400 rounded-full"
-                  style={{ width: `${item.pct}%` }}
-                />
-              </div>
-              <p className="text-sm font-black text-white">{item.value}</p>
+              <span className="text-[9px] font-bold text-zinc-600 uppercase">{m.month}</span>
             </div>
           ))}
-        </div>
-        <div className="flex items-center justify-between pt-4 border-t border-white/5">
-          <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Total Collected</span>
-          <div className="text-right">
-            <span className="text-lg font-black text-sky-400">KSh 284,000</span>
-            <span className="text-[10px] font-bold text-emerald-400 ml-3">↑ 9% vs April</span>
-          </div>
         </div>
       </div>
 
