@@ -90,13 +90,6 @@ const givingTypes = [
   },
 ];
 
-const recentSermons = [
-  { title: "Walking in Faith", date: "04 May 2026", views: 312, status: "Published" },
-  { title: "The Power of Prayer", date: "27 Apr 2026", views: 289, status: "Published" },
-  { title: "Grace and Accountability", date: "20 Apr 2026", views: 251, status: "Published" },
-  { title: "Pentecost Sunday Message", date: "Draft", views: 0, status: "Draft" },
-];
-
 export default function ClergyDashboardPage() {
   const { user } = useAuth();
   const [activeModal, setActiveModal] = useState<"announcement" | "event" | "finance" | "sermon" | "feedback" | null>(null);
@@ -363,44 +356,23 @@ export default function ClergyDashboardPage() {
         </div>
       </div>
 
-      {/* Recent Sermons */}
-      <div className="rounded-2xl bg-zinc-900/40 border border-white/5 overflow-hidden">
-        <div className="flex items-center justify-between px-5 py-4 border-b border-white/5">
-          <h2 className="text-xs font-black text-white uppercase tracking-widest">Recent Sermons</h2>
-          <Link href="/portals/clergy/sermons" className="text-[9px] font-bold text-sky-400 hover:text-sky-300 uppercase tracking-widest transition-colors">
-            Manage →
+      {/* Recent Announcements */}
+      <div className="rounded-2xl bg-zinc-900/40 border border-white/5 p-5 md:p-6">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-sm font-black text-white uppercase tracking-wider">Recent Announcements</h3>
+          <Link href="/portals/clergy/announcements" className="text-[10px] font-black text-sky-400 hover:text-sky-300 uppercase tracking-widest transition-colors">
+            View All
           </Link>
         </div>
-        <div className="divide-y divide-white/5">
-          {recentSermons.map((sermon, i) => (
-            <div key={i} className="flex items-center gap-4 px-5 py-4 hover:bg-white/[0.02] transition-colors group">
-              <div className="shrink-0 w-9 h-9 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-400">
-                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-                </svg>
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-bold text-white truncate">{sermon.title}</p>
-                <p className="text-[10px] text-zinc-500 mt-0.5">{sermon.date}</p>
-              </div>
-              <div className="flex items-center gap-4 shrink-0">
-                {sermon.views > 0 && (
-                  <div className="hidden sm:flex items-center gap-1.5 text-zinc-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" />
-                    </svg>
-                    <span className="text-[10px] font-bold">{sermon.views}</span>
-                  </div>
-                )}
-                <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg border ${sermon.status === "Published"
-                  ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
-                  : "bg-amber-500/10 text-amber-400 border-amber-500/20"
-                  }`}>
-                  {sermon.status}
-                </span>
-              </div>
-            </div>
-          ))}
+
+        <div className="flex flex-col items-center justify-center py-12 text-center space-y-3">
+          <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-zinc-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z" /></svg>
+          </div>
+          <div className="space-y-1">
+            <p className="text-xs font-bold text-zinc-400">No Announcements</p>
+            <p className="text-[10px] text-zinc-600">There are no recent announcements to display.</p>
+          </div>
         </div>
       </div>
 
