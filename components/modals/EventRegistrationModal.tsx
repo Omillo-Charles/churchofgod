@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Modal from "./modal";
 import { toast } from "sonner";
 import api from "@/lib/axios";
+import { useAuth } from "@/lib/useAuth";
 
 interface Props {
   isOpen: boolean;
@@ -18,6 +19,7 @@ interface Props {
 type Tab = "bio" | "church" | "emergency" | "payment";
 
 export default function EventRegistrationModal({ isOpen, onClose, event }: Props) {
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<Tab>("bio");
   const [loading, setLoading] = useState(false);
   const [hasPaid, setHasPaid] = useState(false);
@@ -55,6 +57,20 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
     emergencyPhone: "",
     emergencyEmail: "",
   });
+
+  // Prefill form data when user is logged in
+  useEffect(() => {
+    if (isOpen && user) {
+      setFormData(prev => ({
+        ...prev,
+        name: user.fullName || prev.name,
+        email: user.email || prev.email,
+        phone: user.phone || prev.phone,
+        church: user.churchName || prev.church,
+        region: user.homeCounty || prev.region,
+      }));
+    }
+  }, [isOpen, user]);
 
   const [errors, setErrors] = useState<Record<string, boolean>>({});
 
@@ -124,19 +140,19 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
     setLoading(true);
     try {
       const parsedAmount = isFree ? 0 : parseFloat(event.fee?.replace(/[^\d.]/g, "") || "0");
-      
+
       const res = await api.post("/payments/stkpush", {
-        eventId:        event.id,
-        amount:         parsedAmount,
-        phone:          formData.phone,
-        fullName:       formData.name,
-        email:          formData.email,
-        ageGroup:       formData.age,
-        gender:         formData.gender,
-        region:         formData.region,
-        district:       formData.district,
-        churchName:     formData.church,
-        emergencyName:  formData.emergencyName  || null,
+        eventId: event.id,
+        amount: parsedAmount,
+        phone: formData.phone,
+        fullName: formData.name,
+        email: formData.email,
+        ageGroup: formData.age,
+        gender: formData.gender,
+        region: formData.region,
+        district: formData.district,
+        churchName: formData.church,
+        emergencyName: formData.emergencyName || null,
         emergencyPhone: formData.emergencyPhone || null,
         emergencyEmail: formData.emergencyEmail || null,
       });
@@ -163,10 +179,10 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
           const { registrationId } = res.data;
           toast.success("STK push initiated! Enter your M-Pesa PIN on your phone to complete registration.");
           setIsPollingPayment(true);
-          
+
           let attempts = 0;
           const maxAttempts = 24; // 60 seconds total polling
-          
+
           pollIntervalRef.current = setInterval(async () => {
             attempts++;
             try {
@@ -224,7 +240,7 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
     } catch (error: any) {
       console.error("Registration error:", error);
       toast.error(
-        error.response?.data?.message || 
+        error.response?.data?.message ||
         "Something went wrong. Please check your details and try again."
       );
     } finally {
@@ -253,10 +269,10 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
               <React.Fragment key={step.id}>
                 <div className="flex flex-col items-center gap-2">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black transition-all duration-500 ${activeTab === step.id
-                      ? "bg-amber-500 text-white ring-4 ring-amber-500/20"
-                      : ["bio", "church", "emergency", "payment"].indexOf(step.id) < ["bio", "church", "emergency", "payment"].indexOf(activeTab)
-                        ? "bg-emerald-500 text-white"
-                        : "bg-zinc-800 text-zinc-500"
+                    ? "bg-amber-500 text-white ring-4 ring-amber-500/20"
+                    : ["bio", "church", "emergency", "payment"].indexOf(step.id) < ["bio", "church", "emergency", "payment"].indexOf(activeTab)
+                      ? "bg-emerald-500 text-white"
+                      : "bg-zinc-800 text-zinc-500"
                     }`}>
                     {["bio", "church", "emergency", "payment"].indexOf(step.id) < ["bio", "church", "emergency", "payment"].indexOf(activeTab) ? "✓" : idx + 1}
                   </div>
@@ -310,7 +326,8 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
                     onBlur={handleBlur}
                     type="email"
                     placeholder="john@example.com"
-                    className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.email ? 'border-red-500' : 'border-white/10'} text-xs text-white focus:outline-none focus:border-amber-500/50 transition-all`}
+                    readOnly={!!user?.email}
+                    className={`w-full px-4 py-3 rounded-xl bg-white/[0.03] border ${errors.email ? 'border-red-500' : 'border-white/10'} text-xs ${user?.email ? 'text-zinc-500 cursor-not-allowed bg-white/[0.01]' : 'text-white focus:border-amber-500/50'} transition-all`}
                   />
                 </div>
               </div>
