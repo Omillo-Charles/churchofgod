@@ -68,6 +68,7 @@ export default function EventRegistrationModal({ isOpen, onClose, event }: Props
         phone: user.phone || prev.phone,
         church: user.churchName || prev.church,
         region: user.homeCounty || prev.region,
+        district: user.address || prev.district,
       }));
     }
   }, [isOpen, user]);
