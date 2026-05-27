@@ -146,8 +146,37 @@ export default function ClergyActionModal({ isOpen, onClose, type }: Props) {
       return;
     }
 
+    if (type === "announcement") {
+      if (!formData.title.trim()) {
+        toast.error("Please enter an announcement title.");
+        setErrors(prev => ({ ...prev, title: true }));
+        return;
+      }
+      if (!formData.content.trim()) {
+        toast.error("Please enter the announcement content.");
+        setErrors(prev => ({ ...prev, content: true }));
+        return;
+      }
+
+      setLoading(true);
+      try {
+        const res = await api.post("/announcements", {
+          title: formData.title,
+          body: formData.content,
+        });
+        toast.success(res.data.message || "Announcement published successfully!");
+        setFormData(prev => ({ ...prev, title: "", content: "" }));
+        onClose();
+      } catch (error: any) {
+        toast.error(error.response?.data?.message || "Failed to publish announcement.");
+      } finally {
+        setLoading(false);
+      }
+      return;
+    }
+
     setLoading(true);
-    // Simulate action for other types (as previously implemented)
+    // Simulate action for other non-implemented types
     setTimeout(() => {
       setLoading(false);
       toast.success(`${titles[type].title} processed successfully!`);

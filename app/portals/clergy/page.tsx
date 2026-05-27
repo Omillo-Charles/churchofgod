@@ -94,7 +94,9 @@ export default function ClergyDashboardPage() {
   const { user } = useAuth();
   const [activeModal, setActiveModal] = useState<"announcement" | "event" | "finance" | "sermon" | "feedback" | null>(null);
   const [events, setEvents] = useState<any[]>([]);
+  const [announcements, setAnnouncements] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [announcementsLoading, setAnnouncementsLoading] = useState(true);
 
   const firstName = user?.fullName ? user.fullName.split(" ")[0] : "Clergy";
 
@@ -129,7 +131,22 @@ export default function ClergyDashboardPage() {
         setLoading(false);
       }
     };
+
+    const fetchAnnouncements = async () => {
+      try {
+        const res = await api.get("/announcements");
+        if (res.data.success) {
+          setAnnouncements(res.data.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch announcements:", error);
+      } finally {
+        setAnnouncementsLoading(false);
+      }
+    };
+
     fetchEvents();
+    fetchAnnouncements();
   }, []);
 
   const formatEventDate = (date: Date) => {
@@ -320,17 +337,41 @@ export default function ClergyDashboardPage() {
           <div className="flex items-center justify-between px-5 py-4 border-b border-white/5">
             <h2 className="text-xs font-black text-white uppercase tracking-widest">Recent Announcements</h2>
             <Link href="/portals/clergy/announcements" className="text-[9px] font-bold text-sky-400 hover:text-sky-300 uppercase tracking-widest transition-colors">
-              View All →
+              Manage →
             </Link>
           </div>
-          <div className="flex-1 flex flex-col items-center justify-center py-12 text-center space-y-3">
-            <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-zinc-600">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z" /></svg>
-            </div>
-            <div className="space-y-1">
-              <p className="text-xs font-bold text-zinc-400">No Announcements</p>
-              <p className="text-[10px] text-zinc-600 px-6">There are no recent announcements to display at this time.</p>
-            </div>
+          <div className="divide-y divide-white/5">
+            {announcementsLoading ? (
+              <div className="py-12 text-center space-y-3">
+                <div className="w-6 h-6 border-2 border-sky-500/20 border-t-sky-500 rounded-full animate-spin mx-auto" />
+                <p className="text-[9px] font-black uppercase text-zinc-500 tracking-widest animate-pulse">Loading announcements...</p>
+              </div>
+            ) : announcements.length > 0 ? (
+              announcements.slice(0, 3).map((ann) => (
+                <div key={ann.id} className="flex items-start gap-3 px-5 py-4 hover:bg-white/[0.02] transition-colors group">
+                  <div className="shrink-0 w-8 h-8 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 mt-0.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z" /></svg>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-bold text-white truncate">{ann.title}</p>
+                    <p className="text-[10px] text-zinc-500 mt-0.5 truncate">{ann.body}</p>
+                    <p className="text-[9px] text-zinc-600 mt-1 uppercase tracking-widest">
+                      {new Date(ann.createdAt).toLocaleDateString("en-KE", { day: "numeric", month: "short", year: "numeric" })}
+                    </p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="py-12 text-center space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-zinc-600 mx-auto">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z" /></svg>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-xs font-bold text-zinc-400">No Announcements</p>
+                  <p className="text-[10px] text-zinc-600 px-6">No announcements have been published yet.</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

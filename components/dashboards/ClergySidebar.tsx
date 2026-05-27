@@ -28,7 +28,7 @@ const navItems = [
       },
       {
         name: "Announcements",
-        href: "/portals/clergy/announcements",
+        href: "/announcements",
         icon: (
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M3 11l19-9-9 19-2-8-8-2z" />
@@ -120,6 +120,24 @@ const navItems = [
   {
     section: "Admin",
     items: [
+      {
+        name: "Manage Announcements",
+        href: "/portals/clergy/announcements",
+        icon: (
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 20h9" /><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+          </svg>
+        ),
+      },
+      {
+        name: "Manage Events",
+        href: "/portals/clergy/events",
+        icon: (
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect width="18" height="18" x="3" y="4" rx="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" />
+          </svg>
+        ),
+      },
       {
         name: "Resources",
         href: "/portals/clergy/resources",
