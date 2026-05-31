@@ -61,7 +61,7 @@ const EventsPage = () => {
     const month = currentDate.getMonth();
     const daysCount = daysInMonth(year, month);
     const startDay = firstDayOfMonth(year, month);
-    
+
     const days = [];
     // Padding for previous month days
     for (let i = 0; i < startDay; i++) {
@@ -92,9 +92,9 @@ const EventsPage = () => {
   const getEventsForDay = (day: number | null) => {
     if (!day) return [];
     return events.filter(
-      (e) => 
-        e.date.getDate() === day && 
-        e.date.getMonth() === currentDate.getMonth() && 
+      (e) =>
+        e.date.getDate() === day &&
+        e.date.getMonth() === currentDate.getMonth() &&
         e.date.getFullYear() === currentDate.getFullYear()
     );
   };
@@ -106,17 +106,17 @@ const EventsPage = () => {
   return (
     <div className="bg-black min-h-screen">
       {/* Registration Modal */}
-      <EventRegistrationModal 
-        isOpen={isRegisterOpen} 
-        onClose={() => setIsRegisterOpen(false)} 
-        event={selectedEvent} 
+      <EventRegistrationModal
+        isOpen={isRegisterOpen}
+        onClose={() => setIsRegisterOpen(false)}
+        event={selectedEvent}
       />
 
       {/* Retry Payment Modal */}
-      <RetryPaymentModal 
-        isOpen={isRetryOpen} 
-        onClose={() => setIsRetryOpen(false)} 
-        event={selectedEvent} 
+      <RetryPaymentModal
+        isOpen={isRetryOpen}
+        onClose={() => setIsRetryOpen(false)}
+        event={selectedEvent}
       />
 
       {/* 1. Hero Section */}
@@ -149,9 +149,8 @@ const EventsPage = () => {
             <div className="flex gap-8">
               <button
                 onClick={() => setActiveTab("listing")}
-                className={`py-6 text-[10px] font-black uppercase tracking-[0.2em] transition-all relative ${
-                  activeTab === "listing" ? "text-amber-500" : "text-zinc-400 hover:text-white"
-                }`}
+                className={`py-6 text-[10px] font-black uppercase tracking-[0.2em] transition-all relative ${activeTab === "listing" ? "text-amber-500" : "text-zinc-400 hover:text-white"
+                  }`}
               >
                 List View
                 {activeTab === "listing" && (
@@ -160,9 +159,8 @@ const EventsPage = () => {
               </button>
               <button
                 onClick={() => setActiveTab("calendar")}
-                className={`py-6 text-[10px] font-black uppercase tracking-[0.2em] transition-all relative ${
-                  activeTab === "calendar" ? "text-amber-500" : "text-zinc-400 hover:text-white"
-                }`}
+                className={`py-6 text-[10px] font-black uppercase tracking-[0.2em] transition-all relative ${activeTab === "calendar" ? "text-amber-500" : "text-zinc-400 hover:text-white"
+                  }`}
               >
                 Calendar View
                 {activeTab === "calendar" && (
@@ -207,11 +205,11 @@ const EventsPage = () => {
                               {event.date.toLocaleString("default", { month: "long" })} {event.date.getDate()}
                             </span>
                           </div>
-                          
+
                           <h2 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight leading-tight">
                             {event.title}
                           </h2>
-                          
+
                           <p className="text-sm text-zinc-400 font-medium leading-relaxed">
                             {event.desc}
                           </p>
@@ -221,13 +219,13 @@ const EventsPage = () => {
                         <div className="space-y-4">
                           <div className="flex items-center gap-4 text-xs font-bold text-zinc-300">
                             <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-amber-500">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
                             </div>
                             {event.location}
                           </div>
                           <div className="flex items-center gap-4 text-xs font-bold text-amber-500">
                             <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>
                             </div>
                             Registration: {event.fee}
                           </div>
@@ -246,9 +244,9 @@ const EventsPage = () => {
                             className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl bg-white text-black text-[10px] font-black uppercase tracking-widest hover:bg-amber-500 hover:text-white transition-all duration-300 group/btn shadow-xl shadow-white/5"
                           >
                             Details & Registration
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="group-hover/btn:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="group-hover/btn:translate-x-1 transition-transform"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
                           </button>
-                          
+
                           {event.fee !== "Free" && (
                             <div className="text-center mt-3">
                               <button
@@ -273,7 +271,7 @@ const EventsPage = () => {
                 ) : (
                   <div className="py-20 text-center space-y-6 bg-zinc-900/30 rounded-[3rem] border border-dashed border-zinc-800">
                     <div className="w-16 h-16 bg-zinc-800 rounded-full flex items-center justify-center mx-auto text-zinc-400">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" /><path d="m9 16 2 2 4-4" /></svg>
                     </div>
                     <div className="space-y-2">
                       <h4 className="text-sm font-bold text-white uppercase tracking-widest">No Upcoming Events</h4>
@@ -295,13 +293,13 @@ const EventsPage = () => {
                     </h2>
                     <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-[0.2em]">View our monthly schedule</p>
                   </div>
-                  
+
                   <div className="flex items-center gap-4">
                     <button
                       onClick={handlePrevMonth}
                       className="p-3 rounded-2xl bg-zinc-800 text-zinc-400 hover:bg-amber-500 hover:text-white transition-all"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
                     </button>
                     <button
                       onClick={() => {
@@ -316,7 +314,7 @@ const EventsPage = () => {
                       onClick={handleNextMonth}
                       className="p-3 rounded-2xl bg-zinc-800 text-zinc-400 hover:bg-amber-500 hover:text-white transition-all"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
                     </button>
                   </div>
                 </div>
@@ -336,26 +334,25 @@ const EventsPage = () => {
                   <div className="grid grid-cols-7 gap-2 md:gap-4">
                     {calendarDays.map((dateObj, index) => {
                       const dayEvents = getEventsForDay(dateObj.day);
-                      const isToday = 
-                        dateObj.day === new Date().getDate() && 
-                        dateObj.month === new Date().getMonth() && 
+                      const isToday =
+                        dateObj.day === new Date().getDate() &&
+                        dateObj.month === new Date().getMonth() &&
                         dateObj.year === new Date().getFullYear();
-                      
+
                       const isSelected = selectedDate === dateObj.day;
 
                       return (
                         <div
                           key={index}
                           onClick={() => dateObj.day && setSelectedDate(dateObj.day)}
-                          className={`min-h-[80px] md:min-h-[120px] p-2 md:p-4 rounded-3xl border transition-all relative ${
-                            dateObj.day 
-                              ? isSelected
-                                ? "bg-amber-500 text-white border-amber-500 shadow-lg shadow-amber-500/20 z-10 scale-105"
-                                : isToday
-                                  ? "bg-zinc-900 border-amber-500 ring-2 ring-amber-500/20 shadow-sm"
-                                  : "bg-zinc-800/30 border-zinc-800 hover:border-amber-500/20 group cursor-pointer"
-                              : "border-transparent"
-                          }`}
+                          className={`min-h-[80px] md:min-h-[120px] p-2 md:p-4 rounded-3xl border transition-all relative ${dateObj.day
+                            ? isSelected
+                              ? "bg-amber-500 text-white border-amber-500 shadow-lg shadow-amber-500/20 z-10 scale-105"
+                              : isToday
+                                ? "bg-zinc-900 border-amber-500 ring-2 ring-amber-500/20 shadow-sm"
+                                : "bg-zinc-800/30 border-zinc-800 hover:border-amber-500/20 group cursor-pointer"
+                            : "border-transparent"
+                            }`}
                         >
                           {dateObj.day && (
                             <div className="h-full flex flex-col justify-between">
@@ -367,7 +364,7 @@ const EventsPage = () => {
                                   <span className="text-[7px] font-black uppercase text-amber-500 tracking-tighter bg-amber-500/10 px-1.5 py-0.5 rounded-md">Today</span>
                                 )}
                               </div>
-                              
+
                               <div className="space-y-1">
                                 {dayEvents.map((event) => (
                                   <div
@@ -407,44 +404,44 @@ const EventsPage = () => {
                     <div className="grid grid-cols-1 gap-3">
                       {selectedEvents.map((event) => (
                         <React.Fragment key={event.id}>
-                        <button
-                          onClick={() => {
-                            if (!user) {
-                              toast.error("Please login to register for events.");
-                              return router.push("/auth");
-                            }
-                            setSelectedEvent(event);
-                            setIsRegisterOpen(true);
-                          }}
-                          className="p-4 bg-zinc-900 rounded-2xl border border-zinc-800 flex items-center gap-4 hover:border-amber-500/20 hover:bg-zinc-800 transition-all text-left w-full group"
-                        >
-                          <div className="flex-1">
-                            <h5 className="text-xs font-black text-white uppercase group-hover:text-amber-500 transition-colors">{event.title}</h5>
-                            <p className="text-[10px] text-zinc-400 font-medium">{event.location}</p>
-                          </div>
-                          <div className="p-2 rounded-xl bg-zinc-800 text-zinc-400 group-hover:text-white group-hover:bg-amber-500 transition-all">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                          </div>
-                        </button>
-                        {event.fee !== "Free" && (
-                          <div className="text-center mt-1 mb-2">
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                if (!user) {
-                                  toast.error("Please login to retry payment.");
-                                  return router.push("/auth");
-                                }
-                                setSelectedEvent(event);
-                                setIsRetryOpen(true);
-                              }}
-                              className="text-[9px] font-bold text-zinc-500 hover:text-white uppercase tracking-widest transition-colors cursor-pointer group/retry"
-                            >
-                              Registered but haven't paid? <span className="text-amber-500 group-hover/retry:text-amber-400 underline decoration-amber-500/30 underline-offset-2">Retry here</span>
-                            </button>
-                          </div>
-                        )}
-                      </React.Fragment>
+                          <button
+                            onClick={() => {
+                              if (!user) {
+                                toast.error("Please login to register for events.");
+                                return router.push("/auth");
+                              }
+                              setSelectedEvent(event);
+                              setIsRegisterOpen(true);
+                            }}
+                            className="p-4 bg-zinc-900 rounded-2xl border border-zinc-800 flex items-center gap-4 hover:border-amber-500/20 hover:bg-zinc-800 transition-all text-left w-full group"
+                          >
+                            <div className="flex-1">
+                              <h5 className="text-xs font-black text-white uppercase group-hover:text-amber-500 transition-colors">{event.title}</h5>
+                              <p className="text-[10px] text-zinc-400 font-medium">{event.location}</p>
+                            </div>
+                            <div className="p-2 rounded-xl bg-zinc-800 text-zinc-400 group-hover:text-white group-hover:bg-amber-500 transition-all">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+                            </div>
+                          </button>
+                          {event.fee !== "Free" && (
+                            <div className="text-center mt-1 mb-2">
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  if (!user) {
+                                    toast.error("Please login to retry payment.");
+                                    return router.push("/auth");
+                                  }
+                                  setSelectedEvent(event);
+                                  setIsRetryOpen(true);
+                                }}
+                                className="text-[9px] font-bold text-zinc-500 hover:text-white uppercase tracking-widest transition-colors cursor-pointer group/retry"
+                              >
+                                Registered but haven't paid? <span className="text-amber-500 group-hover/retry:text-amber-400 underline decoration-amber-500/30 underline-offset-2">Retry here</span>
+                              </button>
+                            </div>
+                          )}
+                        </React.Fragment>
                       ))}
                     </div>
                   ) : (
@@ -478,7 +475,7 @@ const EventsPage = () => {
       {/* 4. Newsletter/Updates Section */}
       <section className="py-20 bg-zinc-900 text-white overflow-hidden relative">
         <div className="absolute top-0 right-0 p-16 opacity-5 pointer-events-none">
-          <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M22 17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.5C2 7 4 5 6.5 5H18c2.2 0 4 1.8 4 4v8Z"/><path d="m22 9-10 7L2 9"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M22 17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.5C2 7 4 5 6.5 5H18c2.2 0 4 1.8 4 4v8Z" /><path d="m22 9-10 7L2 9" /></svg>
         </div>
         <div className="container mx-auto px-6 text-center space-y-8 relative z-10">
           <div className="space-y-4">
@@ -488,7 +485,7 @@ const EventsPage = () => {
               Join our community mailing list to receive weekly updates on church services, special gatherings, and community events directly in your inbox.
             </p>
           </div>
-          
+
           <div className="max-w-md mx-auto flex flex-col md:flex-row gap-4">
             <input
               type="email"
