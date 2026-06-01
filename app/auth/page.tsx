@@ -12,7 +12,7 @@ const AuthPage = () => {
   const [mode, setMode] = useState<"login" | "signup" | "verify">("login");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { authenticated, loading: authLoading, user } = useAuth();
+  const { authenticated, loading: authLoading, user, refreshAuth } = useAuth();
 
   // Form states
   const [fullName, setFullName] = useState("");
@@ -79,8 +79,8 @@ const AuthPage = () => {
         setMode("verify");
       } else {
         const res = await api.post("/auth/signin", { email, password });
+        await refreshAuth();
         toast.success(res.data.message || "Welcome back!");
-        router.push("/portals/member");
       }
     } catch (error: any) {
       if (error.response?.data?.needsVerification) {
@@ -104,8 +104,8 @@ const AuthPage = () => {
     setLoading(true);
     try {
       const res = await api.post("/auth/verify-otp", { email, otp });
+      await refreshAuth();
       toast.success(res.data.message || "Email verified! Redirecting...");
-      router.push("/portals/member");
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Invalid OTP. Please try again.");
     } finally {

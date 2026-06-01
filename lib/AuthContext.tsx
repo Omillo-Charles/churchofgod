@@ -32,6 +32,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
   const fetchUser = async () => {
+    setLoading(true);
     try {
       const res = await api.get("/users/me");
       if (res.data?.data) {
