@@ -8,12 +8,20 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-ubuntu);
+  --font-sans: var(--font-mulish);
+  --font-mulish: var(--font-mulish);
+  --font-glacial: var(--font-glacial);
+  --font-heading: var(--font-glacial);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-mulish), sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-glacial), var(--font-mulish), sans-serif;
 }
 
 /* Global Custom Utilities */
